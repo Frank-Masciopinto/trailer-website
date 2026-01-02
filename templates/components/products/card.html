@@ -6,6 +6,7 @@
     data-entity-id="{{id}}"
     data-position="{{position}}"
     data-name="{{name}}"
+    data-card-spotlight
     data-product-category="
     {{#each category}}
         {{#if @last}}
@@ -27,6 +28,8 @@
     {{/or}}"
 >
     <figure class="card-figure">
+        {{!-- Spotlight glow effect element --}}
+        <div class="card-figure__spotlight" aria-hidden="true"></div>
         {{#if stock_level '===' 0}}
             {{#if theme_settings.pdp_sold_out_label '===' ''}}
                 {{> components/products/product-badge
@@ -64,7 +67,10 @@
            aria-label="{{> components/products/product-info}}"
            data-event-type="product-click"
         >
-            <div class="card-img-container">
+            <div class="card-img-container"
+                 data-lens-image
+                 data-lens-src="{{getImage image theme_settings.productgallery_size}}"
+                 data-lens-alt="{{image.alt}}">
                 {{> components/common/responsive-img
                     image=image
                     class="card-image"

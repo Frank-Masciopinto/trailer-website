@@ -9,6 +9,7 @@ import MagicHeader from './components/MagicHeader';
 import LaserFlow from './components/LaserFlow';
 import AnimatedBentoGrid from './components/AnimatedBentoGrid';
 import HeroStats from './components/HeroStats';
+import { initializeLensImagesLazy } from './components/LensInitializer';
 
 const getAccount = () => import('./theme/account');
 const getLogin = () => import('./theme/auth');
@@ -120,6 +121,15 @@ window.stencilBootstrap = function stencilBootstrap(pageType, contextJSON = null
                 if (heroStatsContainer && pageType === 'default') {
                     const statsRoot = createRoot(heroStatsContainer);
                     statsRoot.render(React.createElement(HeroStats));
+                }
+                
+                // Initialize Magic UI Lens effect on product card images
+                // Uses IntersectionObserver for lazy loading
+                if (pageType === 'default' || pageType === 'category' || pageType === 'brand' || pageType === 'search') {
+                    // Delay initialization slightly to ensure DOM is ready
+                    setTimeout(() => {
+                        initializeLensImagesLazy();
+                    }, 100);
                 }
 
                 const importPromises = [];

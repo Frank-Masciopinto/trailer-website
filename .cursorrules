@@ -294,6 +294,22 @@ if (settings.show_product_quick_view) {
 
 ## Best Practices
 
+###REACT components integration:
+Stencil’s architecture allows for organized customization using npm and React. In production, you can use these tools for stylizing seasonally themed products, temporary promotions, or event tickets. Below is a short tutorial on using npm and React to customize your Stencil theme.
+
+In this example, we’ll be making a drawer that sends a coupon code to the customer’s email using Material UI’s React framework. The resulting customization will look like the following:
+Create components
+
+In the following steps, we’ll be adding React components to assemble our coupon drawer.
+
+    Navigate to the ./assets/js folder.
+    Create a /components folder within the /js folder.
+    Navigate into the /components folder.
+    Create a CouponDrawer.js file.
+    Copy the following code into the file:
+fullguide here https://developer.bigcommerce.com/docs/storefront/stencil/themes/foundations/react
+
+
 ### Templates
 - Keep templates DRY using partials in `components/`
 - Use semantic HTML for accessibility

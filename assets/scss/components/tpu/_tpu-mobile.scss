@@ -266,58 +266,7 @@
 
 // Product Grid Dark Theme Override
 // -----------------------------------------------------------------------------
-
-.tpu-dark-theme {
-    .productGrid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: $tpu-space-4;
-        
-        @media (min-width: $tpu-screen-md) {
-            grid-template-columns: repeat(3, 1fr);
-        }
-        
-        @media (min-width: $tpu-screen-lg) {
-            grid-template-columns: repeat(4, 1fr);
-        }
-    }
-    
-    .card {
-        background: $tpu-bg-secondary;
-        border: 1px solid $tpu-border-primary;
-        border-radius: $tpu-radius-lg;
-        overflow: hidden;
-        transition: all $tpu-transition-normal;
-        
-        &:hover {
-            border-color: $tpu-accent-primary;
-            transform: translateY(-4px);
-            box-shadow: $tpu-shadow-lg;
-        }
-    }
-    
-    .card-title {
-        a {
-            color: $tpu-text-primary;
-            font-family: $tpu-font-body;
-            font-weight: $tpu-font-semibold;
-            
-            &:hover {
-                color: $tpu-accent-primary;
-            }
-        }
-    }
-    
-    .price {
-        color: $tpu-accent-primary;
-        font-family: $tpu-font-mono;
-        font-weight: $tpu-font-bold;
-    }
-    
-    .price--non-sale {
-        color: $tpu-text-muted;
-    }
-}
+// Note: Main card styles moved to _tpu-cards.scss for better organization
 
 // Touch Device Enhancements
 // -----------------------------------------------------------------------------

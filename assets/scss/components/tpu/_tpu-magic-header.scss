@@ -1,0 +1,467 @@
+// =============================================================================
+// TPU MAGIC HEADER - React Enhanced Components
+// =============================================================================
+// Styles for Magic UI-inspired React header components
+// =============================================================================
+
+// Magic Header Container
+.tpu-magic-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: $tpu-z-header;
+    background: $tpu-bg-primary;
+    border-bottom: 1px solid $tpu-border-primary;
+    
+    &--scrolled {
+        @include tpu-glass;
+        box-shadow: $tpu-shadow-lg;
+    }
+}
+
+.tpu-magic-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $tpu-space-4;
+    height: 70px;
+    padding: 0 $tpu-space-4;
+    max-width: 1440px;
+    margin: 0 auto;
+    
+    @media (min-width: $tpu-screen-md) {
+        height: 80px;
+        padding: 0 $tpu-space-6;
+    }
+}
+
+.tpu-magic-header__logo {
+    flex-shrink: 0;
+}
+
+.tpu-magic-header__menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: $tpu-bg-secondary;
+    border: 1px solid $tpu-border-primary;
+    border-radius: $tpu-radius-full;
+    cursor: pointer;
+    color: $tpu-text-primary;
+    
+    @media (min-width: $tpu-screen-lg) {
+        display: none;
+    }
+}
+
+.tpu-magic-header__cta {
+    display: none;
+    
+    @media (min-width: $tpu-screen-lg) {
+        display: flex;
+    }
+}
+
+.tpu-magic-header__actions {
+    display: flex;
+    align-items: center;
+    gap: $tpu-space-2;
+}
+
+// Dock Navigation
+.tpu-dock-nav {
+    display: none;
+    align-items: center;
+    gap: $tpu-space-1;
+    
+    @media (min-width: $tpu-screen-lg) {
+        display: flex;
+    }
+}
+
+.tpu-nav-item-wrapper {
+    position: relative;
+}
+
+.tpu-dock-nav__item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $tpu-space-2 $tpu-space-3;
+    font-family: $tpu-font-body;
+    font-size: $tpu-text-sm;
+    font-weight: $tpu-font-medium;
+    color: $tpu-text-secondary;
+    text-decoration: none;
+    border-radius: $tpu-radius-md;
+    transition: color $tpu-transition-fast;
+    
+    svg {
+        opacity: 0.6;
+    }
+    
+    &:hover {
+        color: $tpu-text-primary;
+        
+        svg {
+            opacity: 1;
+        }
+    }
+}
+
+// Dropdown Menu
+.tpu-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 200px;
+    padding: $tpu-space-2;
+    background: $tpu-bg-secondary;
+    border: 1px solid $tpu-border-primary;
+    border-radius: $tpu-radius-lg;
+    box-shadow: $tpu-shadow-xl;
+    z-index: 100;
+    margin-top: $tpu-space-1;
+    
+    // Arrow pointer
+    &::before {
+        content: '';
+        position: absolute;
+        top: -6px;
+        left: 20px;
+        transform: rotate(45deg);
+        width: 12px;
+        height: 12px;
+        background: $tpu-bg-secondary;
+        border-left: 1px solid $tpu-border-primary;
+        border-top: 1px solid $tpu-border-primary;
+    }
+}
+
+.tpu-dropdown-menu__item {
+    display: block;
+    padding: $tpu-space-2 $tpu-space-3;
+    font-family: $tpu-font-body;
+    font-size: $tpu-text-sm;
+    color: $tpu-text-secondary;
+    text-decoration: none;
+    border-radius: $tpu-radius-md;
+    transition: all $tpu-transition-fast;
+    
+    &:hover {
+        color: $tpu-text-primary;
+    }
+}
+
+.tpu-dropdown-menu__footer {
+    margin-top: $tpu-space-2;
+    padding-top: $tpu-space-2;
+    border-top: 1px solid $tpu-border-primary;
+}
+
+.tpu-dropdown-menu__view-all {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $tpu-space-2 $tpu-space-3;
+    font-size: $tpu-text-xs;
+    font-weight: $tpu-font-semibold;
+    color: $tpu-accent-primary;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: $tpu-tracking-wide;
+    border-radius: $tpu-radius-md;
+    
+    svg {
+        transition: transform $tpu-transition-fast;
+    }
+    
+    &:hover {
+        background: rgba(255, 107, 53, 0.1);
+        
+        svg {
+            transform: translateX(4px);
+        }
+    }
+}
+
+// Action Buttons
+.tpu-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: $tpu-bg-secondary;
+    border: 1px solid $tpu-border-primary;
+    border-radius: $tpu-radius-full;
+    color: $tpu-text-primary;
+    cursor: pointer;
+    text-decoration: none;
+    position: relative;
+    
+    svg {
+        stroke: currentColor;
+    }
+}
+
+.tpu-action-btn__badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 4px;
+    font-size: 10px;
+    font-weight: $tpu-font-bold;
+    color: $tpu-text-primary;
+    background: $tpu-accent-primary;
+    border-radius: $tpu-radius-full;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// Shimmer Button Styles
+.tpu-shimmer-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: $tpu-space-2;
+    padding: $tpu-space-3 $tpu-space-6;
+    background: var(--bg, $tpu-accent-primary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius, $tpu-radius-lg);
+    color: $tpu-text-primary;
+    font-family: $tpu-font-body;
+    font-size: $tpu-text-sm;
+    font-weight: $tpu-font-semibold;
+    text-transform: uppercase;
+    letter-spacing: $tpu-tracking-wide;
+    text-decoration: none;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.tpu-shimmer-btn__content {
+    position: relative;
+    z-index: 10;
+    display: inline-flex;
+    align-items: center;
+    gap: $tpu-space-2;
+    
+    svg {
+        flex-shrink: 0;
+        margin-right: $tpu-space-1;
+    }
+}
+
+.tpu-shimmer-btn__shimmer {
+    position: absolute;
+    inset: 0;
+    overflow: visible;
+    filter: blur(2px);
+    z-index: -30;
+}
+
+.tpu-shimmer-btn__shimmer-inner {
+    position: absolute;
+    inset: 0;
+    animation: tpu-shimmer-slide 3s linear infinite;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        inset: -100%;
+        width: 300%;
+        height: 300%;
+        background: conic-gradient(
+            from 270deg,
+            transparent 0deg,
+            var(--shimmer-color, #ff6b35) 90deg,
+            transparent 90deg
+        );
+        animation: tpu-spin-around 4s linear infinite;
+    }
+}
+
+.tpu-shimmer-btn__highlight {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: inset 0 -8px 10px rgba(255, 255, 255, 0.12);
+    transition: box-shadow $tpu-transition-normal;
+    
+    .tpu-shimmer-btn:hover & {
+        box-shadow: inset 0 -6px 10px rgba(255, 255, 255, 0.25);
+    }
+}
+
+.tpu-shimmer-btn__bg {
+    position: absolute;
+    inset: 2px;
+    background: var(--bg, $tpu-accent-primary);
+    border-radius: inherit;
+    z-index: -20;
+}
+
+@keyframes tpu-shimmer-slide {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+@keyframes tpu-spin-around {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+// Search Overlay
+.tpu-search-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: $tpu-z-modal;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 120px;
+}
+
+.tpu-search-overlay__content {
+    width: 100%;
+    max-width: 600px;
+    padding: 0 $tpu-space-4;
+    position: relative;
+}
+
+.tpu-search-overlay__input {
+    width: 100%;
+    padding: $tpu-space-4 $tpu-space-6;
+    font-family: $tpu-font-body;
+    font-size: $tpu-text-lg;
+    color: $tpu-text-primary;
+    background: $tpu-bg-secondary;
+    border: 2px solid $tpu-border-primary;
+    border-radius: $tpu-radius-xl;
+    outline: none;
+    
+    &::placeholder {
+        color: $tpu-text-muted;
+    }
+    
+    &:focus {
+        border-color: $tpu-accent-primary;
+    }
+}
+
+.tpu-search-overlay__close {
+    position: absolute;
+    top: -60px;
+    right: $tpu-space-4;
+    background: none;
+    border: none;
+    color: $tpu-text-primary;
+    cursor: pointer;
+    padding: $tpu-space-2;
+    
+    &:hover {
+        color: $tpu-accent-primary;
+    }
+}
+
+// Mobile Menu
+.tpu-mobile-menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: $tpu-z-overlay;
+}
+
+.tpu-mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 300px;
+    max-width: 85vw;
+    background: $tpu-bg-primary;
+    border-right: 1px solid $tpu-border-primary;
+    display: flex;
+    flex-direction: column;
+}
+
+.tpu-mobile-menu__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $tpu-space-4 $tpu-space-4;
+    border-bottom: 1px solid $tpu-border-primary;
+    color: $tpu-text-primary;
+}
+
+.tpu-mobile-menu__close {
+    background: none;
+    border: none;
+    color: $tpu-text-secondary;
+    cursor: pointer;
+    padding: $tpu-space-2;
+    
+    &:hover {
+        color: $tpu-text-primary;
+    }
+}
+
+.tpu-mobile-menu__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.tpu-mobile-menu__link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $tpu-space-4;
+    font-family: $tpu-font-headline;
+    font-size: $tpu-text-lg;
+    font-weight: $tpu-font-semibold;
+    color: $tpu-text-primary;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: $tpu-tracking-wide;
+    border-bottom: 1px solid $tpu-border-primary;
+    
+    svg {
+        color: $tpu-text-muted;
+    }
+    
+    &:hover {
+        background: $tpu-bg-secondary;
+        color: $tpu-accent-primary;
+    }
+}
+
+.tpu-mobile-menu__cta {
+    padding: $tpu-space-4;
+    border-top: 1px solid $tpu-border-primary;
+}
+
+// Scroll Progress (React version)
+.tpu-scroll-progress-react {
+    pointer-events: none;
+}
+
+// Hide regular header when Magic Header is rendered
+#magic-header-root:not(:empty) ~ .header,
+#magic-header-root:not(:empty) ~ .tpu-header {
+    display: none !important;
+}
+

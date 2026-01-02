@@ -11,7 +11,7 @@
     left: 0;
     width: 100%;
     height: 3px;
-    background: transparent;
+    background: $tpu-bg-primary; // Match dark background
     z-index: $tpu-z-max;
     
     &__bar {
@@ -31,12 +31,20 @@
     left: 0;
     right: 0;
     z-index: $tpu-z-header;
+    background: $tpu-bg-primary; // Always dark background
+    border-bottom: 1px solid $tpu-border-primary;
     transition: all $tpu-transition-normal;
     
     &--scrolled {
         @include tpu-glass;
         box-shadow: $tpu-shadow-lg;
     }
+}
+
+// Override any default header styles
+.header {
+    background: $tpu-bg-primary !important;
+    border-bottom: 1px solid $tpu-border-primary;
 }
 
 // Header Inner Container

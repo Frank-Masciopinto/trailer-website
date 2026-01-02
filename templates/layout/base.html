@@ -57,7 +57,10 @@
     <body>
         <svg data-src="{{cdn 'img/icon-sprite.svg'}}" class="icons-svg-sprite"></svg>
 
+        {{!-- Magic UI React Header container (rendered via JS on homepage) --}}
+        <div id="magic-header-root"></div>
         {{> components/common/header }}
+        
         {{> components/common/body }}
         {{> components/common/footer }}
 

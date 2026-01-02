@@ -2,6 +2,11 @@ __webpack_public_path__ = window.__webpack_public_path__; // eslint-disable-line
 
 import Global from './theme/global';
 
+// React imports for Magic UI components
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import MagicHeader from './components/MagicHeader';
+
 const getAccount = () => import('./theme/account');
 const getLogin = () => import('./theme/auth');
 const noop = null;
@@ -70,6 +75,13 @@ window.stencilBootstrap = function stencilBootstrap(pageType, contextJSON = null
                 // Load globals
                 if (loadGlobal) {
                     Global.load(context);
+                }
+                
+                // Render Magic UI React header on homepage
+                const magicHeaderContainer = document.getElementById('magic-header-root');
+                if (magicHeaderContainer && pageType === 'default') {
+                    const root = createRoot(magicHeaderContainer);
+                    root.render(React.createElement(MagicHeader));
                 }
 
                 const importPromises = [];

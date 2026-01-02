@@ -19,7 +19,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 include: /(assets\/js|assets\\js|stencil-utils)/,
                 use: {
                     loader: 'babel-loader',
@@ -35,6 +35,7 @@ module.exports = {
                                 useBuiltIns: 'entry',
                                 corejs: '^3.6.5',
                             }],
+                            '@babel/preset-react', // Add React support
                         ],
                     },
                 },
@@ -76,6 +77,7 @@ module.exports = {
         }),
     ],
     resolve: {
+        extensions: ['.js', '.jsx', '.json'],
         fallback: { url: require.resolve('url/') },
         alias: {
             jquery: path.resolve(__dirname, 'node_modules/jquery/dist/jquery.min.js'),

@@ -10,6 +10,13 @@
     color: $tpu-text-primary;
 }
 
+// Remove margin-top from main content
+#main-content,
+.body {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
 // Container overrides for TPU sections
 .tpu-container {
     width: 100%;
@@ -152,8 +159,53 @@
 .tpu-dark-theme {
     // Hide old carousel/banner content from regions
     .banners:not(.tpu-top-banner),
-    [id^="sd-image-"] {
+    [id^="sd-image-"],
+    [id^="sd-image-"] img,
+    div[id^="sd-image-"] {
         display: none !important;
+        visibility: hidden !important;
+    }
+}
+
+// Global hide for BigCommerce Page Builder widget images
+#main-content {
+    [id^="sd-image-"],
+    [id^="sd-image-"] img {
+        display: none !important;
+        visibility: hidden !important;
+    }
+}
+
+// Hide legacy header/footer region content
+body [data-content-region="header_bottom--global"],
+body [data-content-region="header_bottom"],
+body [data-content-region="header_navigation_bottom--global"],
+body [data-sub-layout-container],
+body [data-layout-id],
+body .body > div:not(.main-content-wrapper):not(.modal):not(.alertModal),
+div[data-content-region="header_bottom--global"],
+div[data-content-region="header_bottom"],
+div[data-content-region="header_navigation_bottom--global"] {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+// Fix logo background in header - blend mode removes white background
+.tpu-header__logo,
+.header-logo {
+    a {
+        display: block;
+    }
+    
+    img {
+        background: transparent !important;
+        max-height: 50px;
+        mix-blend-mode: multiply; // Makes white background transparent on dark
+        filter: invert(1); // Invert colors for dark theme
     }
 }
 

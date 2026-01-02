@@ -38,6 +38,23 @@
 
 .tpu-magic-header__logo {
     flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.tpu-magic-header__phone {
+    &:hover {
+        color: lighten($tpu-accent-primary, 10%) !important;
+        
+        svg {
+            transform: scale(1.1);
+        }
+    }
+    
+    svg {
+        transition: transform $tpu-transition-fast;
+    }
 }
 
 .tpu-magic-header__menu-toggle {

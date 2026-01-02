@@ -3,9 +3,11 @@
     Full-screen animated text hero with industrial aesthetic
 --}}
 
-<section class="tpu-hero">
+<section class="tpu-hero tpu-hero--laser-flow">
     {{!-- Background Layers --}}
     <div class="tpu-hero__background">
+        {{!-- React-rendered LaserFlow background --}}
+        <div id="hero-laser-flow-root" aria-hidden="true"></div>
         <div class="tpu-hero__grid" aria-hidden="true"></div>
         <div class="tpu-hero__gradient" aria-hidden="true"></div>
         <div class="tpu-hero__noise" aria-hidden="true"></div>

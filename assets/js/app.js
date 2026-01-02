@@ -6,6 +6,8 @@ import Global from './theme/global';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import MagicHeader from './components/MagicHeader';
+import LaserFlow from './components/LaserFlow';
+import AnimatedBentoGrid from './components/AnimatedBentoGrid';
 
 const getAccount = () => import('./theme/account');
 const getLogin = () => import('./theme/auth');
@@ -82,6 +84,32 @@ window.stencilBootstrap = function stencilBootstrap(pageType, contextJSON = null
                 if (magicHeaderContainer && pageType === 'default') {
                     const root = createRoot(magicHeaderContainer);
                     root.render(React.createElement(MagicHeader));
+                }
+                
+                // Render LaserFlow background in hero section on homepage
+                const laserFlowContainer = document.getElementById('hero-laser-flow-root');
+                if (laserFlowContainer && pageType === 'default') {
+                    const laserRoot = createRoot(laserFlowContainer);
+                    // Adjust settings based on viewport width
+                    const isMobile = window.innerWidth < 768;
+                    laserRoot.render(React.createElement(LaserFlow, {
+                        color: '#FF6B35',
+                        verticalBeamOffset: isMobile ? 0.25 : -0.35, // Move beam up on mobile
+                        horizontalBeamOffset: 0.0,
+                        verticalSizing: isMobile ? 1.0 : 2.5, // Reduce vertical stretch on mobile
+                        horizontalSizing: isMobile ? 1.0 : 0.6,
+                        fogIntensity: isMobile ? 0.7 : 0.5,
+                        wispIntensity: isMobile ? 8.0 : 4.0, // More visible wisps on mobile
+                        flowSpeed: 0.3,
+                        wispDensity: isMobile ? 1.5 : 1.0 // More wisps on mobile
+                    }));
+                }
+                
+                // Render animated Bento Grid with scroll animations on homepage
+                const bentoContainer = document.getElementById('animated-bento-root');
+                if (bentoContainer && pageType === 'default') {
+                    const bentoRoot = createRoot(bentoContainer);
+                    bentoRoot.render(React.createElement(AnimatedBentoGrid));
                 }
 
                 const importPromises = [];

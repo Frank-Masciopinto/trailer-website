@@ -6,9 +6,9 @@ import Global from './theme/global';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import MagicHeader from './components/MagicHeader';
-import LaserFlow from './components/LaserFlow';
+// import LaserFlow from './components/LaserFlow'; // Replaced with static image background
 import AnimatedBentoGrid from './components/AnimatedBentoGrid';
-import HeroStats from './components/HeroStats';
+// import HeroStats from './components/HeroStats'; // Removed from hero
 import GoogleReviews from './components/GoogleReviews';
 import WhyKitsBeatParts from './components/WhyKitsBeatParts';
 import { initializeLensImagesLazy } from './components/LensInitializer';
@@ -93,37 +93,14 @@ window.stencilBootstrap = function stencilBootstrap(pageType, contextJSON = null
                     }));
                 }
                 
-                // Render LaserFlow background in hero section on homepage
-                const laserFlowContainer = document.getElementById('hero-laser-flow-root');
-                if (laserFlowContainer && pageType === 'default') {
-                    const laserRoot = createRoot(laserFlowContainer);
-                    // Adjust settings based on viewport width
-                    const isMobile = window.innerWidth < 768;
-                    laserRoot.render(React.createElement(LaserFlow, {
-                        color: '#FF6B35',
-                        verticalBeamOffset: isMobile ? 0.25 : -0.35, // Move beam up on mobile
-                        horizontalBeamOffset: 0.0,
-                        verticalSizing: isMobile ? 1.0 : 2.5, // Reduce vertical stretch on mobile
-                        horizontalSizing: isMobile ? 1.0 : 0.6,
-                        fogIntensity: isMobile ? 0.7 : 0.5,
-                        wispIntensity: isMobile ? 8.0 : 4.0, // More visible wisps on mobile
-                        flowSpeed: 0.3,
-                        wispDensity: isMobile ? 1.5 : 1.0 // More wisps on mobile
-                    }));
-                }
+                // LaserFlow background replaced with static image (trailer-horizontal.webp)
+                // See templates/components/tpu/hero.html for image background implementation
                 
                 // Render animated Bento Grid with scroll animations on homepage
                 const bentoContainer = document.getElementById('animated-bento-root');
                 if (bentoContainer && pageType === 'default') {
                     const bentoRoot = createRoot(bentoContainer);
                     bentoRoot.render(React.createElement(AnimatedBentoGrid));
-                }
-                
-                // Render HeroStats with CountUp and Gradient on homepage
-                const heroStatsContainer = document.getElementById('hero-stats-root');
-                if (heroStatsContainer && pageType === 'default') {
-                    const statsRoot = createRoot(heroStatsContainer);
-                    statsRoot.render(React.createElement(HeroStats));
                 }
                 
                 // Render Google Reviews section with MagicUI components

@@ -3,12 +3,22 @@
     Full-screen animated text hero with industrial aesthetic
 --}}
 
-<section class="tpu-hero tpu-hero--laser-flow">
+<section class="tpu-hero tpu-hero--image">
     {{!-- Background Layers --}}
     <div class="tpu-hero__background">
-        {{!-- React-rendered LaserFlow background --}}
-        <div id="hero-laser-flow-root" aria-hidden="true"></div>
-        <div class="tpu-hero__grid" aria-hidden="true"></div>
+        {{!-- Hero background image (responsive: vertical for mobile, horizontal for desktop) --}}
+        <div class="tpu-hero__image" aria-hidden="true">
+            <picture>
+                <source media="(min-width: 768px)" 
+                        srcset="{{cdn 'img/trailer-horizontal.webp'}}" />
+                <img src="{{cdn 'img/trailer-vertical.webp'}}" 
+                     alt="" 
+                     loading="eager"
+                     fetchpriority="high"
+                     class="tpu-hero__image-src" />
+            </picture>
+        </div>
+        <div class="tpu-hero__image-overlay" aria-hidden="true"></div>
         <div class="tpu-hero__gradient" aria-hidden="true"></div>
         <div class="tpu-hero__noise" aria-hidden="true"></div>
     </div>
@@ -49,13 +59,6 @@
             </a>
         </div>
 
-        {{!-- Stats Bar (React-rendered with CountUp and Gradient) --}}
-        <div class="tpu-hero__stats" id="hero-stats-root">
-            {{!-- Fallback for non-JS --}}
-            <noscript>
-                {{> components/tpu/stats-bar}}
-            </noscript>
-        </div>
     </div>
 
     {{!-- Scroll Indicator --}}

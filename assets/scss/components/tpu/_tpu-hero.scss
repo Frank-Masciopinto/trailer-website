@@ -336,7 +336,83 @@ $word-height-xl: 112px;     // For text-8xl (6rem = 96px * 1.15)
 }
 
 // =============================================================================
-// LASER FLOW BACKGROUND
+// IMAGE BACKGROUND
+// =============================================================================
+
+.tpu-hero__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.tpu-hero__image-src {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+    object-position: center center;
+    
+    // Slight zoom on load animation
+    animation: tpu-hero-image-zoom 20s ease-out forwards;
+}
+
+@keyframes tpu-hero-image-zoom {
+    0% {
+        transform: translate(-50%, -50%) scale(1.05);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+// Dark overlay to ensure text readability
+.tpu-hero__image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.5) 0%,
+        rgba(0, 0, 0, 0.4) 40%,
+        rgba(0, 0, 0, 0.6) 70%,
+        rgba(26, 26, 26, 0.95) 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+}
+
+// When image background is active
+.tpu-hero--image {
+    .tpu-hero__grid {
+        display: none;
+    }
+    
+    .tpu-hero__gradient {
+        z-index: 2;
+        background: radial-gradient(
+            ellipse 80% 50% at 50% 0%,
+            rgba(255, 107, 53, 0.2) 0%,
+            transparent 60%
+        );
+    }
+    
+    .tpu-hero__noise {
+        z-index: 2;
+    }
+}
+
+// =============================================================================
+// LASER FLOW BACKGROUND (Legacy - kept for reference)
 // =============================================================================
 
 .tpu-laser-flow {

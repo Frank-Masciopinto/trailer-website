@@ -80,23 +80,6 @@
             box-shadow $tpu-transition-normal,
             border-color $tpu-transition-normal;
         
-        // Left accent border
-        &::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: linear-gradient(
-                180deg,
-                $tpu-accent-primary 0%,
-                $tpu-accent-secondary 100%
-            );
-            opacity: 0;
-            transition: opacity $tpu-transition-normal;
-            z-index: 2;
-        }
         
         // Animated shine border effect
         &::after {
@@ -131,10 +114,6 @@
                 0 4px 12px -2px rgba(0, 0, 0, 0.3),
                 0 0 0 1px rgba($tpu-accent-primary, 0.1),
                 0 0 40px -10px rgba($tpu-accent-primary, 0.3);
-            
-            &::before {
-                opacity: 1;
-            }
             
             &::after {
                 opacity: 1;

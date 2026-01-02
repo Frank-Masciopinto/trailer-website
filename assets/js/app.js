@@ -10,6 +10,7 @@ import LaserFlow from './components/LaserFlow';
 import AnimatedBentoGrid from './components/AnimatedBentoGrid';
 import HeroStats from './components/HeroStats';
 import GoogleReviews from './components/GoogleReviews';
+import WhyKitsBeatParts from './components/WhyKitsBeatParts';
 import { initializeLensImagesLazy } from './components/LensInitializer';
 import { initializeLightRaysLazy } from './components/LightRaysInitializer';
 
@@ -130,6 +131,13 @@ window.stencilBootstrap = function stencilBootstrap(pageType, contextJSON = null
                 if (googleReviewsContainer && pageType === 'default') {
                     const reviewsRoot = createRoot(googleReviewsContainer);
                     reviewsRoot.render(React.createElement(GoogleReviews));
+                }
+                
+                // Render Why Kits Beat Parts section with MagicUI components
+                const whyKitsContainer = document.getElementById('why-kits-root');
+                if (whyKitsContainer && pageType === 'default') {
+                    const kitsRoot = createRoot(whyKitsContainer);
+                    kitsRoot.render(React.createElement(WhyKitsBeatParts));
                 }
                 
                 // Initialize Magic UI Lens effect on product card images

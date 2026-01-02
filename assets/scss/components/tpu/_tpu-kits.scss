@@ -1,0 +1,486 @@
+// =============================================================================
+// TPU KITS SECTION - "Why Our Kits Beat Buying One-Off Parts"
+// =============================================================================
+// MagicUI-inspired premium section for AOV & trust building
+// =============================================================================
+
+.tpu-kits-section {
+    position: relative;
+    width: 100%;
+    padding: $tpu-space-16 0 $tpu-space-20;
+    overflow: hidden;
+    
+    @media (min-width: $tpu-screen-md) {
+        padding: $tpu-space-20 0 $tpu-space-24;
+    }
+}
+
+// Background Effects
+// -----------------------------------------------------------------------------
+
+.tpu-kits__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.tpu-kits__bg-gradient {
+    position: absolute;
+    inset: 0;
+    background: 
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255, 107, 53, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(255, 193, 7, 0.05) 0%, transparent 40%),
+        linear-gradient(180deg, $tpu-bg-secondary 0%, $tpu-bg-primary 30%, $tpu-bg-primary 70%, $tpu-bg-secondary 100%);
+}
+
+.tpu-kits__bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 100% 80% at 50% 50%, black 30%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse 100% 80% at 50% 50%, black 30%, transparent 70%);
+}
+
+.tpu-kits__bg-noise {
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+// Header
+// -----------------------------------------------------------------------------
+
+.tpu-kits__header {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    margin-bottom: $tpu-space-12;
+    
+    @media (min-width: $tpu-screen-md) {
+        margin-bottom: $tpu-space-16;
+    }
+}
+
+.tpu-kits__eyebrow {
+    display: inline-block;
+    font-family: $tpu-font-body;
+    font-size: $tpu-text-sm;
+    font-weight: $tpu-font-semibold;
+    text-transform: uppercase;
+    letter-spacing: $tpu-tracking-widest;
+    margin-bottom: $tpu-space-4;
+    
+    @media (min-width: $tpu-screen-md) {
+        font-size: $tpu-text-base;
+    }
+}
+
+.tpu-kits__headline {
+    font-family: $tpu-font-headline;
+    font-size: $tpu-text-3xl;
+    font-weight: $tpu-font-bold;
+    line-height: $tpu-leading-tight;
+    letter-spacing: $tpu-tracking-tight;
+    color: $tpu-text-primary;
+    margin-bottom: $tpu-space-4;
+    
+    @media (min-width: $tpu-screen-md) {
+        font-size: $tpu-text-5xl;
+    }
+    
+    @media (min-width: $tpu-screen-lg) {
+        font-size: $tpu-text-6xl;
+    }
+}
+
+.tpu-kits__subhead {
+    font-family: $tpu-font-body;
+    font-size: $tpu-text-lg;
+    color: $tpu-text-secondary;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: $tpu-leading-relaxed;
+    
+    @media (min-width: $tpu-screen-md) {
+        font-size: $tpu-text-xl;
+    }
+}
+
+// Value Cards Grid
+// -----------------------------------------------------------------------------
+
+.tpu-kits__grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $tpu-space-6;
+    margin-bottom: $tpu-space-10;
+    
+    @media (min-width: $tpu-screen-md) {
+        grid-template-columns: repeat(3, 1fr);
+        gap: $tpu-space-8;
+    }
+}
+
+.tpu-kits__card {
+    position: relative;
+    background: linear-gradient(135deg, $tpu-bg-secondary 0%, rgba(45, 45, 45, 0.8) 100%);
+    border: 1px solid $tpu-border-primary;
+    border-radius: $tpu-radius-xl;
+    padding: $tpu-space-8;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all $tpu-transition-normal;
+    
+    &:hover {
+        border-color: var(--card-accent, $tpu-accent-primary);
+        
+        .tpu-kits__card-glow {
+            opacity: 0.15;
+        }
+        
+        .tpu-kits__card-beam {
+            opacity: 1;
+        }
+        
+        .tpu-kits__card-icon {
+            transform: scale(1.1);
+            color: var(--card-accent, $tpu-accent-primary);
+        }
+    }
+}
+
+.tpu-kits__card-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 0%, var(--card-accent, $tpu-accent-primary), transparent 70%);
+    opacity: 0;
+    transition: opacity $tpu-transition-normal;
+    pointer-events: none;
+}
+
+.tpu-kits__card-beam {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity $tpu-transition-normal;
+    pointer-events: none;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        inset: -2px;
+        border-radius: inherit;
+        background: conic-gradient(
+            from 0deg,
+            transparent,
+            var(--card-accent, $tpu-accent-primary),
+            transparent 30%
+        );
+        animation: tpu-border-beam 4s linear infinite;
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask-composite: exclude;
+        -webkit-mask-composite: xor;
+        padding: 2px;
+    }
+}
+
+@keyframes tpu-border-beam {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.tpu-kits__card-inner {
+    position: relative;
+    z-index: 1;
+}
+
+.tpu-kits__card-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: $tpu-radius-lg;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid $tpu-border-primary;
+    margin-bottom: $tpu-space-5;
+    color: $tpu-text-secondary;
+    transition: all $tpu-transition-normal;
+    
+    svg {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+.tpu-kits__card-check {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(34, 197, 94, 0.2);
+    border-radius: $tpu-radius-full;
+    color: #22c55e;
+}
+
+.tpu-kits__check-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.tpu-kits__card-title {
+    font-family: $tpu-font-headline;
+    font-size: $tpu-text-xl;
+    font-weight: $tpu-font-bold;
+    color: $tpu-text-primary;
+    margin-bottom: $tpu-space-3;
+    
+    @media (min-width: $tpu-screen-md) {
+        font-size: $tpu-text-2xl;
+    }
+}
+
+.tpu-kits__card-description {
+    font-family: $tpu-font-body;
+    font-size: $tpu-text-base;
+    color: $tpu-text-secondary;
+    line-height: $tpu-leading-relaxed;
+}
+
+// CTA Section
+// -----------------------------------------------------------------------------
+
+.tpu-kits__cta {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    margin-bottom: $tpu-space-12;
+}
+
+.tpu-kits__cta-btn {
+    font-family: $tpu-font-body !important;
+    font-size: $tpu-text-lg !important;
+    font-weight: $tpu-font-bold !important;
+    text-transform: uppercase;
+    letter-spacing: $tpu-tracking-wide;
+    padding: $tpu-space-5 $tpu-space-10 !important;
+    
+    @media (min-width: $tpu-screen-md) {
+        font-size: $tpu-text-xl !important;
+        padding: $tpu-space-6 $tpu-space-12 !important;
+    }
+}
+
+.tpu-kits__arrow {
+    width: 20px;
+    height: 20px;
+    margin-left: $tpu-space-2;
+    transition: transform $tpu-transition-fast;
+    
+    .tpu-kits__cta-btn:hover & {
+        transform: translateX(4px);
+    }
+}
+
+// Trust Badges
+// -----------------------------------------------------------------------------
+
+.tpu-kits__badges {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $tpu-space-4;
+    margin-bottom: $tpu-space-12;
+    
+    @media (min-width: $tpu-screen-md) {
+        flex-direction: row;
+        justify-content: center;
+        gap: $tpu-space-8;
+    }
+}
+
+.tpu-kits__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: $tpu-space-3;
+    padding: $tpu-space-3 $tpu-space-5;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid $tpu-border-primary;
+    border-radius: $tpu-radius-full;
+    transition: all $tpu-transition-fast;
+    
+    &:hover {
+        background: rgba(255, 255, 255, 0.06);
+        border-color: $tpu-border-secondary;
+    }
+}
+
+.tpu-kits__badge-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    color: $tpu-accent-primary;
+    
+    svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+.tpu-kits__badge-text {
+    font-family: $tpu-font-body;
+    font-size: $tpu-text-sm;
+    font-weight: $tpu-font-medium;
+    color: $tpu-text-secondary;
+    
+    @media (min-width: $tpu-screen-md) {
+        font-size: $tpu-text-base;
+    }
+}
+
+// Carter Brand Callout
+// -----------------------------------------------------------------------------
+
+.tpu-kits__brand-callout {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $tpu-space-8;
+    padding: $tpu-space-10;
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.08) 0%, rgba(45, 45, 45, 0.6) 50%, rgba(255, 193, 7, 0.05) 100%);
+    border: 1px solid $tpu-border-accent;
+    border-radius: $tpu-radius-2xl;
+    overflow: hidden;
+    
+    @media (min-width: $tpu-screen-md) {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: $tpu-space-12 $tpu-space-16;
+    }
+}
+
+.tpu-kits__brand-content {
+    text-align: center;
+    
+    @media (min-width: $tpu-screen-md) {
+        text-align: left;
+    }
+}
+
+.tpu-kits__brand-badge {
+    display: inline-block;
+    padding: $tpu-space-1 $tpu-space-3;
+    background: $tpu-accent-primary;
+    color: $tpu-text-primary;
+    font-family: $tpu-font-body;
+    font-size: $tpu-text-xs;
+    font-weight: $tpu-font-bold;
+    text-transform: uppercase;
+    letter-spacing: $tpu-tracking-wider;
+    border-radius: $tpu-radius-sm;
+    margin-bottom: $tpu-space-3;
+}
+
+.tpu-kits__brand-name {
+    font-family: $tpu-font-headline;
+    font-size: $tpu-text-4xl;
+    font-weight: $tpu-font-black;
+    letter-spacing: $tpu-tracking-wide;
+    text-transform: uppercase;
+    margin-bottom: $tpu-space-2;
+    
+    @media (min-width: $tpu-screen-md) {
+        font-size: $tpu-text-5xl;
+    }
+}
+
+.tpu-kits__brand-tagline {
+    font-family: $tpu-font-body;
+    font-size: $tpu-text-base;
+    color: $tpu-text-secondary;
+    margin-bottom: $tpu-space-5;
+    
+    @media (min-width: $tpu-screen-md) {
+        font-size: $tpu-text-lg;
+    }
+}
+
+.tpu-kits__brand-link {
+    display: inline-flex;
+    align-items: center;
+    gap: $tpu-space-2;
+    font-family: $tpu-font-body;
+    font-size: $tpu-text-base;
+    font-weight: $tpu-font-semibold;
+    color: $tpu-accent-primary;
+    text-decoration: none;
+    transition: all $tpu-transition-fast;
+    
+    svg {
+        width: 18px;
+        height: 18px;
+        transition: transform $tpu-transition-fast;
+    }
+    
+    &:hover {
+        color: $tpu-accent-secondary;
+        
+        svg {
+            transform: translateX(4px);
+        }
+    }
+}
+
+.tpu-kits__brand-visual {
+    position: relative;
+    display: none;
+    
+    @media (min-width: $tpu-screen-md) {
+        display: block;
+        width: 160px;
+        height: 160px;
+    }
+}
+
+.tpu-kits__brand-orb {
+    position: absolute;
+    inset: 0;
+    border-radius: $tpu-radius-full;
+    background: radial-gradient(circle at 30% 30%, $tpu-accent-primary, $tpu-accent-secondary 50%, transparent 70%);
+    opacity: 0.6;
+    filter: blur(30px);
+    animation: tpu-orb-pulse 4s ease-in-out infinite;
+}
+
+@keyframes tpu-orb-pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+    50% {
+        transform: scale(1.15);
+        opacity: 0.8;
+    }
+}
+

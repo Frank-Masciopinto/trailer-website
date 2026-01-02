@@ -8,6 +8,7 @@ import { createRoot } from 'react-dom/client';
 import MagicHeader from './components/MagicHeader';
 import LaserFlow from './components/LaserFlow';
 import AnimatedBentoGrid from './components/AnimatedBentoGrid';
+import HeroStats from './components/HeroStats';
 
 const getAccount = () => import('./theme/account');
 const getLogin = () => import('./theme/auth');
@@ -83,7 +84,9 @@ window.stencilBootstrap = function stencilBootstrap(pageType, contextJSON = null
                 const magicHeaderContainer = document.getElementById('magic-header-root');
                 if (magicHeaderContainer && pageType === 'default') {
                     const root = createRoot(magicHeaderContainer);
-                    root.render(React.createElement(MagicHeader));
+                    root.render(React.createElement(MagicHeader, {
+                        initialCartQuantity: context.cartQuantity || 0
+                    }));
                 }
                 
                 // Render LaserFlow background in hero section on homepage
@@ -110,6 +113,13 @@ window.stencilBootstrap = function stencilBootstrap(pageType, contextJSON = null
                 if (bentoContainer && pageType === 'default') {
                     const bentoRoot = createRoot(bentoContainer);
                     bentoRoot.render(React.createElement(AnimatedBentoGrid));
+                }
+                
+                // Render HeroStats with CountUp and Gradient on homepage
+                const heroStatsContainer = document.getElementById('hero-stats-root');
+                if (heroStatsContainer && pageType === 'default') {
+                    const statsRoot = createRoot(heroStatsContainer);
+                    statsRoot.render(React.createElement(HeroStats));
                 }
 
                 const importPromises = [];

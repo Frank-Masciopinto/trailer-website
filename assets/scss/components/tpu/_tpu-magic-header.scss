@@ -88,7 +88,307 @@
     gap: $tpu-space-2;
 }
 
-// Dock Navigation
+// =============================================================================
+// SHADCN-STYLE NAVIGATION MENU
+// =============================================================================
+// Built on Radix UI primitives for accessibility
+// =============================================================================
+
+.tpu-nav-menu {
+    display: none;
+    position: relative;
+    z-index: 10;
+    
+    @media (min-width: $tpu-screen-lg) {
+        display: flex;
+    }
+}
+
+.tpu-nav-menu__list {
+    display: flex;
+    flex: 1 1 auto;
+    list-style: none;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    gap: $tpu-space-1;
+}
+
+.tpu-nav-menu__trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: $tpu-space-1;
+    padding: $tpu-space-2 $tpu-space-3;
+    font-family: $tpu-font-body;
+    font-size: $tpu-text-sm;
+    font-weight: $tpu-font-medium;
+    color: $tpu-text-secondary;
+    background: transparent;
+    border: none;
+    border-radius: $tpu-radius-md;
+    cursor: pointer;
+    transition: all $tpu-transition-fast;
+    outline: none;
+    text-decoration: none;
+    
+    &:hover,
+    &:focus {
+        color: $tpu-text-primary;
+        background: rgba(255, 255, 255, 0.05);
+    }
+    
+    &[data-state='open'] {
+        color: $tpu-accent-primary;
+        background: rgba(255, 107, 53, 0.1);
+        
+        .tpu-nav-menu__chevron {
+            transform: rotate(180deg);
+        }
+    }
+}
+
+.tpu-nav-menu__chevron {
+    position: relative;
+    top: 1px;
+    transition: transform 0.2s ease;
+    opacity: 0.7;
+}
+
+.tpu-nav-menu__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: $tpu-space-2 $tpu-space-3;
+    font-family: $tpu-font-body;
+    font-size: $tpu-text-sm;
+    font-weight: $tpu-font-medium;
+    color: $tpu-text-secondary;
+    text-decoration: none;
+    border-radius: $tpu-radius-md;
+    transition: all $tpu-transition-fast;
+    
+    &:hover,
+    &:focus {
+        color: $tpu-text-primary;
+        background: rgba(255, 255, 255, 0.05);
+    }
+}
+
+.tpu-nav-menu__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: auto;
+    min-width: 400px;
+    padding: $tpu-space-3;
+    
+    // Animation
+    animation-duration: 0.2s;
+    animation-timing-function: ease;
+    
+    &[data-motion='from-start'] {
+        animation-name: enterFromLeft;
+    }
+    
+    &[data-motion='from-end'] {
+        animation-name: enterFromRight;
+    }
+    
+    &[data-motion='to-start'] {
+        animation-name: exitToLeft;
+    }
+    
+    &[data-motion='to-end'] {
+        animation-name: exitToRight;
+    }
+}
+
+@keyframes enterFromRight {
+    from { opacity: 0; transform: translateX(200px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes enterFromLeft {
+    from { opacity: 0; transform: translateX(-200px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes exitToRight {
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateX(200px); }
+}
+
+@keyframes exitToLeft {
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateX(-200px); }
+}
+
+.tpu-nav-menu__viewport-wrapper,
+.tpu-nav-menu__viewport-position {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    perspective: 2000px;
+    width: 100%;
+    padding-top: $tpu-space-2;
+    z-index: $tpu-z-header + 10; // Must be above header
+    pointer-events: auto;
+}
+
+.tpu-nav-menu__viewport {
+    position: relative;
+    overflow: hidden;
+    min-width: 400px; // Fallback minimum width
+    width: var(--radix-navigation-menu-viewport-width, 400px);
+    height: var(--radix-navigation-menu-viewport-height, auto);
+    background: $tpu-bg-secondary;
+    border: 1px solid $tpu-border-primary;
+    border-radius: $tpu-radius-lg;
+    box-shadow: $tpu-shadow-xl;
+    transition: width 0.3s ease, height 0.3s ease;
+    transform-origin: top center;
+    
+    // Entry animation
+    &[data-state='open'] {
+        animation: scaleIn 0.2s ease;
+    }
+    
+    &[data-state='closed'] {
+        animation: scaleOut 0.2s ease;
+    }
+}
+
+@keyframes scaleIn {
+    from { opacity: 0; transform: rotateX(-10deg) scale(0.95); }
+    to { opacity: 1; transform: rotateX(0) scale(1); }
+}
+
+@keyframes scaleOut {
+    from { opacity: 1; transform: rotateX(0) scale(1); }
+    to { opacity: 0; transform: rotateX(-10deg) scale(0.95); }
+}
+
+.tpu-nav-menu__indicator {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    height: 10px;
+    top: 100%;
+    overflow: hidden;
+    z-index: 1;
+    transition: width 0.25s ease, transform 0.25s ease;
+    
+    &[data-state='visible'] {
+        animation: fadeIn 0.2s ease;
+    }
+    
+    &[data-state='hidden'] {
+        animation: fadeOut 0.2s ease;
+    }
+}
+
+.tpu-nav-menu__indicator-arrow {
+    position: relative;
+    top: 70%;
+    width: 10px;
+    height: 10px;
+    background: $tpu-bg-secondary;
+    border-top: 1px solid $tpu-border-primary;
+    border-left: 1px solid $tpu-border-primary;
+    transform: rotate(45deg);
+    border-radius: 2px 0 0 0;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+// Navigation Menu Content Items
+.tpu-nav-content-grid {
+    display: grid;
+    gap: $tpu-space-2;
+    padding: $tpu-space-1;
+    width: 400px;
+    
+    &--2cols {
+        grid-template-columns: repeat(2, 1fr);
+        width: 500px;
+    }
+}
+
+.tpu-nav-content-item {
+    display: block;
+    padding: $tpu-space-3;
+    border-radius: $tpu-radius-md;
+    text-decoration: none;
+    transition: all $tpu-transition-fast;
+    
+    &:hover {
+        background: rgba(255, 107, 53, 0.1);
+    }
+    
+    &__title {
+        font-family: $tpu-font-body;
+        font-size: $tpu-text-sm;
+        font-weight: $tpu-font-semibold;
+        color: $tpu-text-primary;
+        margin-bottom: $tpu-space-1;
+    }
+    
+    &__description {
+        font-family: $tpu-font-body;
+        font-size: $tpu-text-xs;
+        color: $tpu-text-muted;
+        line-height: $tpu-leading-relaxed;
+    }
+}
+
+.tpu-nav-content-footer {
+    margin-top: $tpu-space-2;
+    padding-top: $tpu-space-2;
+    border-top: 1px solid $tpu-border-primary;
+    
+    a {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: $tpu-space-2 $tpu-space-3;
+        font-size: $tpu-text-xs;
+        font-weight: $tpu-font-semibold;
+        color: $tpu-accent-primary;
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: $tpu-tracking-wide;
+        border-radius: $tpu-radius-md;
+        
+        svg {
+            width: 14px;
+            height: 14px;
+            transition: transform $tpu-transition-fast;
+        }
+        
+        &:hover {
+            background: rgba(255, 107, 53, 0.1);
+            
+            svg {
+                transform: translateX(4px);
+            }
+        }
+    }
+}
+
+// Legacy dock nav (kept for backwards compatibility)
 .tpu-dock-nav {
     display: none;
     align-items: center;
@@ -130,7 +430,7 @@
     }
 }
 
-// Dropdown Menu
+// Dropdown Menu (legacy)
 .tpu-dropdown-menu {
     position: absolute;
     top: 100%;
@@ -392,7 +692,287 @@
     }
 }
 
-// Mobile Menu
+// =============================================================================
+// SHEET COMPONENT (shadcn-style)
+// =============================================================================
+// Sliding panel/drawer built on Radix UI Dialog
+// =============================================================================
+
+.tpu-sheet__overlay {
+    position: fixed;
+    inset: 0;
+    z-index: $tpu-z-overlay;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    
+    // Animation
+    &[data-state='open'] {
+        animation: fadeIn 0.2s ease-out;
+    }
+    
+    &[data-state='closed'] {
+        animation: fadeOut 0.2s ease-in;
+    }
+}
+
+.tpu-sheet__content {
+    position: fixed;
+    z-index: $tpu-z-modal;
+    background: $tpu-bg-primary;
+    display: flex;
+    flex-direction: column;
+    box-shadow: $tpu-shadow-xl;
+    
+    // Focus ring removal for sheet
+    &:focus {
+        outline: none;
+    }
+    
+    // Left side (default for mobile menu)
+    &--left {
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 300px;
+        max-width: 85vw;
+        border-right: 1px solid $tpu-border-primary;
+        
+        &[data-state='open'] {
+            animation: slideInFromLeft 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        &[data-state='closed'] {
+            animation: slideOutToLeft 0.2s ease-in;
+        }
+    }
+    
+    // Right side
+    &--right {
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 300px;
+        max-width: 85vw;
+        border-left: 1px solid $tpu-border-primary;
+        
+        &[data-state='open'] {
+            animation: slideInFromRight 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        &[data-state='closed'] {
+            animation: slideOutToRight 0.2s ease-in;
+        }
+    }
+    
+    // Top side
+    &--top {
+        top: 0;
+        left: 0;
+        right: 0;
+        height: auto;
+        max-height: 85vh;
+        border-bottom: 1px solid $tpu-border-primary;
+        
+        &[data-state='open'] {
+            animation: slideInFromTop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        &[data-state='closed'] {
+            animation: slideOutToTop 0.2s ease-in;
+        }
+    }
+    
+    // Bottom side
+    &--bottom {
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: auto;
+        max-height: 85vh;
+        border-top: 1px solid $tpu-border-primary;
+        
+        &[data-state='open'] {
+            animation: slideInFromBottom 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        &[data-state='closed'] {
+            animation: slideOutToBottom 0.2s ease-in;
+        }
+    }
+}
+
+@keyframes slideInFromLeft {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+
+@keyframes slideOutToLeft {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+}
+
+@keyframes slideInFromRight {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+@keyframes slideOutToRight {
+    from { transform: translateX(0); }
+    to { transform: translateX(100%); }
+}
+
+@keyframes slideInFromTop {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+}
+
+@keyframes slideOutToTop {
+    from { transform: translateY(0); }
+    to { transform: translateY(-100%); }
+}
+
+@keyframes slideInFromBottom {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+}
+
+@keyframes slideOutToBottom {
+    from { transform: translateY(0); }
+    to { transform: translateY(100%); }
+}
+
+.tpu-sheet__close {
+    position: absolute;
+    top: $tpu-space-4;
+    right: $tpu-space-4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background: transparent;
+    border: 1px solid $tpu-border-primary;
+    border-radius: $tpu-radius-md;
+    color: $tpu-text-secondary;
+    cursor: pointer;
+    transition: all $tpu-transition-fast;
+    
+    &:hover {
+        background: rgba(255, 107, 53, 0.1);
+        border-color: $tpu-accent-primary;
+        color: $tpu-accent-primary;
+    }
+    
+    svg {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+.tpu-sheet__header {
+    display: flex;
+    flex-direction: column;
+    gap: $tpu-space-2;
+    padding: $tpu-space-6;
+    padding-right: $tpu-space-12; // Space for close button
+    border-bottom: 1px solid $tpu-border-primary;
+}
+
+.tpu-sheet__title {
+    font-family: $tpu-font-headline;
+    font-size: $tpu-text-lg;
+    font-weight: $tpu-font-bold;
+    color: $tpu-text-primary;
+    text-transform: uppercase;
+    letter-spacing: $tpu-tracking-wide;
+    margin: 0;
+}
+
+.tpu-sheet__description {
+    font-family: $tpu-font-body;
+    font-size: $tpu-text-sm;
+    color: $tpu-text-muted;
+    margin: 0;
+}
+
+.tpu-sheet__footer {
+    padding: $tpu-space-4;
+    border-top: 1px solid $tpu-border-primary;
+    margin-top: auto;
+}
+
+// Screen reader only
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+// =============================================================================
+// SIDEBAR MENU (Mobile Navigation)
+// =============================================================================
+// Navigation items inside the Sheet sidebar
+// =============================================================================
+
+.tpu-sidebar-nav {
+    flex: 1;
+    overflow-y: auto;
+    padding: $tpu-space-2 0;
+}
+
+.tpu-sidebar-nav__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.tpu-sidebar-nav__item {
+    margin: 0;
+}
+
+.tpu-sidebar-nav__link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $tpu-space-3;
+    padding: $tpu-space-4 $tpu-space-6;
+    font-family: $tpu-font-headline;
+    font-size: $tpu-text-base;
+    font-weight: $tpu-font-semibold;
+    color: $tpu-text-primary;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: $tpu-tracking-wide;
+    border-bottom: 1px solid $tpu-border-primary;
+    transition: all $tpu-transition-fast;
+    
+    svg {
+        width: 18px;
+        height: 18px;
+        color: $tpu-text-muted;
+        transition: all $tpu-transition-fast;
+    }
+    
+    &:hover,
+    &:focus {
+        background: rgba(255, 107, 53, 0.1);
+        color: $tpu-accent-primary;
+        
+        svg {
+            color: $tpu-accent-primary;
+            transform: translateX(4px);
+        }
+    }
+}
+
+// Legacy mobile menu classes (kept for backwards compatibility)
 .tpu-mobile-menu-overlay {
     position: fixed;
     inset: 0;

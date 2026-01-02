@@ -49,9 +49,12 @@
             </a>
         </div>
 
-        {{!-- Stats Bar --}}
-        <div class="tpu-hero__stats">
-            {{> components/tpu/stats-bar}}
+        {{!-- Stats Bar (React-rendered with CountUp and Gradient) --}}
+        <div class="tpu-hero__stats" id="hero-stats-root">
+            {{!-- Fallback for non-JS --}}
+            <noscript>
+                {{> components/tpu/stats-bar}}
+            </noscript>
         </div>
     </div>
 

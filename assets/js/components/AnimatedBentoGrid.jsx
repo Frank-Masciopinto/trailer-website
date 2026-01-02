@@ -1,5 +1,6 @@
 import React from 'react';
 import { BlurFade } from './BlurFade';
+import ElectricBorder from './ElectricBorder';
 
 // Category data for the bento grid
 const categories = [
@@ -75,6 +76,7 @@ const categories = [
     ),
     size: 'wide',
     gradient: 'linear-gradient(90deg, #2d2d2d 0%, #3f3f46 50%, #2d2d2d 100%)',
+    hasElectricBorder: true, // Special effect for electrical category
   },
 ];
 
@@ -87,6 +89,27 @@ const ArrowIcon = () => (
 const BentoCard = ({ category, index }) => {
   const sizeClass = category.size ? `tpu-bento__card--${category.size}` : '';
   
+  const cardContent = (
+    <article className={`tpu-bento__card ${sizeClass}`}>
+      {category.gradient && (
+        <div className="tpu-bento__image">
+          <div style={{ width: '100%', height: '100%', background: category.gradient }} />
+          <div className="tpu-bento__overlay" />
+        </div>
+      )}
+      <div className="tpu-bento__content">
+        {category.icon && <div className="tpu-bento__icon">{category.icon}</div>}
+        <h3 className="tpu-bento__title">{category.title}</h3>
+        <p className="tpu-bento__description">{category.description}</p>
+        <a href={category.href} className="tpu-bento__link">
+          {category.linkText || 'Shop Now'}
+          <ArrowIcon />
+        </a>
+      </div>
+      {category.badge && <span className="tpu-bento__badge">{category.badge}</span>}
+    </article>
+  );
+  
   return (
     <BlurFade
       delay={0.1 * index}
@@ -95,24 +118,18 @@ const BentoCard = ({ category, index }) => {
       blur="8px"
       duration={0.5}
     >
-      <article className={`tpu-bento__card ${sizeClass}`}>
-        {category.gradient && (
-          <div className="tpu-bento__image">
-            <div style={{ width: '100%', height: '100%', background: category.gradient }} />
-            <div className="tpu-bento__overlay" />
-          </div>
-        )}
-        <div className="tpu-bento__content">
-          {category.icon && <div className="tpu-bento__icon">{category.icon}</div>}
-          <h3 className="tpu-bento__title">{category.title}</h3>
-          <p className="tpu-bento__description">{category.description}</p>
-          <a href={category.href} className="tpu-bento__link">
-            {category.linkText || 'Shop Now'}
-            <ArrowIcon />
-          </a>
-        </div>
-        {category.badge && <span className="tpu-bento__badge">{category.badge}</span>}
-      </article>
+      {category.hasElectricBorder ? (
+        <ElectricBorder 
+          color="#FF6B35" 
+          speed={0.8} 
+          chaos={0.15} 
+          borderRadius={16}
+        >
+          {cardContent}
+        </ElectricBorder>
+      ) : (
+        cardContent
+      )}
     </BlurFade>
   );
 };

@@ -9,6 +9,7 @@ import MagicHeader from './components/MagicHeader';
 import LaserFlow from './components/LaserFlow';
 import AnimatedBentoGrid from './components/AnimatedBentoGrid';
 import HeroStats from './components/HeroStats';
+import GoogleReviews from './components/GoogleReviews';
 import { initializeLensImagesLazy } from './components/LensInitializer';
 import { initializeLightRaysLazy } from './components/LightRaysInitializer';
 
@@ -122,6 +123,13 @@ window.stencilBootstrap = function stencilBootstrap(pageType, contextJSON = null
                 if (heroStatsContainer && pageType === 'default') {
                     const statsRoot = createRoot(heroStatsContainer);
                     statsRoot.render(React.createElement(HeroStats));
+                }
+                
+                // Render Google Reviews section with MagicUI components
+                const googleReviewsContainer = document.getElementById('google-reviews-root');
+                if (googleReviewsContainer && pageType === 'default') {
+                    const reviewsRoot = createRoot(googleReviewsContainer);
+                    reviewsRoot.render(React.createElement(GoogleReviews));
                 }
                 
                 // Initialize Magic UI Lens effect on product card images

@@ -1,0 +1,175 @@
+// =============================================================================
+// TPU GOOGLE REVIEWS SECTION
+// =============================================================================
+// Social proof section with animated reviews marquee
+// =============================================================================
+
+.tpu-section--reviews {
+    position: relative;
+    background: $tpu-bg-primary;
+    border-top: 1px solid $tpu-border-primary;
+    border-bottom: 1px solid $tpu-border-primary;
+    
+    // Subtle background pattern
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+            circle at 50% 0%,
+            rgba($tpu-accent-primary, 0.03) 0%,
+            transparent 50%
+        );
+        pointer-events: none;
+    }
+}
+
+// =============================================================================
+// MARQUEE ANIMATIONS (React-driven)
+// =============================================================================
+
+.animate-marquee {
+    animation: marquee var(--duration, 40s) linear infinite;
+}
+
+.animate-marquee-vertical {
+    animation: marquee-vertical var(--duration, 40s) linear infinite;
+}
+
+@keyframes marquee {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(calc(-100% - var(--gap, 1rem)));
+    }
+}
+
+@keyframes marquee-vertical {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(calc(-100% - var(--gap, 1rem)));
+    }
+}
+
+// =============================================================================
+// LINE CLAMP UTILITY
+// =============================================================================
+
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+// =============================================================================
+// REVIEW CARD STYLES (enhancement for React components)
+// =============================================================================
+
+#google-reviews-root {
+    // Trust badge
+    .inline-flex {
+        display: inline-flex;
+    }
+    
+    // Ensure proper text rendering
+    p, span {
+        font-family: $tpu-font-body;
+    }
+    
+    // Star colors
+    .text-yellow-400 {
+        color: #facc15;
+    }
+    
+    .fill-yellow-400 {
+        fill: #facc15;
+    }
+    
+    .text-gray-600 {
+        color: #4b5563;
+    }
+    
+    .fill-gray-600 {
+        fill: #4b5563;
+    }
+    
+    // Review card hover animation
+    .group:hover .tpu-review-card__shine {
+        opacity: 1;
+    }
+}
+
+// =============================================================================
+// RESPONSIVE ADJUSTMENTS
+// =============================================================================
+
+@media (max-width: $tpu-screen-sm) {
+    .tpu-section--reviews {
+        padding-top: $tpu-space-10;
+        padding-bottom: $tpu-space-10;
+    }
+    
+    #google-reviews-root {
+        // Make cards slightly smaller on mobile
+        .w-\[380px\] {
+            width: 320px;
+        }
+        
+        // Reduce text sizes
+        .text-5xl, .text-6xl {
+            font-size: $tpu-text-4xl;
+        }
+        
+        .text-4xl, .text-5xl {
+            font-size: $tpu-text-3xl;
+        }
+    }
+}
+
+// =============================================================================
+// NUMBER TICKER ANIMATIONS
+// =============================================================================
+
+.tabular-nums {
+    font-variant-numeric: tabular-nums;
+}
+
+.tracking-wider {
+    letter-spacing: 0.05em;
+}
+
+// =============================================================================
+// GOOGLE BUTTON STYLES
+// =============================================================================
+
+.tpu-google-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: $tpu-space-3;
+    padding: $tpu-space-3 $tpu-space-6;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 9999px;
+    color: $tpu-text-primary;
+    font-weight: $tpu-font-medium;
+    transition: all $tpu-transition-normal;
+    
+    &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+    }
+    
+    svg {
+        transition: transform $tpu-transition-normal;
+    }
+    
+    &:hover svg:last-child {
+        transform: translateX(4px);
+    }
+}
+

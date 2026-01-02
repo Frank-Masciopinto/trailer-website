@@ -10,6 +10,7 @@ import LaserFlow from './components/LaserFlow';
 import AnimatedBentoGrid from './components/AnimatedBentoGrid';
 import HeroStats from './components/HeroStats';
 import { initializeLensImagesLazy } from './components/LensInitializer';
+import { initializeLightRaysLazy } from './components/LightRaysInitializer';
 
 const getAccount = () => import('./theme/account');
 const getLogin = () => import('./theme/auth');
@@ -130,6 +131,13 @@ window.stencilBootstrap = function stencilBootstrap(pageType, contextJSON = null
                     setTimeout(() => {
                         initializeLensImagesLazy();
                     }, 100);
+                }
+                
+                // Initialize LightRays background effect on sections with data-light-rays attribute
+                if (pageType === 'default') {
+                    setTimeout(() => {
+                        initializeLightRaysLazy();
+                    }, 200);
                 }
 
                 const importPromises = [];

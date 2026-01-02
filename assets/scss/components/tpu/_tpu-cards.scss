@@ -74,7 +74,7 @@
         background: $tpu-bg-secondary;
         border: 1px solid $tpu-border-primary;
         border-radius: $tpu-radius-xl;
-        overflow: hidden;
+        overflow: visible; // Allow lens effect to overflow
         transition: 
             transform $tpu-transition-normal,
             box-shadow $tpu-transition-normal,
@@ -161,7 +161,7 @@
         position: relative;
         margin: 0;
         padding: 0;
-        overflow: hidden;
+        overflow: visible; // Allow lens effect to overflow
         background: linear-gradient(
             135deg,
             rgba($tpu-bg-tertiary, 0.5) 0%,
@@ -187,33 +187,35 @@
     // Image Container - Clean with subtle border
     .card-img-container {
         position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         height: 220px;
         padding: $tpu-space-3;
         background: rgba(255, 255, 255, 0.02);
         border-bottom: 1px solid $tpu-border-primary;
         
-        // Lens wrapper from React - ensure centering
+        // Lens wrapper from React - use absolute positioning to fill container
         > div,
         > [role="region"] {
+            position: absolute !important;
+            top: $tpu-space-3 !important;
+            left: $tpu-space-3 !important;
+            right: $tpu-space-3 !important;
+            bottom: $tpu-space-3 !important;
+            width: auto !important; // Override inline width: 100%
+            height: auto !important; // Override inline height: 100%
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
-            width: 90% !important;
-            height: 90% !important;
-            margin: 0 auto;
         }
     }
     
-    // Product Image - 90% of parent, centered, with rounded corners
+    // Product Image - Fill container while maintaining aspect ratio
     .card-image {
+        position: static !important; // Override lazy-loaded-img mixin's absolute positioning
         display: block;
-        width: auto !important;
-        height: auto !important;
         max-width: 100%;
-        max-height: 100%;
+        max-height: 200px; // Slightly less than container height (220px - padding)
+        width: auto;
+        height: auto;
         object-fit: contain;
         border-radius: $tpu-radius-lg;
         background: rgba(255, 255, 255, 0.95);

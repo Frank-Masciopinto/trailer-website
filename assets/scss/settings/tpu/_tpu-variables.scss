@@ -1,0 +1,325 @@
+// =============================================================================
+// TPU - TRAILER PARTS UNLIMITED CUSTOM VARIABLES
+// =============================================================================
+// Industrial, heavy-duty aesthetic with safety-focused colors
+// =============================================================================
+
+
+// TPU Color Palette
+// -----------------------------------------------------------------------------
+
+// Primary Backgrounds - Industrial Dark
+$tpu-bg-primary:            #1a1a1a;    // Charcoal Steel
+$tpu-bg-secondary:          #2d2d2d;    // Slate Gray
+$tpu-bg-tertiary:           #3f3f46;    // Gunmetal
+$tpu-bg-elevated:           #404040;    // Elevated surfaces
+
+// Accent Colors - Safety & Warning tones
+$tpu-accent-primary:        #ff6b35;    // Safety Orange
+$tpu-accent-secondary:      #ffc107;    // Industrial Yellow
+$tpu-accent-tertiary:       #ef4444;    // Alert Red
+$tpu-accent-success:        #22c55e;    // Success Green
+
+// Text Colors
+$tpu-text-primary:          #f5f5f5;    // Off-White
+$tpu-text-secondary:        #d4d4d8;    // Light Gray
+$tpu-text-muted:            #9ca3af;    // Steel Gray
+$tpu-text-inverse:          #1a1a1a;    // Dark text on light
+
+// Border & Dividers
+$tpu-border-primary:        #3f3f46;    // Gunmetal
+$tpu-border-secondary:      #52525b;    // Zinc
+$tpu-border-accent:         rgba(255, 107, 53, 0.5); // Safety Orange 50%
+
+// Overlay & Glass effects
+$tpu-glass-bg:              rgba(26, 26, 26, 0.8);
+$tpu-glass-border:          rgba(255, 255, 255, 0.1);
+$tpu-overlay-dark:          rgba(0, 0, 0, 0.7);
+$tpu-overlay-light:         rgba(255, 255, 255, 0.05);
+
+
+// TPU Typography
+// -----------------------------------------------------------------------------
+
+// Font Families (loaded via Google Fonts)
+$tpu-font-headline:         'Oswald', 'Bebas Neue', 'Impact', sans-serif;
+$tpu-font-body:             'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
+$tpu-font-mono:             'Roboto Mono', 'Courier New', monospace;
+
+// Font Sizes (mobile-first, scale up with breakpoints)
+$tpu-text-xs:               0.75rem;    // 12px
+$tpu-text-sm:               0.875rem;   // 14px
+$tpu-text-base:             1rem;       // 16px
+$tpu-text-lg:               1.125rem;   // 18px
+$tpu-text-xl:               1.25rem;    // 20px
+$tpu-text-2xl:              1.5rem;     // 24px
+$tpu-text-3xl:              1.875rem;   // 30px
+$tpu-text-4xl:              2.25rem;    // 36px
+$tpu-text-5xl:              3rem;       // 48px
+$tpu-text-6xl:              3.75rem;    // 60px
+$tpu-text-7xl:              4.5rem;     // 72px
+$tpu-text-8xl:              6rem;       // 96px
+
+// Font Weights
+$tpu-font-light:            300;
+$tpu-font-regular:          400;
+$tpu-font-medium:           500;
+$tpu-font-semibold:         600;
+$tpu-font-bold:             700;
+$tpu-font-black:            900;
+
+// Line Heights
+$tpu-leading-none:          1;
+$tpu-leading-tight:         1.15;
+$tpu-leading-snug:          1.25;
+$tpu-leading-normal:        1.5;
+$tpu-leading-relaxed:       1.625;
+
+// Letter Spacing
+$tpu-tracking-tight:        -0.025em;
+$tpu-tracking-normal:       0;
+$tpu-tracking-wide:         0.05em;
+$tpu-tracking-wider:        0.1em;
+$tpu-tracking-widest:       0.2em;
+
+
+// TPU Spacing
+// -----------------------------------------------------------------------------
+
+$tpu-space-0:               0;
+$tpu-space-1:               0.25rem;    // 4px
+$tpu-space-2:               0.5rem;     // 8px
+$tpu-space-3:               0.75rem;    // 12px
+$tpu-space-4:               1rem;       // 16px
+$tpu-space-5:               1.25rem;    // 20px
+$tpu-space-6:               1.5rem;     // 24px
+$tpu-space-8:               2rem;       // 32px
+$tpu-space-10:              2.5rem;     // 40px
+$tpu-space-12:              3rem;       // 48px
+$tpu-space-16:              4rem;       // 64px
+$tpu-space-20:              5rem;       // 80px
+$tpu-space-24:              6rem;       // 96px
+$tpu-space-32:              8rem;       // 128px
+
+
+// TPU Border Radius
+// -----------------------------------------------------------------------------
+
+$tpu-radius-none:           0;
+$tpu-radius-sm:             0.125rem;   // 2px
+$tpu-radius-md:             0.25rem;    // 4px
+$tpu-radius-lg:             0.5rem;     // 8px
+$tpu-radius-xl:             0.75rem;    // 12px
+$tpu-radius-2xl:            1rem;       // 16px
+$tpu-radius-full:           9999px;
+
+
+// TPU Shadows
+// -----------------------------------------------------------------------------
+
+$tpu-shadow-sm:             0 1px 2px 0 rgba(0, 0, 0, 0.3);
+$tpu-shadow-md:             0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+$tpu-shadow-lg:             0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
+$tpu-shadow-xl:             0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+$tpu-shadow-glow-orange:    0 0 20px rgba(255, 107, 53, 0.4);
+$tpu-shadow-glow-yellow:    0 0 20px rgba(255, 193, 7, 0.4);
+
+
+// TPU Transitions
+// -----------------------------------------------------------------------------
+
+$tpu-transition-fast:       150ms ease-out;
+$tpu-transition-normal:     300ms ease-out;
+$tpu-transition-slow:       500ms ease-out;
+$tpu-transition-slower:     700ms ease-out;
+
+
+// TPU Z-Index
+// -----------------------------------------------------------------------------
+
+$tpu-z-base:                1;
+$tpu-z-dropdown:            100;
+$tpu-z-sticky:              200;
+$tpu-z-header:              300;
+$tpu-z-overlay:             400;
+$tpu-z-modal:               500;
+$tpu-z-tooltip:             600;
+$tpu-z-max:                 9999;
+
+
+// TPU Breakpoints (matching existing Stencil breakpoints)
+// -----------------------------------------------------------------------------
+
+$tpu-screen-sm:             480px;
+$tpu-screen-md:             768px;
+$tpu-screen-lg:             992px;
+$tpu-screen-xl:             1200px;
+$tpu-screen-2xl:            1440px;
+
+
+// TPU Animation Keyframes (for use in SCSS)
+// -----------------------------------------------------------------------------
+
+@keyframes tpu-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes tpu-fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes tpu-blur-in {
+    from {
+        opacity: 0;
+        filter: blur(10px);
+    }
+    to {
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+@keyframes tpu-scale-in {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes tpu-shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+
+@keyframes tpu-pulse-glow {
+    0%, 100% { box-shadow: 0 0 5px rgba(255, 107, 53, 0.3); }
+    50% { box-shadow: 0 0 20px rgba(255, 107, 53, 0.6); }
+}
+
+@keyframes tpu-marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+@keyframes tpu-word-rotate {
+    0%, 20% { opacity: 1; transform: translateY(0); }
+    25%, 95% { opacity: 0; transform: translateY(-100%); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes tpu-grid-fade {
+    0% { opacity: 0; }
+    50% { opacity: 0.3; }
+    100% { opacity: 0.15; }
+}
+
+@keyframes tpu-scroll-progress {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
+
+@keyframes tpu-number-tick {
+    from { opacity: 0; transform: translateY(100%); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+// TPU Utility Mixins
+// -----------------------------------------------------------------------------
+
+// Glass morphism effect
+@mixin tpu-glass {
+    background: $tpu-glass-bg;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid $tpu-glass-border;
+}
+
+// Industrial card styling
+@mixin tpu-card {
+    background: $tpu-bg-secondary;
+    border: 1px solid $tpu-border-primary;
+    border-radius: $tpu-radius-lg;
+    box-shadow: $tpu-shadow-md;
+}
+
+// Safety accent border
+@mixin tpu-accent-border($position: bottom) {
+    border-#{$position}: 3px solid $tpu-accent-primary;
+}
+
+// Headline text style
+@mixin tpu-headline($size: $tpu-text-4xl) {
+    font-family: $tpu-font-headline;
+    font-size: $size;
+    font-weight: $tpu-font-bold;
+    line-height: $tpu-leading-tight;
+    letter-spacing: $tpu-tracking-wide;
+    text-transform: uppercase;
+    color: $tpu-text-primary;
+}
+
+// Body text style
+@mixin tpu-body($size: $tpu-text-base) {
+    font-family: $tpu-font-body;
+    font-size: $size;
+    font-weight: $tpu-font-regular;
+    line-height: $tpu-leading-normal;
+    color: $tpu-text-secondary;
+}
+
+// Shimmer button effect
+@mixin tpu-shimmer-button {
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent
+        );
+        animation: tpu-shimmer 2s infinite;
+    }
+}
+
+// Responsive font scaling
+@mixin tpu-responsive-text($min-size, $max-size) {
+    font-size: $min-size;
+    
+    @media (min-width: $tpu-screen-md) {
+        font-size: calc(#{$min-size} + (#{strip-unit($max-size)} - #{strip-unit($min-size)}) * 0.5);
+    }
+    
+    @media (min-width: $tpu-screen-lg) {
+        font-size: $max-size;
+    }
+}
+
+// Strip unit helper
+@function strip-unit($number) {
+    @if type-of($number) == 'number' and not unitless($number) {
+        @return $number / ($number * 0 + 1);
+    }
+    @return $number;
+}
+

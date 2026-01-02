@@ -1,0 +1,421 @@
+// =============================================================================
+// TPU MOBILE OPTIMIZATIONS
+// =============================================================================
+// Responsive design enhancements for all TPU components
+// =============================================================================
+
+// Mobile-First Body/Container Adjustments
+// -----------------------------------------------------------------------------
+
+.main-content-wrapper {
+    // Remove container restrictions for full-width TPU sections
+    .tpu-dark-theme & {
+        max-width: none;
+        padding: 0;
+        margin: 0;
+    }
+}
+
+// Mobile Header Adjustments
+// -----------------------------------------------------------------------------
+
+@media (max-width: #{$tpu-screen-lg - 1px}) {
+    .tpu-header {
+        background: $tpu-bg-primary;
+    }
+    
+    .tpu-header__inner {
+        padding: 0 $tpu-space-3;
+    }
+    
+    .tpu-header__logo {
+        img, svg {
+            height: 35px;
+        }
+    }
+    
+    .tpu-nav {
+        display: none;
+    }
+    
+    .tpu-nav__cta {
+        display: none;
+    }
+    
+    .tpu-header__account {
+        display: none;
+    }
+}
+
+// Mobile Navigation Drawer
+// -----------------------------------------------------------------------------
+
+@media (max-width: #{$tpu-screen-lg - 1px}) {
+    .tpu-nav-container,
+    .navPages-container {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: $tpu-bg-primary;
+        z-index: $tpu-z-overlay;
+        transform: translateX(-100%);
+        transition: transform $tpu-transition-normal;
+        overflow-y: auto;
+        padding: $tpu-space-4;
+        
+        &.is-open {
+            transform: translateX(0);
+        }
+    }
+    
+    .tpu-nav__list,
+    .navPages-list {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .tpu-nav__item,
+    .navPages-item {
+        border-bottom: 1px solid $tpu-border-primary;
+    }
+    
+    .tpu-nav__link,
+    .navPages-action {
+        display: flex;
+        justify-content: space-between;
+        padding: $tpu-space-4 0;
+        font-size: $tpu-text-lg;
+    }
+    
+    .tpu-dropdown,
+    .navPage-subMenu {
+        position: static;
+        transform: none;
+        opacity: 1;
+        visibility: visible;
+        background: transparent;
+        border: none;
+        padding-left: $tpu-space-4;
+        display: none;
+        
+        &.is-open {
+            display: block;
+        }
+    }
+    
+    .tpu-mobile-nav__account {
+        display: flex;
+        flex-direction: column;
+        gap: $tpu-space-3;
+        margin-top: $tpu-space-6;
+        padding-top: $tpu-space-6;
+        border-top: 1px solid $tpu-border-primary;
+    }
+}
+
+@media (min-width: $tpu-screen-lg) {
+    .tpu-mobile-nav__account {
+        display: none;
+    }
+}
+
+// Mobile Hero Section
+// -----------------------------------------------------------------------------
+
+@media (max-width: #{$tpu-screen-sm - 1px}) {
+    .tpu-hero {
+        min-height: calc(100vh - 70px);
+        padding-top: 80px;
+        padding-bottom: $tpu-space-16;
+    }
+    
+    .tpu-hero__headline-static,
+    .tpu-hero__word {
+        font-size: $tpu-text-3xl;
+    }
+    
+    .tpu-hero__subheadline {
+        font-size: $tpu-text-base;
+        padding: 0 $tpu-space-2;
+    }
+    
+    .tpu-hero__cta {
+        width: 100%;
+        padding: 0 $tpu-space-2;
+    }
+    
+    .tpu-hero__btn-primary,
+    .tpu-hero__btn-secondary {
+        width: 100%;
+        min-width: auto;
+    }
+    
+    .tpu-hero__scroll {
+        display: none;
+    }
+}
+
+// Mobile Stats Section
+// -----------------------------------------------------------------------------
+
+@media (max-width: #{$tpu-screen-sm - 1px}) {
+    .tpu-stats {
+        padding: $tpu-space-4;
+        gap: $tpu-space-4;
+    }
+    
+    .tpu-stats__number {
+        font-size: $tpu-text-2xl;
+    }
+    
+    .tpu-stats__label {
+        font-size: $tpu-text-xs;
+    }
+}
+
+// Mobile Bento Grid
+// -----------------------------------------------------------------------------
+
+@media (max-width: #{$tpu-screen-sm - 1px}) {
+    .tpu-bento {
+        grid-template-columns: 1fr;
+        gap: $tpu-space-3;
+        padding: $tpu-space-3;
+    }
+    
+    .tpu-bento__card--lg,
+    .tpu-bento__card--wide,
+    .tpu-bento__card--tall {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+    
+    .tpu-bento__title {
+        font-size: $tpu-text-lg;
+    }
+    
+    .tpu-bento__description {
+        font-size: $tpu-text-sm;
+    }
+    
+    .tpu-bento-section__title {
+        font-size: $tpu-text-2xl;
+    }
+}
+
+// Mobile Marquee
+// -----------------------------------------------------------------------------
+
+@media (max-width: #{$tpu-screen-md - 1px}) {
+    .tpu-marquee {
+        padding: $tpu-space-6 0;
+    }
+    
+    .tpu-marquee__brand-name {
+        font-size: $tpu-text-lg;
+    }
+    
+    .tpu-marquee__wrapper::before,
+    .tpu-marquee__wrapper::after {
+        width: 50px;
+    }
+}
+
+// Mobile Buttons
+// -----------------------------------------------------------------------------
+
+@media (max-width: #{$tpu-screen-sm - 1px}) {
+    .tpu-btn {
+        padding: $tpu-space-3 $tpu-space-5;
+        font-size: $tpu-text-sm;
+    }
+    
+    .tpu-btn--lg {
+        padding: $tpu-space-3 $tpu-space-6;
+    }
+    
+    .tpu-btn-group {
+        flex-direction: column;
+        width: 100%;
+        
+        .tpu-btn {
+            width: 100%;
+        }
+    }
+}
+
+// Tablet Specific Adjustments
+// -----------------------------------------------------------------------------
+
+@media (min-width: $tpu-screen-sm) and (max-width: #{$tpu-screen-lg - 1px}) {
+    .tpu-hero__headline-static,
+    .tpu-hero__word {
+        font-size: $tpu-text-5xl;
+    }
+    
+    .tpu-bento {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .tpu-stats {
+        flex-direction: row;
+    }
+}
+
+// Product Grid Dark Theme Override
+// -----------------------------------------------------------------------------
+
+.tpu-dark-theme {
+    .productGrid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: $tpu-space-4;
+        
+        @media (min-width: $tpu-screen-md) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        
+        @media (min-width: $tpu-screen-lg) {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+    
+    .card {
+        background: $tpu-bg-secondary;
+        border: 1px solid $tpu-border-primary;
+        border-radius: $tpu-radius-lg;
+        overflow: hidden;
+        transition: all $tpu-transition-normal;
+        
+        &:hover {
+            border-color: $tpu-accent-primary;
+            transform: translateY(-4px);
+            box-shadow: $tpu-shadow-lg;
+        }
+    }
+    
+    .card-title {
+        a {
+            color: $tpu-text-primary;
+            font-family: $tpu-font-body;
+            font-weight: $tpu-font-semibold;
+            
+            &:hover {
+                color: $tpu-accent-primary;
+            }
+        }
+    }
+    
+    .price {
+        color: $tpu-accent-primary;
+        font-family: $tpu-font-mono;
+        font-weight: $tpu-font-bold;
+    }
+    
+    .price--non-sale {
+        color: $tpu-text-muted;
+    }
+}
+
+// Touch Device Enhancements
+// -----------------------------------------------------------------------------
+
+@media (hover: none) and (pointer: coarse) {
+    // Larger touch targets
+    .tpu-btn--icon {
+        min-width: 48px;
+        min-height: 48px;
+    }
+    
+    .tpu-nav__link {
+        padding: $tpu-space-3 $tpu-space-4;
+    }
+    
+    // Disable hover effects on touch devices
+    .tpu-bento__card:hover {
+        transform: none;
+    }
+    
+    .tpu-bento__card::before {
+        display: none;
+    }
+}
+
+// Reduced Motion Preference
+// -----------------------------------------------------------------------------
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .tpu-marquee__track {
+        animation: none;
+    }
+    
+    .tpu-hero__word-list {
+        animation: none;
+        
+        .tpu-hero__word:not(:first-child) {
+            display: none;
+        }
+    }
+}
+
+// High Contrast Mode Support
+// -----------------------------------------------------------------------------
+
+@media (prefers-contrast: high) {
+    .tpu-header,
+    .tpu-hero,
+    .tpu-section {
+        border: 2px solid $tpu-text-primary;
+    }
+    
+    .tpu-btn {
+        border: 2px solid currentColor;
+    }
+    
+    .tpu-bento__card {
+        border-width: 2px;
+    }
+}
+
+// Dark Mode System Preference (already dark, but ensure consistency)
+// -----------------------------------------------------------------------------
+
+@media (prefers-color-scheme: dark) {
+    .tpu-dark-theme {
+        // Already dark theme, maintain consistency
+        color-scheme: dark;
+    }
+}
+
+// Print Styles
+// -----------------------------------------------------------------------------
+
+@media print {
+    .tpu-header,
+    .tpu-scroll-progress,
+    .tpu-hero__scroll,
+    .tpu-marquee {
+        display: none;
+    }
+    
+    .tpu-hero {
+        min-height: auto;
+        padding: $tpu-space-8;
+    }
+    
+    .tpu-dark-theme {
+        background: white;
+        color: black;
+    }
+}
+

@@ -1,0 +1,316 @@
+// =============================================================================
+// TPU BENTO GRID
+// =============================================================================
+// Magazine-style product showcase grid
+// =============================================================================
+
+.tpu-bento {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $tpu-space-4;
+    padding: $tpu-space-4;
+    
+    @media (min-width: $tpu-screen-sm) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @media (min-width: $tpu-screen-lg) {
+        grid-template-columns: repeat(3, 1fr);
+        gap: $tpu-space-6;
+        padding: $tpu-space-6;
+    }
+}
+
+// Bento Card Base
+.tpu-bento__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: $tpu-bg-secondary;
+    border: 1px solid $tpu-border-primary;
+    border-radius: $tpu-radius-xl;
+    overflow: hidden;
+    transition: all $tpu-transition-normal;
+    
+    &:hover {
+        border-color: $tpu-accent-primary;
+        transform: translateY(-4px);
+        box-shadow: $tpu-shadow-xl, $tpu-shadow-glow-orange;
+    }
+}
+
+// Spotlight Effect (Mouse-following gradient)
+.tpu-bento__card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(255, 107, 53, 0.1),
+        transparent 40%
+    );
+    z-index: 1;
+    opacity: 0;
+    transition: opacity $tpu-transition-normal;
+    pointer-events: none;
+}
+
+.tpu-bento__card:hover::before {
+    opacity: 1;
+}
+
+// Card Sizes
+.tpu-bento__card--lg {
+    @media (min-width: $tpu-screen-sm) {
+        grid-column: span 2;
+    }
+    
+    @media (min-width: $tpu-screen-lg) {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+}
+
+.tpu-bento__card--tall {
+    @media (min-width: $tpu-screen-lg) {
+        grid-row: span 2;
+    }
+}
+
+.tpu-bento__card--wide {
+    @media (min-width: $tpu-screen-sm) {
+        grid-column: span 2;
+    }
+}
+
+// Card Image
+.tpu-bento__image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    
+    .tpu-bento__card--lg & {
+        aspect-ratio: 16 / 9;
+    }
+    
+    .tpu-bento__card--tall & {
+        aspect-ratio: 3 / 4;
+        
+        @media (min-width: $tpu-screen-lg) {
+            aspect-ratio: auto;
+            flex: 1;
+        }
+    }
+    
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform $tpu-transition-slow;
+    }
+    
+    .tpu-bento__card:hover & img {
+        transform: scale(1.05);
+    }
+}
+
+// Image Overlay
+.tpu-bento__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(26, 26, 26, 0.9) 0%,
+        rgba(26, 26, 26, 0.4) 40%,
+        transparent 100%
+    );
+    z-index: 1;
+}
+
+// Card Content
+.tpu-bento__content {
+    position: relative;
+    z-index: 2;
+    padding: $tpu-space-4;
+    
+    @media (min-width: $tpu-screen-md) {
+        padding: $tpu-space-6;
+    }
+    
+    // For cards with image overlay
+    .tpu-bento__image + & {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: $tpu-space-4;
+        
+        @media (min-width: $tpu-screen-md) {
+            padding: $tpu-space-6;
+        }
+    }
+}
+
+// Card Icon
+.tpu-bento__icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 107, 53, 0.2);
+    border-radius: $tpu-radius-lg;
+    margin-bottom: $tpu-space-3;
+    
+    svg {
+        width: 24px;
+        height: 24px;
+        color: $tpu-accent-primary;
+    }
+    
+    @media (min-width: $tpu-screen-md) {
+        width: 48px;
+        height: 48px;
+        
+        svg {
+            width: 28px;
+            height: 28px;
+        }
+    }
+}
+
+// Card Title
+.tpu-bento__title {
+    font-family: $tpu-font-headline;
+    font-size: $tpu-text-xl;
+    font-weight: $tpu-font-bold;
+    color: $tpu-text-primary;
+    text-transform: uppercase;
+    letter-spacing: $tpu-tracking-wide;
+    margin: 0 0 $tpu-space-2;
+    
+    @media (min-width: $tpu-screen-md) {
+        font-size: $tpu-text-2xl;
+    }
+    
+    .tpu-bento__card--lg & {
+        font-size: $tpu-text-2xl;
+        
+        @media (min-width: $tpu-screen-md) {
+            font-size: $tpu-text-3xl;
+        }
+    }
+}
+
+// Card Description
+.tpu-bento__description {
+    font-family: $tpu-font-body;
+    font-size: $tpu-text-sm;
+    color: $tpu-text-muted;
+    line-height: $tpu-leading-relaxed;
+    margin: 0;
+    
+    @media (min-width: $tpu-screen-md) {
+        font-size: $tpu-text-base;
+    }
+}
+
+// Card Link
+.tpu-bento__link {
+    display: inline-flex;
+    align-items: center;
+    gap: $tpu-space-2;
+    margin-top: $tpu-space-3;
+    font-size: $tpu-text-sm;
+    font-weight: $tpu-font-semibold;
+    color: $tpu-accent-primary;
+    text-decoration: none;
+    transition: gap $tpu-transition-fast;
+    
+    svg {
+        width: 16px;
+        height: 16px;
+        transition: transform $tpu-transition-fast;
+    }
+    
+    &:hover {
+        gap: $tpu-space-3;
+        
+        svg {
+            transform: translateX(4px);
+        }
+    }
+}
+
+// Card Badge
+.tpu-bento__badge {
+    position: absolute;
+    top: $tpu-space-3;
+    right: $tpu-space-3;
+    padding: $tpu-space-1 $tpu-space-2;
+    font-size: $tpu-text-xs;
+    font-weight: $tpu-font-bold;
+    text-transform: uppercase;
+    background: $tpu-accent-primary;
+    color: $tpu-text-primary;
+    border-radius: $tpu-radius-md;
+    z-index: 3;
+}
+
+// Featured Product Section
+.tpu-bento-section {
+    padding: $tpu-space-12 0;
+    background: $tpu-bg-primary;
+    
+    @media (min-width: $tpu-screen-md) {
+        padding: $tpu-space-16 0;
+    }
+}
+
+.tpu-bento-section__header {
+    text-align: center;
+    margin-bottom: $tpu-space-8;
+    padding: 0 $tpu-space-4;
+}
+
+.tpu-bento-section__title {
+    @include tpu-headline($tpu-text-3xl);
+    margin: 0 0 $tpu-space-2;
+    
+    @media (min-width: $tpu-screen-md) {
+        font-size: $tpu-text-4xl;
+    }
+}
+
+.tpu-bento-section__subtitle {
+    font-family: $tpu-font-body;
+    font-size: $tpu-text-lg;
+    color: $tpu-text-muted;
+    margin: 0;
+}
+
+// Lens Zoom Effect Container
+.tpu-bento__lens {
+    position: relative;
+    overflow: hidden;
+    cursor: zoom-in;
+    
+    &:hover .tpu-bento__lens-overlay {
+        opacity: 1;
+    }
+}
+
+.tpu-bento__lens-overlay {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid $tpu-accent-primary;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity $tpu-transition-fast;
+    background: radial-gradient(circle, rgba(255, 107, 53, 0.1), transparent);
+    transform: translate(-50%, -50%);
+}
+

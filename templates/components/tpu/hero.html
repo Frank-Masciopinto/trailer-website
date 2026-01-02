@@ -1,0 +1,66 @@
+{{!--
+    TPU Hero Section
+    Full-screen animated text hero with industrial aesthetic
+--}}
+
+<section class="tpu-hero">
+    {{!-- Background Layers --}}
+    <div class="tpu-hero__background">
+        <div class="tpu-hero__grid" aria-hidden="true"></div>
+        <div class="tpu-hero__gradient" aria-hidden="true"></div>
+        <div class="tpu-hero__noise" aria-hidden="true"></div>
+    </div>
+
+    {{!-- Main Content --}}
+    <div class="tpu-hero__content">
+        {{!-- Main Headline with Word Rotation --}}
+        <h1 class="tpu-hero__headline">
+            <span class="tpu-hero__headline-static">Built for the</span>
+            <span class="tpu-hero__headline-rotate" aria-label="road, haul, long run, job">
+                <span class="tpu-hero__word-list">
+                    <span class="tpu-hero__word">Road</span>
+                    <span class="tpu-hero__word">Haul</span>
+                    <span class="tpu-hero__word">Long Run</span>
+                    <span class="tpu-hero__word">Job</span>
+                    <span class="tpu-hero__word">Road</span>
+                </span>
+            </span>
+        </h1>
+
+        {{!-- Subheadline --}}
+        <p class="tpu-hero__subheadline">
+            Premium trailer parts for professionals who demand reliability. 
+            Quality you can trust, service you can count on.
+        </p>
+
+        {{!-- CTA Buttons --}}
+        <div class="tpu-hero__cta">
+            <a href="/categories" class="tpu-hero__btn-primary">
+                Shop All Parts
+            </a>
+            <a href="/parts-finder" class="tpu-hero__btn-secondary">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                Parts Finder
+            </a>
+        </div>
+
+        {{!-- Stats Bar --}}
+        <div class="tpu-hero__stats">
+            {{> components/tpu/stats-bar}}
+        </div>
+    </div>
+
+    {{!-- Scroll Indicator --}}
+    <div class="tpu-hero__scroll" aria-hidden="true">
+        <span class="tpu-hero__scroll-text">Scroll</span>
+        <div class="tpu-hero__scroll-icon"></div>
+    </div>
+
+    {{!-- Decorative Lines --}}
+    <div class="tpu-hero__accent-line tpu-hero__accent-line--left" aria-hidden="true"></div>
+    <div class="tpu-hero__accent-line tpu-hero__accent-line--right" aria-hidden="true"></div>
+</section>
+

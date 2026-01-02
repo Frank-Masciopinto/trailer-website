@@ -1,0 +1,231 @@
+{{!--
+    TPU Header
+    Redesigned navigation with sticky glass effect and scroll progress
+--}}
+
+{{!-- Skip to main content link --}}
+<a href="#main-content" class="skip-to-main-link tpu-sr-only">{{lang 'header.skip_to_main'}}</a>
+
+{{!-- Scroll Progress Bar --}}
+<div class="tpu-scroll-progress" aria-hidden="true">
+    <div class="tpu-scroll-progress__bar" data-tpu-scroll-progress></div>
+</div>
+
+{{!-- Top Banner (if exists) --}}
+{{#if banners.top}}
+<div class="tpu-top-banner">
+    {{#each (limit banners.top_metadata 1)}}
+    <div class="tpu-top-banner__content" data-event-type="promotion" data-entity-id="{{this.id}}">
+        {{{this.content}}}
+    </div>
+    {{/each}}
+</div>
+{{/if}}
+
+{{!-- Main Header --}}
+<header class="tpu-header" role="banner" data-tpu-header>
+    <div class="tpu-header__inner">
+        {{!-- Logo --}}
+        <div class="tpu-header__logo">
+            {{#if page_type '===' 'default'}}
+                <h1 class="tpu-header__logo-heading">
+                    {{> components/common/store-logo}}
+                </h1>
+            {{else}}
+                {{> components/common/store-logo}}
+            {{/if}}
+        </div>
+
+        {{!-- Main Navigation (Desktop) --}}
+        <nav class="tpu-nav" aria-label="Main navigation">
+            <ul class="tpu-nav__list">
+                {{#each categories}}
+                <li class="tpu-nav__item">
+                    <a href="{{url}}" class="tpu-nav__link{{#if children}} has-dropdown{{/if}}">
+                        {{name}}
+                        {{#if children}}
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                        {{/if}}
+                    </a>
+                    {{#if children}}
+                    <div class="tpu-dropdown" aria-hidden="true">
+                        {{#each children}}
+                        <a href="{{url}}" class="tpu-dropdown__item">{{name}}</a>
+                        {{/each}}
+                    </div>
+                    {{/if}}
+                </li>
+                {{/each}}
+                
+                {{!-- Static nav items --}}
+                <li class="tpu-nav__item">
+                    <a href="/brands" class="tpu-nav__link">Brands</a>
+                </li>
+            </ul>
+            
+            {{!-- Parts Finder CTA --}}
+            <a href="/parts-finder" class="tpu-nav__cta">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                Parts Finder
+            </a>
+        </nav>
+
+        {{!-- Right Side Actions --}}
+        <div class="tpu-header__actions">
+            {{!-- Search Button --}}
+            <button 
+                type="button" 
+                class="tpu-header__search tpu-btn--icon"
+                data-tpu-search-toggle
+                aria-label="{{lang 'common.search'}}"
+                aria-expanded="false"
+                aria-controls="tpu-search-overlay"
+            >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <span class="tpu-sr-only">{{lang 'common.search'}}</span>
+            </button>
+
+            {{!-- Account Button --}}
+            <a 
+                href="{{#if customer}}{{urls.account.index}}{{else}}{{urls.auth.login}}{{/if}}" 
+                class="tpu-header__account tpu-btn--icon"
+                aria-label="{{#if customer}}{{lang 'common.account'}}{{else}}{{lang 'common.login'}}{{/if}}"
+            >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+            </a>
+
+            {{!-- Cart Button --}}
+            <a 
+                href="{{urls.cart}}" 
+                class="tpu-header__cart tpu-btn--icon{{#if cart.quantity}} tpu-header__cart--has-items{{/if}}"
+                data-cart-preview
+                data-dropdown="cart-preview-dropdown"
+                aria-label="{{lang 'cart.nav_aria_label'}}"
+            >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+                {{#if cart.quantity}}
+                <span class="tpu-header__cart-count cart-quantity">{{cart.quantity}}</span>
+                {{else}}
+                <span class="tpu-header__cart-count cart-quantity" style="display: none;"></span>
+                {{/if}}
+            </a>
+
+            {{!-- Mobile Menu Toggle --}}
+            <button 
+                type="button" 
+                class="tpu-header__menu-toggle tpu-btn--icon"
+                data-tpu-menu-toggle
+                aria-label="Toggle menu"
+                aria-expanded="false"
+                aria-controls="tpu-mobile-nav"
+            >
+                <span class="tpu-hamburger" data-tpu-hamburger>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </button>
+        </div>
+    </div>
+
+    {{!-- Cart Preview Dropdown --}}
+    <div class="dropdown-menu tpu-cart-preview" id="cart-preview-dropdown" data-dropdown-content aria-hidden="true"></div>
+</header>
+
+{{!-- Mobile Navigation Drawer --}}
+<nav class="tpu-mobile-nav" id="tpu-mobile-nav" aria-label="Mobile navigation" data-tpu-mobile-nav>
+    <div class="tpu-mobile-nav__inner">
+        <ul class="tpu-mobile-nav__list">
+            {{#each categories}}
+            <li class="tpu-mobile-nav__item">
+                <a href="{{url}}" class="tpu-mobile-nav__link">
+                    {{name}}
+                    {{#if children}}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                    {{/if}}
+                </a>
+            </li>
+            {{/each}}
+            
+            <li class="tpu-mobile-nav__item">
+                <a href="/brands" class="tpu-mobile-nav__link">Brands</a>
+            </li>
+            
+            <li class="tpu-mobile-nav__item">
+                <a href="/parts-finder" class="tpu-mobile-nav__link" style="color: #ff6b35;">
+                    Parts Finder
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+
+        {{!-- Mobile Account Links --}}
+        <div class="tpu-mobile-nav__account" style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #3f3f46;">
+            {{#if customer}}
+            <a href="{{urls.account.index}}" class="tpu-btn tpu-btn--secondary" style="width: 100%; margin-bottom: 0.75rem;">
+                My Account
+            </a>
+            <a href="{{urls.auth.logout}}" class="tpu-btn tpu-btn--ghost" style="width: 100%;">
+                Sign Out
+            </a>
+            {{else}}
+            <a href="{{urls.auth.login}}" class="tpu-btn tpu-btn--primary" style="width: 100%; margin-bottom: 0.75rem;">
+                Sign In
+            </a>
+            {{#if settings.account_creation_enabled}}
+            <a href="{{urls.auth.create_account}}" class="tpu-btn tpu-btn--secondary" style="width: 100%;">
+                Create Account
+            </a>
+            {{/if}}
+            {{/if}}
+        </div>
+    </div>
+</nav>
+
+{{!-- Search Overlay --}}
+<div class="tpu-search-overlay" id="tpu-search-overlay" data-tpu-search-overlay aria-hidden="true">
+    <div class="tpu-search-overlay__inner">
+        <form action="{{urls.search}}" method="GET">
+            <input 
+                type="search" 
+                name="search_query" 
+                class="tpu-search-input"
+                placeholder="Search for trailer parts..."
+                aria-label="Search"
+                data-tpu-search-input
+            >
+        </form>
+        <button type="button" class="tpu-search-close" data-tpu-search-close style="position: absolute; top: -60px; right: 0; color: #f5f5f5; background: none; border: none; cursor: pointer; font-size: 1.5rem;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+    </div>
+</div>
+
+{{!-- Global regions --}}
+{{{region name="header_navigation_bottom--global"}}}
+{{{region name="header_bottom--global"}}}
+{{{region name="header_bottom"}}}
+

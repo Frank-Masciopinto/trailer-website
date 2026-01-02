@@ -45,6 +45,7 @@
 @import "settings/citadel/citadel"; // 4
 @import "settings/stencil/stencil"; // 4
 @import "settings/layouts/layouts"; // 4
+@import "settings/tpu/tpu"; // TPU Custom Variables
 
 
 // Utilities
@@ -77,3 +78,7 @@
 // -----------------------------------------------------------------------------
 
 @import "layouts/layouts"; // 1
+
+// TPU Custom Components
+// -----------------------------------------------------------------------------
+@import "components/tpu/tpu";

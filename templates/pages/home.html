@@ -13,33 +13,99 @@ blog:
 ---
 {{#partial "hero"}}
     {{{region name="home_below_menu"}}}
-    {{#and carousel carousel.slides.length}}
-        {{> components/carousel arrows=theme_settings.homepage_show_carousel_arrows play_pause_button=theme_settings.homepage_show_carousel_play_pause_button}}
-    {{/and}}
+    
+    {{!-- TPU Custom Hero Section --}}
+    {{> components/tpu/hero}}
+    
     {{{region name="home_below_carousel"}}}
 {{/partial}}
 
 {{#partial "page"}}
-
+<div class="tpu-dark-theme">
     {{#each shipping_messages}}
         {{> components/common/alert/alert-info message}}
     {{/each}}
 
-<div class="main full">
+    {{!-- Brand Marquee Section --}}
+    {{> components/tpu/brand-marquee}}
+
+    {{!-- Bento Grid Categories --}}
+    {{> components/tpu/bento-grid}}
+
+    {{!-- Featured Products Section --}}
     {{#if products.featured}}
-        {{> components/products/featured products=products.featured columns=theme_settings.homepage_featured_products_column_count}}
+    <section class="tpu-section tpu-section--dark" data-tpu-animate="fade-in-up">
+        <div class="tpu-container">
+            <div class="tpu-bento-section__header">
+                <h2 class="tpu-bento-section__title">Featured Products</h2>
+                <p class="tpu-bento-section__subtitle">Hand-picked parts trusted by professionals</p>
+            </div>
+            <div class="productGrid">
+                {{#each products.featured}}
+                    {{> components/products/card}}
+                {{/each}}
+            </div>
+        </div>
+    </section>
     {{/if}}
     {{{region name="home_below_featured_products"}}}
 
+    {{!-- Top Sellers Section --}}
     {{#if products.top_sellers}}
-        {{> components/products/top products=products.top_sellers columns=theme_settings.homepage_top_products_column_count}}
+    <section class="tpu-section tpu-section--secondary" data-tpu-animate="fade-in-up">
+        <div class="tpu-container">
+            <div class="tpu-bento-section__header">
+                <h2 class="tpu-bento-section__title">Top Sellers</h2>
+                <p class="tpu-bento-section__subtitle">Our most popular trailer parts</p>
+            </div>
+            <div class="productGrid">
+                {{#each products.top_sellers}}
+                    {{> components/products/card}}
+                {{/each}}
+            </div>
+        </div>
+    </section>
     {{/if}}
     {{{region name="home_below_top_products"}}}
 
+    {{!-- New Arrivals Section --}}
     {{#if products.new}}
-        {{> components/products/new products=products.new columns=theme_settings.homepage_new_products_column_count}}
+    <section class="tpu-section tpu-section--dark" data-tpu-animate="fade-in-up">
+        <div class="tpu-container">
+            <div class="tpu-bento-section__header">
+                <h2 class="tpu-bento-section__title">New Arrivals</h2>
+                <p class="tpu-bento-section__subtitle">Latest additions to our inventory</p>
+            </div>
+            <div class="productGrid">
+                {{#each products.new}}
+                    {{> components/products/card}}
+                {{/each}}
+            </div>
+        </div>
+    </section>
     {{/if}}
     {{{region name="home_below_new_products"}}}
+
+    {{!-- Trust Section / Call to Action --}}
+    <section class="tpu-section tpu-section--secondary" data-tpu-animate="fade-in-up">
+        <div class="tpu-container" style="text-align: center;">
+            <h2 class="tpu-bento-section__title" style="margin-bottom: 1rem;">
+                Ready to Get Started?
+            </h2>
+            <p class="tpu-bento-section__subtitle" style="max-width: 600px; margin: 0 auto 2rem;">
+                Join thousands of satisfied customers who trust Trailer Parts Unlimited 
+                for all their trailer part needs.
+            </p>
+            <div class="tpu-btn-group" style="justify-content: center;">
+                <a href="/categories" class="tpu-btn tpu-btn--primary tpu-btn--lg">
+                    Browse All Products
+                </a>
+                <a href="/contact" class="tpu-btn tpu-btn--secondary tpu-btn--lg">
+                    Contact Us
+                </a>
+            </div>
+        </div>
+    </section>
 </div>
 {{/partial}}
 {{> layout/base}}

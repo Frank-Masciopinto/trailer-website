@@ -1,0 +1,159 @@
+// =============================================================================
+// TPU BASE STYLES
+// =============================================================================
+// Global styles for Trailer Parts Unlimited theme
+// =============================================================================
+
+// Apply dark theme to body
+.tpu-dark-theme {
+    background-color: $tpu-bg-primary;
+    color: $tpu-text-primary;
+}
+
+// Container overrides for TPU sections
+.tpu-container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 $tpu-space-4;
+    
+    @media (min-width: $tpu-screen-md) {
+        padding: 0 $tpu-space-6;
+    }
+    
+    @media (min-width: $tpu-screen-lg) {
+        padding: 0 $tpu-space-8;
+    }
+}
+
+// Full-width section
+.tpu-section {
+    width: 100%;
+    padding: $tpu-space-12 0;
+    
+    @media (min-width: $tpu-screen-md) {
+        padding: $tpu-space-16 0;
+    }
+    
+    &--dark {
+        background-color: $tpu-bg-primary;
+    }
+    
+    &--secondary {
+        background-color: $tpu-bg-secondary;
+    }
+}
+
+// TPU Grid Pattern Background
+.tpu-grid-pattern {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(to right, $tpu-border-primary 1px, transparent 1px),
+        linear-gradient(to bottom, $tpu-border-primary 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.15;
+    pointer-events: none;
+    animation: tpu-grid-fade 2s ease-out forwards;
+}
+
+// TPU Dot Pattern Background
+.tpu-dot-pattern {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle, $tpu-border-primary 1px, transparent 1px);
+    background-size: 24px 24px;
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+// Gradient overlays
+.tpu-gradient-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(26, 26, 26, 0.5) 50%,
+        $tpu-bg-primary 100%
+    );
+    pointer-events: none;
+}
+
+.tpu-gradient-radial {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        ellipse at center top,
+        rgba(255, 107, 53, 0.1) 0%,
+        transparent 50%
+    );
+    pointer-events: none;
+}
+
+// Text utilities
+.tpu-text-gradient {
+    background: linear-gradient(135deg, $tpu-accent-primary, $tpu-accent-secondary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.tpu-text-headline {
+    @include tpu-headline;
+}
+
+.tpu-text-body {
+    @include tpu-body;
+}
+
+// Animation utilities
+.tpu-animate-fade-in {
+    animation: tpu-fade-in 0.6s ease-out forwards;
+}
+
+.tpu-animate-fade-in-up {
+    animation: tpu-fade-in-up 0.6s ease-out forwards;
+}
+
+.tpu-animate-blur-in {
+    animation: tpu-blur-in 0.8s ease-out forwards;
+}
+
+.tpu-animate-scale-in {
+    animation: tpu-scale-in 0.5s ease-out forwards;
+}
+
+// Stagger animation delays
+@for $i from 1 through 10 {
+    .tpu-delay-#{$i} {
+        animation-delay: #{$i * 0.1}s;
+    }
+}
+
+// Visibility helpers
+.tpu-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+// Hide legacy BigCommerce banners/widgets on TPU dark theme
+.tpu-dark-theme {
+    // Hide old carousel/banner content from regions
+    .banners:not(.tpu-top-banner),
+    [id^="sd-image-"] {
+        display: none !important;
+    }
+}
+

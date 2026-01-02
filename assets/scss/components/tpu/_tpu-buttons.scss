@@ -1,0 +1,162 @@
+// =============================================================================
+// TPU BUTTONS
+// =============================================================================
+// Custom button styles for Trailer Parts Unlimited
+// =============================================================================
+
+// Base button reset
+.tpu-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: $tpu-space-2;
+    padding: $tpu-space-3 $tpu-space-6;
+    font-family: $tpu-font-body;
+    font-size: $tpu-text-sm;
+    font-weight: $tpu-font-semibold;
+    text-transform: uppercase;
+    letter-spacing: $tpu-tracking-wide;
+    text-decoration: none;
+    border: none;
+    border-radius: $tpu-radius-lg;
+    cursor: pointer;
+    transition: all $tpu-transition-normal;
+    
+    &:focus {
+        outline: 2px solid $tpu-accent-primary;
+        outline-offset: 2px;
+    }
+    
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+    
+    @media (min-width: $tpu-screen-md) {
+        padding: $tpu-space-4 $tpu-space-8;
+        font-size: $tpu-text-base;
+    }
+}
+
+// Primary button - Shimmer effect
+.tpu-btn--primary {
+    position: relative;
+    background: $tpu-accent-primary;
+    color: $tpu-text-primary;
+    overflow: hidden;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.3),
+            transparent
+        );
+        transition: left 0.5s ease;
+    }
+    
+    &:hover {
+        background: darken($tpu-accent-primary, 8%);
+        transform: translateY(-2px);
+        box-shadow: $tpu-shadow-glow-orange;
+        
+        &::before {
+            left: 100%;
+        }
+    }
+    
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+// Secondary button - Outline style
+.tpu-btn--secondary {
+    background: transparent;
+    color: $tpu-text-primary;
+    border: 2px solid $tpu-border-secondary;
+    
+    &:hover {
+        border-color: $tpu-accent-primary;
+        color: $tpu-accent-primary;
+        background: rgba(255, 107, 53, 0.1);
+    }
+}
+
+// Ghost button
+.tpu-btn--ghost {
+    background: transparent;
+    color: $tpu-text-secondary;
+    
+    &:hover {
+        color: $tpu-text-primary;
+        background: $tpu-overlay-light;
+    }
+}
+
+// Icon button
+.tpu-btn--icon {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border-radius: $tpu-radius-full;
+    background: $tpu-bg-secondary;
+    color: $tpu-text-primary; // White icons for visibility
+    border: 1px solid $tpu-border-primary;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    
+    svg {
+        width: 20px;
+        height: 20px;
+        stroke: currentColor;
+        flex-shrink: 0;
+    }
+    
+    &:hover {
+        background: $tpu-bg-tertiary;
+        color: $tpu-text-primary;
+        border-color: $tpu-accent-primary;
+    }
+}
+
+// Large button variant
+.tpu-btn--lg {
+    padding: $tpu-space-4 $tpu-space-8;
+    font-size: $tpu-text-base;
+    
+    @media (min-width: $tpu-screen-md) {
+        padding: $tpu-space-5 $tpu-space-10;
+        font-size: $tpu-text-lg;
+    }
+}
+
+// Full width button
+.tpu-btn--full {
+    width: 100%;
+}
+
+// Button with pulsing glow effect
+.tpu-btn--pulse {
+    animation: tpu-pulse-glow 2s infinite;
+}
+
+// Button group
+.tpu-btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: $tpu-space-3;
+    
+    @media (min-width: $tpu-screen-sm) {
+        flex-direction: row;
+        gap: $tpu-space-4;
+    }
+}
+

@@ -1,0 +1,180 @@
+// =============================================================================
+// TPU STATS SECTION
+// =============================================================================
+// Animated statistics bar with number ticker effect
+// =============================================================================
+
+.tpu-stats {
+    display: flex;
+    flex-direction: column;
+    gap: $tpu-space-6;
+    padding: $tpu-space-6;
+    background: $tpu-bg-secondary;
+    border: 1px solid $tpu-border-primary;
+    border-radius: $tpu-radius-xl;
+    
+    @media (min-width: $tpu-screen-sm) {
+        flex-direction: row;
+        justify-content: center;
+        gap: $tpu-space-8;
+        padding: $tpu-space-8 $tpu-space-10;
+    }
+    
+    @media (min-width: $tpu-screen-md) {
+        gap: $tpu-space-12;
+    }
+}
+
+.tpu-stats__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    
+    @media (min-width: $tpu-screen-sm) {
+        &:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: calc(-1 * #{$tpu-space-4});
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 60%;
+            background: $tpu-border-primary;
+            
+            @media (min-width: $tpu-screen-md) {
+                right: calc(-1 * #{$tpu-space-6});
+            }
+        }
+    }
+}
+
+.tpu-stats__number {
+    font-family: $tpu-font-mono;
+    font-size: $tpu-text-3xl;
+    font-weight: $tpu-font-bold;
+    line-height: $tpu-leading-none;
+    color: $tpu-accent-primary;
+    display: flex;
+    align-items: baseline;
+    
+    @media (min-width: $tpu-screen-md) {
+        font-size: $tpu-text-4xl;
+    }
+    
+    @media (min-width: $tpu-screen-lg) {
+        font-size: $tpu-text-5xl;
+    }
+}
+
+.tpu-stats__suffix {
+    font-size: 0.6em;
+    color: $tpu-accent-secondary;
+    margin-left: 2px;
+}
+
+.tpu-stats__label {
+    font-family: $tpu-font-body;
+    font-size: $tpu-text-sm;
+    font-weight: $tpu-font-medium;
+    color: $tpu-text-muted;
+    text-transform: uppercase;
+    letter-spacing: $tpu-tracking-wide;
+    margin-top: $tpu-space-2;
+    
+    @media (min-width: $tpu-screen-md) {
+        font-size: $tpu-text-base;
+    }
+}
+
+// Number Ticker Animation
+.tpu-number-ticker {
+    display: inline-flex;
+    overflow: hidden;
+}
+
+.tpu-number-ticker__digit {
+    display: inline-block;
+    animation: tpu-ticker-roll 0.8s ease-out forwards;
+    animation-delay: var(--digit-delay, 0s);
+}
+
+@keyframes tpu-ticker-roll {
+    0% {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// Stats Section Full Width Variant
+.tpu-stats-section {
+    width: 100%;
+    padding: $tpu-space-12 0;
+    background: $tpu-bg-primary;
+    border-top: 1px solid $tpu-border-primary;
+    border-bottom: 1px solid $tpu-border-primary;
+    
+    @media (min-width: $tpu-screen-md) {
+        padding: $tpu-space-16 0;
+    }
+}
+
+.tpu-stats-section__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 $tpu-space-4;
+}
+
+// Alternative Stats Grid Layout
+.tpu-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $tpu-space-6;
+    
+    @media (min-width: $tpu-screen-md) {
+        grid-template-columns: repeat(4, 1fr);
+        gap: $tpu-space-8;
+    }
+}
+
+.tpu-stats-grid__item {
+    text-align: center;
+    padding: $tpu-space-4;
+}
+
+.tpu-stats-grid__icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto $tpu-space-3;
+    color: $tpu-accent-primary;
+    
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.tpu-stats-grid__number {
+    font-family: $tpu-font-headline;
+    font-size: $tpu-text-4xl;
+    font-weight: $tpu-font-bold;
+    color: $tpu-text-primary;
+    line-height: $tpu-leading-tight;
+    
+    @media (min-width: $tpu-screen-md) {
+        font-size: $tpu-text-5xl;
+    }
+}
+
+.tpu-stats-grid__label {
+    font-family: $tpu-font-body;
+    font-size: $tpu-text-sm;
+    color: $tpu-text-muted;
+    margin-top: $tpu-space-1;
+}
+

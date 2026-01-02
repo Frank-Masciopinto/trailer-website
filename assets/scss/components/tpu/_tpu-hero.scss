@@ -1,0 +1,335 @@
+// =============================================================================
+// TPU HERO SECTION
+// =============================================================================
+// Full-screen animated text hero with industrial aesthetic
+// =============================================================================
+
+.tpu-hero {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: $tpu-bg-primary;
+    overflow: hidden;
+    padding: $tpu-space-20 $tpu-space-4;
+    padding-top: 100px; // Account for fixed header
+    
+    @media (min-width: $tpu-screen-md) {
+        padding: $tpu-space-24 $tpu-space-6;
+        padding-top: 120px;
+    }
+}
+
+// Background Layers
+.tpu-hero__background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.tpu-hero__grid {
+    @extend .tpu-grid-pattern;
+}
+
+.tpu-hero__gradient {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        ellipse 80% 50% at 50% 0%,
+        rgba(255, 107, 53, 0.15) 0%,
+        transparent 50%
+    );
+    pointer-events: none;
+}
+
+.tpu-hero__noise {
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+    pointer-events: none;
+}
+
+// Content Container
+.tpu-hero__content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 1000px;
+    width: 100%;
+}
+
+// Main Headline
+.tpu-hero__headline {
+    margin: 0 0 $tpu-space-4;
+    opacity: 0;
+    animation: tpu-blur-in 0.8s ease-out 0.3s forwards;
+}
+
+.tpu-hero__headline-static {
+    display: block;
+    font-family: $tpu-font-headline;
+    font-size: $tpu-text-4xl;
+    font-weight: $tpu-font-bold;
+    line-height: $tpu-leading-none;
+    letter-spacing: $tpu-tracking-wide;
+    text-transform: uppercase;
+    color: $tpu-text-primary;
+    
+    @media (min-width: $tpu-screen-sm) {
+        font-size: $tpu-text-5xl;
+    }
+    
+    @media (min-width: $tpu-screen-md) {
+        font-size: $tpu-text-6xl;
+    }
+    
+    @media (min-width: $tpu-screen-lg) {
+        font-size: $tpu-text-7xl;
+    }
+    
+    @media (min-width: $tpu-screen-xl) {
+        font-size: $tpu-text-8xl;
+    }
+}
+
+// Word Rotation Container
+// Using explicit pixel heights to ensure proper overflow clipping
+$word-height-mobile: 42px;  // For text-4xl (2.25rem = 36px * 1.15)
+$word-height-sm: 56px;      // For text-5xl (3rem = 48px * 1.15)
+$word-height-md: 70px;      // For text-6xl (3.75rem = 60px * 1.15)
+$word-height-lg: 84px;      // For text-7xl (4.5rem = 72px * 1.15)
+$word-height-xl: 112px;     // For text-8xl (6rem = 96px * 1.15)
+
+.tpu-hero__headline-rotate {
+    display: block;
+    position: relative;
+    height: $word-height-mobile;
+    overflow: hidden;
+    margin-top: $tpu-space-2;
+    
+    @media (min-width: $tpu-screen-sm) {
+        height: $word-height-sm;
+    }
+    
+    @media (min-width: $tpu-screen-md) {
+        height: $word-height-md;
+    }
+    
+    @media (min-width: $tpu-screen-lg) {
+        height: $word-height-lg;
+    }
+    
+    @media (min-width: $tpu-screen-xl) {
+        height: $word-height-xl;
+    }
+}
+
+.tpu-hero__word-list {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    animation: tpu-word-cycle 12s infinite;
+}
+
+.tpu-hero__word {
+    display: block;
+    font-family: $tpu-font-headline;
+    font-size: $tpu-text-4xl;
+    font-weight: $tpu-font-black;
+    line-height: 1.15;
+    height: $word-height-mobile;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, $tpu-accent-primary, $tpu-accent-secondary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    
+    @media (min-width: $tpu-screen-sm) {
+        font-size: $tpu-text-5xl;
+        height: $word-height-sm;
+    }
+    
+    @media (min-width: $tpu-screen-md) {
+        font-size: $tpu-text-6xl;
+        height: $word-height-md;
+    }
+    
+    @media (min-width: $tpu-screen-lg) {
+        font-size: $tpu-text-7xl;
+        height: $word-height-lg;
+    }
+    
+    @media (min-width: $tpu-screen-xl) {
+        font-size: $tpu-text-8xl;
+        height: $word-height-xl;
+    }
+}
+
+// Word rotation animation - moves up through the list
+// With 5 words, each word takes 20% of the animation (100% / 5 = 20%)
+@keyframes tpu-word-cycle {
+    0%, 18% {
+        transform: translateY(0);
+    }
+    20%, 38% {
+        transform: translateY(-20%);
+    }
+    40%, 58% {
+        transform: translateY(-40%);
+    }
+    60%, 78% {
+        transform: translateY(-60%);
+    }
+    80%, 100% {
+        transform: translateY(-80%);
+    }
+}
+
+// Subheadline
+.tpu-hero__subheadline {
+    font-family: $tpu-font-body;
+    font-size: $tpu-text-lg;
+    font-weight: $tpu-font-regular;
+    line-height: $tpu-leading-relaxed;
+    color: $tpu-text-muted;
+    max-width: 600px;
+    margin: 0 auto $tpu-space-8;
+    opacity: 0;
+    animation: tpu-fade-in-up 0.6s ease-out 0.8s forwards;
+    
+    @media (min-width: $tpu-screen-md) {
+        font-size: $tpu-text-xl;
+    }
+    
+    @media (min-width: $tpu-screen-lg) {
+        font-size: $tpu-text-2xl;
+    }
+}
+
+// CTA Buttons
+.tpu-hero__cta {
+    display: flex;
+    flex-direction: column;
+    gap: $tpu-space-3;
+    align-items: center;
+    margin-bottom: $tpu-space-12;
+    opacity: 0;
+    animation: tpu-scale-in 0.5s ease-out 1.2s forwards;
+    
+    @media (min-width: $tpu-screen-sm) {
+        flex-direction: row;
+        justify-content: center;
+        gap: $tpu-space-4;
+    }
+}
+
+.tpu-hero__btn-primary {
+    @extend .tpu-btn;
+    @extend .tpu-btn--primary;
+    @extend .tpu-btn--lg;
+    min-width: 200px;
+}
+
+.tpu-hero__btn-secondary {
+    @extend .tpu-btn;
+    @extend .tpu-btn--secondary;
+    @extend .tpu-btn--lg;
+    min-width: 200px;
+}
+
+// Stats Section within Hero
+.tpu-hero__stats {
+    opacity: 0;
+    animation: tpu-fade-in-up 0.6s ease-out 1.5s forwards;
+}
+
+// Scroll Indicator
+.tpu-hero__scroll {
+    position: absolute;
+    bottom: $tpu-space-8;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $tpu-space-2;
+    color: $tpu-text-muted;
+    opacity: 0;
+    animation: tpu-fade-in 0.6s ease-out 2s forwards;
+    
+    @media (min-width: $tpu-screen-md) {
+        bottom: $tpu-space-12;
+    }
+}
+
+.tpu-hero__scroll-text {
+    font-size: $tpu-text-xs;
+    font-weight: $tpu-font-medium;
+    text-transform: uppercase;
+    letter-spacing: $tpu-tracking-widest;
+}
+
+.tpu-hero__scroll-icon {
+    width: 24px;
+    height: 40px;
+    border: 2px solid $tpu-border-secondary;
+    border-radius: 12px;
+    position: relative;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4px;
+        height: 8px;
+        background: $tpu-accent-primary;
+        border-radius: 2px;
+        animation: tpu-scroll-bounce 1.5s infinite;
+    }
+}
+
+@keyframes tpu-scroll-bounce {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translateX(-50%) translateY(8px);
+        opacity: 0.5;
+    }
+}
+
+// Decorative Elements
+.tpu-hero__accent-line {
+    position: absolute;
+    width: 3px;
+    height: 100px;
+    background: linear-gradient(to bottom, $tpu-accent-primary, transparent);
+    
+    &--left {
+        left: 10%;
+        top: 20%;
+    }
+    
+    &--right {
+        right: 10%;
+        bottom: 30%;
+    }
+}
+
+// Particle effect placeholders (for JS enhancement)
+.tpu-hero__particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+

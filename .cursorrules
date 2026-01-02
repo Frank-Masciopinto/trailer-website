@@ -1,0 +1,365 @@
+# Trailer Parts Unlimited - BigCommerce Stencil Theme
+
+## Project Overview
+This is a BigCommerce Stencil storefront theme for Trailer Parts Unlimited (https://trailerpartsunlimited.com/), based on the Cornerstone theme framework. The theme uses Handlebars.js templating, SCSS styling, and ES6 JavaScript.
+
+## Technology Stack
+
+### Templating: Handlebars.js v4
+- Templates are `.html` files using Handlebars syntax
+- Expressions use double curly braces: `{{variableName}}`
+- Block helpers: `{{#each items}}...{{/each}}`, `{{#if condition}}...{{/if}}`
+- Partials are included with: `{{> components/path/to/partial}}`
+- Data injection for JS: `{{inject "key" value}}` and `{{jsContext}}`
+
+### Styling: SCSS
+- Main entry: `assets/scss/theme.scss`
+- Uses Foundation 5 and Citadel (BigCommerce's component library)
+- Theme settings variables from `config.json` are available in SCSS via `stencil-` prefix
+- Compile with: `stencil start` (automatic) or build separately
+
+### JavaScript: ES6 with Webpack
+- Entry point: `assets/js/app.js`
+- Page-specific modules in `assets/js/theme/`
+- Each page type extends `PageManager` class
+- Uses jQuery, lodash, Foundation, and stencil-utils
+- Build: `npm run build` (production) or `npm run buildDev` (development)
+
+### Stencil Utils
+- Library for AJAX interactions with BigCommerce APIs
+- Import: `import utils from '@bigcommerce/stencil-utils'`
+- Common methods: `utils.api.cart.getContent()`, `utils.api.product.getById()`
+
+## Directory Structure
+
+```
+├── assets/
+│   ├── js/
+│   │   ├── app.js              # Main JS entry point
+│   │   ├── theme/              # Page-specific modules
+│   │   │   ├── global.js       # Runs on every page
+│   │   │   ├── product.js      # Product page logic
+│   │   │   ├── cart.js         # Cart page logic
+│   │   │   ├── category.js     # Category page logic
+│   │   │   └── common/         # Shared utilities
+│   │   └── polyfills.js        # Legacy browser support
+│   ├── scss/
+│   │   ├── theme.scss          # Main stylesheet entry
+│   │   ├── settings/           # SCSS variables & config
+│   │   ├── components/         # Component styles
+│   │   └── layouts/            # Layout styles
+│   ├── icons/                  # SVG icons (bundled via grunt svgstore)
+│   └── img/                    # Static images
+├── templates/
+│   ├── layout/
+│   │   ├── base.html           # Main layout wrapper
+│   │   └── empty.html          # Minimal layout
+│   ├── pages/                  # Full page templates
+│   │   ├── home.html
+│   │   ├── product.html
+│   │   ├── category.html
+│   │   ├── cart.html
+│   │   ├── checkout.html
+│   │   └── account/            # Customer account pages
+│   └── components/             # Reusable partials
+│       ├── common/             # Shared components
+│       ├── products/           # Product-related partials
+│       ├── cart/               # Cart components
+│       └── faceted-search/     # Search/filter components
+├── lang/                       # i18n translation files (JSON)
+│   └── en.json                 # English translations
+├── config.json                 # Theme settings & variations
+├── schema.json                 # Theme Editor UI schema
+└── stencil.conf.cjs            # Stencil CLI configuration
+```
+
+## Key Configuration Files
+
+### config.json
+- Theme metadata, version, and author info
+- Default settings and color values
+- Theme variations (Light, Bold, Warm)
+- Resource configurations for API data
+- Image dimension settings
+
+### schema.json
+- Defines the Theme Editor UI in BigCommerce admin
+- Controls what merchants can customize
+- Organized into sections, groups, and settings
+
+### lang/*.json
+- Translation strings for internationalization
+- Access in templates: `{{lang 'key.path'}}`
+- Default language: `en.json`
+
+## YAML Front Matter
+
+Templates can request data using YAML at the top of the file:
+
+```yaml
+---
+products:
+    featured:
+        limit: {{theme_settings.homepage_featured_products_count}}
+    new:
+        limit: 8
+cart: true
+customer:
+    orders:
+        limit: 5
+---
+```
+
+## Common Handlebars Helpers
+
+```handlebars
+{{!-- Conditionals --}}
+{{#if product.has_options}}...{{/if}}
+{{#unless cart.empty}}...{{/unless}}
+
+{{!-- Loops --}}
+{{#each products}}
+    <h2>{{name}}</h2>
+    <p>{{price.without_tax.formatted}}</p>
+{{/each}}
+
+{{!-- Partials --}}
+{{> components/products/card product=this}}
+
+{{!-- Theme Settings --}}
+{{theme_settings.logo_size}}
+
+{{!-- Translations --}}
+{{lang 'cart.items' count=cart.quantity}}
+
+{{!-- JSON injection for JS --}}
+{{inject "productId" product.id}}
+<script>var context = JSON.parse({{jsContext}});</script>
+
+{{!-- Images --}}
+{{getImage product.main_image "productgallery_size"}}
+
+{{!-- URLs --}}
+{{urls.home}}
+{{urls.cart}}
+```
+
+## Stencil CLI Commands
+
+```bash
+# Start local development server with hot reload
+stencil start
+
+# Initialize/configure store connection
+stencil init
+
+# Bundle theme for upload
+stencil bundle
+
+# Push theme to BigCommerce store
+stencil push
+
+# Pull current theme configuration from store
+stencil pull
+
+# Download theme files from store
+stencil download
+
+# Check for CLI updates
+stencil --version
+```
+
+## NPM Scripts
+
+```bash
+npm run build        # Production webpack build
+npm run buildDev     # Development webpack build
+npm test             # Run Jest tests
+npm run test:watch   # Run tests in watch mode
+npm run stylelint    # Lint SCSS files
+npm run stylelint:fix # Auto-fix SCSS issues
+```
+
+## Development Workflow
+
+1. Start dev server: `stencil start`
+2. Open http://localhost:3000
+3. Edit templates, SCSS, or JS files
+4. Browser auto-refreshes on save
+5. Debug with `?debug=context` or `?debug=bar` query params
+
+## Page Types & JavaScript Modules
+
+Each page type maps to a JS module in `assets/js/theme/`:
+
+| Page Type | JS Module | Template |
+|-----------|-----------|----------|
+| `pages/home` | `global.js` | `pages/home.html` |
+| `pages/product` | `product.js` | `pages/product.html` |
+| `pages/category` | `category.js` | `pages/category.html` |
+| `pages/cart` | `cart.js` | `pages/cart.html` |
+| `pages/brand` | `brand.js` | `pages/brand.html` |
+| `pages/search` | `search.js` | `pages/search.html` |
+| `pages/account/*` | `account.js` | `pages/account/*.html` |
+| `pages/auth/*` | `auth.js` | `pages/auth/*.html` |
+| `global` | `global.js` | All pages |
+
+## Creating a New Page Module
+
+```javascript
+// assets/js/theme/custom-page.js
+import PageManager from './page-manager';
+
+export default class CustomPage extends PageManager {
+    constructor(context) {
+        super(context);
+        // this.context contains data from {{jsContext}}
+    }
+
+    onReady() {
+        // DOM is ready, initialize components
+        this.$element = $('[data-custom-element]');
+        this.bindEvents();
+    }
+
+    bindEvents() {
+        this.$element.on('click', (e) => this.handleClick(e));
+    }
+
+    handleClick(event) {
+        event.preventDefault();
+        // Handle click
+    }
+}
+```
+
+## Stencil Utils API Examples
+
+```javascript
+import utils from '@bigcommerce/stencil-utils';
+
+// Add to cart
+utils.api.cart.itemAdd(formData, (err, response) => {
+    if (response.data.status === 'succeed') {
+        // Item added successfully
+    }
+});
+
+// Get cart contents
+utils.api.cart.getContent({ template: 'cart/content' }, (err, response) => {
+    $cartContainer.html(response);
+});
+
+// Get product options
+utils.api.productAttributes.optionChange(productId, formData, (err, response) => {
+    // Update price, stock, etc.
+});
+
+// Remote page content
+utils.api.getPage(url, { template: 'components/partial' }, (err, response) => {
+    $container.html(response);
+});
+```
+
+## Theme Settings Access
+
+In SCSS:
+```scss
+.header {
+    background-color: stencil-color("header-backgroundColor");
+    font-family: stencil-font-family("body-font");
+    font-size: stencil-number("fontSize-root") * 1px;
+}
+```
+
+In Handlebars:
+```handlebars
+{{#if theme_settings.show_product_reviews}}
+    {{> components/products/reviews}}
+{{/if}}
+
+<img src="{{getImage product.main_image theme_settings.product_size}}" />
+```
+
+In JavaScript (via context injection):
+```handlebars
+{{inject "themeSettings" theme_settings}}
+```
+```javascript
+const settings = this.context.themeSettings;
+if (settings.show_product_quick_view) {
+    this.initQuickView();
+}
+```
+
+## Best Practices
+
+### Templates
+- Keep templates DRY using partials in `components/`
+- Use semantic HTML for accessibility
+- Always provide alt text for images
+- Use translation keys instead of hardcoded strings
+
+### JavaScript
+- Extend PageManager for page-specific logic
+- Use stencil-utils for API calls (handles CSRF automatically)
+- Avoid global variables; use module scope
+- Clean up event listeners in page transitions
+
+### SCSS
+- Use theme settings variables for customizable values
+- Follow BEM naming convention
+- Keep selectors shallow (max 3 levels)
+- Use Foundation mixins for responsive design
+
+### Performance
+- Lazy load images with `lazyload` class
+- Minimize JavaScript in critical path
+- Use `{{region}}` for content injection
+- Leverage browser caching for static assets
+
+## Debugging
+
+### Template Data
+- Add `?debug=context` to URL for full JSON data
+- Add `?debug=bar` for overlay panel
+- Check Network tab for API responses
+
+### JavaScript
+- Use browser DevTools console
+- Check for errors in stencil start terminal
+- Test with `npm test`
+
+### SCSS
+- Check for compilation errors in terminal
+- Use browser DevTools to inspect computed styles
+- Validate with `npm run stylelint`
+
+## Deployment
+
+1. Test locally with `stencil start`
+2. Bundle: `stencil bundle`
+3. Push to store: `stencil push`
+4. Or upload `.zip` via BigCommerce admin
+
+## Store Connection
+
+Store URL: https://trailerpartsunlimited.com/
+Config file: `config.stencil.json` or `.stencil`
+
+Required API Token scopes:
+- Content (read)
+- Products (read)
+- Themes (read/write for publish)
+- Store Information (read)
+- Checkout Content (read)
+
+## Resources
+
+- [Stencil Docs](https://developer.bigcommerce.com/docs/storefront/stencil)
+- [Handlebars Reference](https://developer.bigcommerce.com/docs/storefront/stencil/themes/context/handlebars-reference)
+- [Front Matter Reference](https://developer.bigcommerce.com/docs/storefront/stencil/themes/context/frontmatter-reference)
+- [Theme Objects Reference](https://developer.bigcommerce.com/docs/storefront/stencil/themes/context/object-reference/schemas)
+- [Stencil Utils](https://github.com/bigcommerce/stencil-utils)
+- [Cornerstone Theme](https://github.com/bigcommerce/cornerstone)
+

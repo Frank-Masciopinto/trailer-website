@@ -1,6 +1,9 @@
 import React from 'react';
 import { BlurFade } from './BlurFade';
 import ElectricBorder from './ElectricBorder';
+import { AnimatedShinyText } from './AnimatedShinyText';
+import { TextAnimate } from './TextAnimate';
+import { AnimatedGradientText } from './AnimatedGradientText';
 
 // Category data for the bento grid
 const categories = [
@@ -99,10 +102,22 @@ const BentoCard = ({ category, index }) => {
       )}
       <div className="tpu-bento__content">
         {category.icon && <div className="tpu-bento__icon">{category.icon}</div>}
-        <h3 className="tpu-bento__title">{category.title}</h3>
+        <TextAnimate
+          as="h3"
+          className="tpu-bento__title"
+          by="character"
+          animation="blurInUp"
+          delay={0.1 * index}
+          duration={0.5}
+          once={true}
+        >
+          {category.title}
+        </TextAnimate>
         <p className="tpu-bento__description">{category.description}</p>
         <a href={category.href} className="tpu-bento__link">
-          {category.linkText || 'Shop Now'}
+          <AnimatedShinyText shimmerWidth={80}>
+            {category.linkText || 'Shop Now'}
+          </AnimatedShinyText>
           <ArrowIcon />
         </a>
       </div>
@@ -140,7 +155,11 @@ export function AnimatedBentoGrid() {
       <div className="tpu-container">
         <BlurFade delay={0} direction="up" offset={15} blur="6px">
           <div className="tpu-bento-section__header">
-            <h2 className="tpu-bento-section__title">Shop by Category</h2>
+            <h2 className="tpu-bento-section__title">
+              <AnimatedGradientText speed={1.2} colorFrom="#FF6B35" colorTo="#FFB347">
+                Shop by Category
+              </AnimatedGradientText>
+            </h2>
             <p className="tpu-bento-section__subtitle">
               Everything you need to keep your trailer running strong
             </p>

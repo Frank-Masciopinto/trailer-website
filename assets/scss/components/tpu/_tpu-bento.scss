@@ -243,6 +243,79 @@
     }
 }
 
+// =============================================================================
+// ANIMATED SHINY TEXT
+// =============================================================================
+// Shimmering light effect that pans across text
+// =============================================================================
+
+@keyframes shiny-text {
+    0% {
+        background-position: -200% 50%;
+    }
+    100% {
+        background-position: 200% 50%;
+    }
+}
+
+.tpu-shiny-text {
+    display: inline-block;
+    position: relative;
+    color: inherit;
+    
+    // Gradient shimmer with the accent color as base
+    background: linear-gradient(
+        90deg,
+        $tpu-accent-primary 0%,
+        $tpu-accent-primary 35%,
+        lighten($tpu-accent-primary, 25%) 45%,
+        #fff 50%,
+        lighten($tpu-accent-primary, 25%) 55%,
+        $tpu-accent-primary 65%,
+        $tpu-accent-primary 100%
+    );
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shiny-text 2.5s ease-in-out infinite;
+}
+
+// =============================================================================
+// ANIMATED GRADIENT TEXT
+// =============================================================================
+// Animated gradient that shifts colors across text
+// =============================================================================
+
+@keyframes gradient-text {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.tpu-gradient-text {
+    display: inline-block;
+    background: linear-gradient(
+        90deg,
+        var(--color-from, $tpu-accent-primary) 0%,
+        var(--color-to, lighten($tpu-accent-primary, 15%)) 25%,
+        var(--color-from, $tpu-accent-primary) 50%,
+        var(--color-to, lighten($tpu-accent-primary, 15%)) 75%,
+        var(--color-from, $tpu-accent-primary) 100%
+    );
+    background-size: 300% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-text var(--gradient-speed, 3s) ease-in-out infinite;
+}
+
 // Card Badge
 .tpu-bento__badge {
     position: absolute;

@@ -38,31 +38,8 @@ blog:
     {{!-- Bento Grid Categories (React with scroll animations) --}}
     <div id="animated-bento-root"></div>
 
-    {{!-- Featured Products Section with Light Rays Background --}}
-    {{#if products.featured}}
-    <section class="tpu-section tpu-section--dark tpu-section--light-rays" 
-             data-tpu-animate="fade-in-up"
-             data-light-rays
-             data-rays-origin="top-center"
-             data-rays-color="#ff6b35"
-             data-rays-speed="0.6"
-             data-light-spread="1.5"
-             data-ray-length="2.5"
-             data-fade-distance="1.2"
-             data-saturation="0.7">
-        <div class="tpu-container" style="position: relative; z-index: 2;">
-            <div class="tpu-bento-section__header">
-                <h2 class="tpu-bento-section__title">Featured Products</h2>
-                <p class="tpu-bento-section__subtitle">Hand-picked parts trusted by professionals</p>
-            </div>
-            <div class="productGrid">
-                {{#each products.featured}}
-                    {{> components/products/card}}
-                {{/each}}
-            </div>
-        </div>
-    </section>
-    {{/if}}
+    {{!-- Shop by Capacity Section (React with MagicUI) --}}
+    <div id="capacity-grid-root"></div>
     {{{region name="home_below_featured_products"}}}
 
     {{!-- Top Sellers Section --}}

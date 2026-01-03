@@ -11,6 +11,7 @@ import AnimatedBentoGrid from './components/AnimatedBentoGrid';
 // import HeroStats from './components/HeroStats'; // Removed from hero
 import GoogleReviews from './components/GoogleReviews';
 import WhyKitsBeatParts from './components/WhyKitsBeatParts';
+import CapacityGrid from './components/CapacityGrid';
 import { initializeLensImagesLazy } from './components/LensInitializer';
 import { initializeLightRaysLazy } from './components/LightRaysInitializer';
 
@@ -115,6 +116,13 @@ window.stencilBootstrap = function stencilBootstrap(pageType, contextJSON = null
                 if (whyKitsContainer && pageType === 'default') {
                     const kitsRoot = createRoot(whyKitsContainer);
                     kitsRoot.render(React.createElement(WhyKitsBeatParts));
+                }
+                
+                // Render Capacity Grid section with MagicUI components
+                const capacityGridContainer = document.getElementById('capacity-grid-root');
+                if (capacityGridContainer && pageType === 'default') {
+                    const capacityRoot = createRoot(capacityGridContainer);
+                    capacityRoot.render(React.createElement(CapacityGrid));
                 }
                 
                 // Initialize Magic UI Lens effect on product card images

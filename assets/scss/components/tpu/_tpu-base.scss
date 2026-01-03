@@ -4,10 +4,18 @@
 // Global styles for Trailer Parts Unlimited theme
 // =============================================================================
 
+// Prevent horizontal overflow from absolute positioned elements
+html,
+body {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
 // Apply dark theme to body
 .tpu-dark-theme {
     background-color: $tpu-bg-primary;
     color: $tpu-text-primary;
+    overflow-x: hidden;
 }
 
 // Remove margin-top from main content

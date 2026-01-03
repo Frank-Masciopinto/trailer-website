@@ -1,0 +1,273 @@
+// =============================================================================
+// TPU CAPACITY GRID - "Shop by Capacity"
+// =============================================================================
+// MagicUI-powered capacity selector grid
+// =============================================================================
+
+.tpu-capacity-grid-section {
+    position: relative;
+    width: 100%;
+    padding: $tpu-space-12 0;
+    background: $tpu-bg-secondary;
+    
+    @media (min-width: $tpu-screen-md) {
+        padding: $tpu-space-16 0;
+    }
+}
+
+// Header
+// -----------------------------------------------------------------------------
+
+.tpu-capacity-grid__header {
+    text-align: center;
+    margin-bottom: $tpu-space-10;
+    
+    @media (min-width: $tpu-screen-md) {
+        margin-bottom: $tpu-space-12;
+    }
+}
+
+.tpu-capacity-grid__title {
+    font-family: $tpu-font-headline;
+    font-size: $tpu-text-3xl;
+    font-weight: $tpu-font-bold;
+    color: $tpu-text-primary;
+    margin-bottom: $tpu-space-3;
+    
+    @media (min-width: $tpu-screen-md) {
+        font-size: $tpu-text-4xl;
+    }
+}
+
+.tpu-capacity-grid__subtitle {
+    font-family: $tpu-font-body;
+    font-size: $tpu-text-lg;
+    color: $tpu-text-secondary;
+    
+    @media (min-width: $tpu-screen-md) {
+        font-size: $tpu-text-xl;
+    }
+}
+
+// Grid
+// -----------------------------------------------------------------------------
+
+.tpu-capacity-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); // 3 per row = 2 rows for 6 items
+    gap: $tpu-space-3;
+    
+    @media (min-width: $tpu-screen-sm) {
+        gap: $tpu-space-4;
+    }
+    
+    @media (min-width: $tpu-screen-md) {
+        grid-template-columns: repeat(6, 1fr); // All 6 in one row on desktop
+        gap: $tpu-space-5;
+    }
+}
+
+// Card Link
+// -----------------------------------------------------------------------------
+
+.tpu-capacity-grid__link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    
+    &:hover,
+    &:focus {
+        text-decoration: none;
+        
+        .tpu-capacity-grid__card-icon {
+            transform: scale(1.1);
+            color: $tpu-accent-primary;
+        }
+        
+        .tpu-capacity-grid__number {
+            color: $tpu-accent-primary;
+        }
+    }
+}
+
+// Card
+// -----------------------------------------------------------------------------
+
+.tpu-capacity-grid__card {
+    height: 100%;
+    min-height: 120px;
+    
+    @media (min-width: $tpu-screen-sm) {
+        min-height: 150px;
+    }
+    
+    @media (min-width: $tpu-screen-md) {
+        min-height: 180px;
+    }
+}
+
+.tpu-capacity-grid__card-icon {
+    width: 50px;
+    height: 30px;
+    margin: 0 auto $tpu-space-2;
+    color: #888888; // Light gray for dark card background
+    transition: all $tpu-transition-normal;
+    
+    @media (min-width: $tpu-screen-sm) {
+        width: 70px;
+        height: 42px;
+        margin-bottom: $tpu-space-3;
+    }
+    
+    @media (min-width: $tpu-screen-md) {
+        width: 80px;
+        height: 48px;
+        margin-bottom: $tpu-space-4;
+    }
+}
+
+.tpu-capacity-grid__icon {
+    width: 100%;
+    height: 100%;
+}
+
+.tpu-capacity-grid__card-capacity {
+    text-align: center;
+    margin-bottom: $tpu-space-2;
+}
+
+.tpu-capacity-grid__number {
+    font-family: $tpu-font-headline;
+    font-size: $tpu-text-xl;
+    font-weight: $tpu-font-black;
+    color: #ffffff; // Light text for dark card background
+    letter-spacing: $tpu-tracking-tight;
+    transition: color $tpu-transition-fast;
+    
+    @media (min-width: $tpu-screen-sm) {
+        font-size: $tpu-text-2xl;
+    }
+    
+    @media (min-width: $tpu-screen-md) {
+        font-size: $tpu-text-3xl;
+    }
+}
+
+.tpu-capacity-grid__card-label {
+    text-align: center;
+    font-family: $tpu-font-body;
+    font-size: $tpu-text-xs;
+    font-weight: $tpu-font-medium;
+    color: #999999; // Light muted text for dark card background
+    text-transform: uppercase;
+    letter-spacing: $tpu-tracking-wide;
+    
+    @media (min-width: $tpu-screen-sm) {
+        font-size: $tpu-text-sm;
+    }
+    
+    @media (min-width: $tpu-screen-md) {
+        font-size: $tpu-text-base;
+    }
+}
+
+// =============================================================================
+// MAGIC CARD STYLES
+// =============================================================================
+
+.tpu-magic-card {
+    position: relative;
+    border-radius: $tpu-radius-xl;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.tpu-magic-card__border {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity $tpu-transition-normal;
+    
+    .tpu-magic-card:hover & {
+        opacity: 1;
+    }
+}
+
+.tpu-magic-card__bg {
+    position: absolute;
+    inset: 1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+}
+
+.tpu-magic-card__spotlight {
+    pointer-events: none;
+    position: absolute;
+    inset: 1px;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity $tpu-transition-normal;
+    
+    .tpu-magic-card:hover & {
+        opacity: 1;
+    }
+}
+
+.tpu-magic-card__content {
+    position: relative;
+    z-index: 1;
+    padding: $tpu-space-3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    
+    @media (min-width: $tpu-screen-sm) {
+        padding: $tpu-space-4;
+    }
+    
+    @media (min-width: $tpu-screen-md) {
+        padding: $tpu-space-6;
+    }
+}
+
+// =============================================================================
+// BORDER BEAM STYLES
+// =============================================================================
+
+.tpu-border-beam {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border: var(--border-beam-width, 1px) solid transparent;
+    mask-image: linear-gradient(transparent, transparent), linear-gradient(#000, #000);
+    mask-composite: intersect;
+    -webkit-mask-composite: source-in;
+    mask-clip: padding-box, border-box;
+    opacity: 0;
+    transition: opacity $tpu-transition-normal;
+    
+    .tpu-magic-card:hover & {
+        opacity: 1;
+    }
+}
+
+.tpu-border-beam__light {
+    position: absolute;
+    aspect-ratio: 1;
+    background: linear-gradient(to left, var(--color-from), var(--color-to), transparent);
+}
+
+// =============================================================================
+// NUMBER TICKER STYLES
+// =============================================================================
+
+.tpu-number-ticker {
+    display: inline-block;
+    font-variant-numeric: tabular-nums;
+}
+

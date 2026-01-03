@@ -15,43 +15,33 @@ category:
 
 {{#partial "page"}}
 
+{{!-- Breadcrumbs --}}
 {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
-{{#if category.image}}
-    {{> components/common/responsive-img
-        image=category.image
-        fallback_size=theme_settings.zoom_size
-        lazyload=theme_settings.lazyload_mode
-        class="category-header-image"
-    }}
-{{/if}}
-{{#unless theme_settings.hide_category_page_heading }}
-    <h1 class="page-heading">{{category.name}}</h1>
-    {{{region name="category_below_header"}}}
-{{/unless}}
-{{{category.description}}}
-<div class="page">
-    {{#if category.faceted_search_enabled}}
-        <aside class="page-sidebar" id="faceted-search-container">
-            {{> components/category/sidebar}}
-        </aside>
-    {{else if category.subcategories}}
-        <aside class="page-sidebar" id="faceted-search-container">
-            {{> components/category/sidebar}}
-        </aside>
-    {{else if theme_settings.shop_by_price_visibility}}
-        <aside class="page-sidebar" id="faceted-search-container">
-            {{> components/category/sidebar}}
-        </aside>
-    {{/if}}
 
-    <main class="page-content" id="product-listing-container">
-        {{> components/category/product-listing}}
-    </main>
+{{!-- 
+    Enhanced PLP Structure for Axle Kit Categories
+    Uses new fitment-focused partials with React components
+--}}
 
-    <div class="page-region">
-        {{{region name="category_below_content"}}}
+{{!-- Hero + Fitment Finder (above the fold) - HIDDEN
+{{> components/category/hero-fitment-finder}}
+--}}
+
+{{!-- Quick Path Chips (intent-based shortcuts) --}}
+{{> components/category/quick-path-chips}}
+
+{{!-- Category Description --}}
+{{#if category.description}}
+    <div class="tpu-category-description">
+        {{{category.description}}}
     </div>
-</div>
+{{/if}}
+
+{{!-- Enhanced Product Listing (filters + grid + injected cards) --}}
+{{> components/category/product-listing-enhanced}}
+
+{{!-- Decision Support (FAQ + resources below grid) --}}
+{{> components/category/decision-support}}
 
 {{/partial}}
 {{> layout/base}}

@@ -1,0 +1,106 @@
+{{!--
+    PDP Layout - React-based Product Detail Page
+    This partial provides a React mount point for the new MCP-based PDP components.
+    Product data is injected in templates/pages/product.html before this partial is rendered.
+--}}
+
+{{!-- Product view wrapper with data attributes for analytics --}}
+<div class="tpu-pdp-wrapper"
+    data-event-type="product"
+    data-entity-id="{{product.id}}"
+    data-name="{{product.title}}"
+    data-product-category="{{#each product.category}}{{#if @last}}{{this}}{{else}}{{this}}, {{/if}}{{/each}}"
+    data-product-brand="{{product.brand.name}}"
+    data-product-price="{{#or customer (unless settings.hide_price_from_guests)}}{{#if product.price.with_tax}}{{product.price.with_tax.value}}{{else}}{{product.price.without_tax.value}}{{/if}}{{else}}{{lang 'common.login_for_pricing'}}{{/or}}"
+    data-product-variant="single-product-option">
+
+    {{!-- Review success/error messages --}}
+    {{#each product.reviews.messages}}
+        {{#if error}}
+            <div class="tpu-pdp-alert tpu-pdp-alert--error" role="alert">
+                {{error}}
+            </div>
+        {{/if}}
+        {{#if success}}
+            <div class="tpu-pdp-alert tpu-pdp-alert--success" role="alert">
+                {{success}}
+            </div>
+        {{/if}}
+    {{/each}}
+
+    {{!-- React mount point for new PDP --}}
+    <div id="pdp-react-root" 
+         class="tpu-pdp-react-container"
+         aria-busy="true"
+         aria-label="Product details loading">
+        {{!-- 
+            Fallback content shown while React loads
+            This prevents CLS and provides basic SEO content
+        --}}
+        <noscript>
+            <div class="tpu-pdp-noscript">
+                <h1>{{product.title}}</h1>
+                {{#if product.brand}}
+                    <p><a href="{{product.brand.url}}">{{product.brand.name}}</a></p>
+                {{/if}}
+                <div class="tpu-pdp-noscript__price">
+                    {{#or customer (unless settings.hide_price_from_guests)}}
+                        {{#if product.price.without_tax}}
+                            <span>{{product.price.without_tax.formatted}}</span>
+                        {{/if}}
+                    {{/or}}
+                </div>
+                {{#if product.main_image}}
+                    <img src="{{getImage product.main_image 'product_size'}}" alt="{{product.title}}" />
+                {{/if}}
+                <div class="tpu-pdp-noscript__description">
+                    {{{product.description}}}
+                </div>
+            </div>
+        </noscript>
+
+        {{!-- Loading skeleton (shown while React hydrates) --}}
+        <div class="tpu-pdp-skeleton" aria-hidden="true">
+            <div class="tpu-pdp-skeleton__layout">
+                <div class="tpu-pdp-skeleton__gallery">
+                    <div class="tpu-pdp-skeleton__image"></div>
+                    <div class="tpu-pdp-skeleton__thumbs">
+                        <div class="tpu-pdp-skeleton__thumb"></div>
+                        <div class="tpu-pdp-skeleton__thumb"></div>
+                        <div class="tpu-pdp-skeleton__thumb"></div>
+                    </div>
+                </div>
+                <div class="tpu-pdp-skeleton__buybox">
+                    <div class="tpu-pdp-skeleton__title"></div>
+                    <div class="tpu-pdp-skeleton__price"></div>
+                    <div class="tpu-pdp-skeleton__options">
+                        <div class="tpu-pdp-skeleton__option"></div>
+                        <div class="tpu-pdp-skeleton__option"></div>
+                    </div>
+                    <div class="tpu-pdp-skeleton__button"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{!-- Schema.org structured data --}}
+    {{> components/products/schema}}
+
+    {{!-- Hidden container for existing review modal (used by React) --}}
+    {{#if settings.show_product_reviews}}
+        <div id="pdp-review-modal-container" style="display: none;">
+            {{> components/products/modals/writeReview}}
+        </div>
+    {{/if}}
+
+    {{!-- BigCommerce regions for third-party apps --}}
+    {{{region name="product_below_content"}}}
+</div>
+
+{{!-- Preview modal for quick view (existing functionality) --}}
+<div id="previewModal" class="modal modal--large" data-reveal>
+    {{> components/common/modal/modal-close-btn }}
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-header-title"></div>
+    <div class="loadingOverlay"></div>
+</div>
+

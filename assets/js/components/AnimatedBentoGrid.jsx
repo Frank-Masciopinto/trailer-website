@@ -11,7 +11,7 @@ const categories = [
     id: 'axles',
     title: 'Axles & Hubs',
     description: 'Complete axle assemblies, hub kits, and bearings for all trailer types.',
-    href: '/axles-hubs',
+    href: '/categories/all-products/axles.html',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <circle cx="12" cy="12" r="10" />
@@ -26,7 +26,7 @@ const categories = [
     id: 'lights',
     title: 'Trailer Lights',
     description: 'LED and incandescent lighting solutions.',
-    href: '/trailer-lights',
+    href: '/categories/trailer-lights.html',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M9 18h6M10 22h4M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
@@ -38,7 +38,7 @@ const categories = [
     id: 'brakes',
     title: 'Brakes',
     description: 'Electric and hydraulic brake systems.',
-    href: '/brakes',
+    href: '/categories/trailer-axle-parts/trailer-brakes.html',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <circle cx="12" cy="12" r="10" />
@@ -50,7 +50,7 @@ const categories = [
     id: 'couplers',
     title: 'Couplers & Hitches',
     description: 'Ball couplers, pintle hooks, and more.',
-    href: '/couplers',
+    href: '/categories/trailer-coupler.html',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8zM6 1v4M10 1v4M14 1v4" />
@@ -61,7 +61,7 @@ const categories = [
     id: 'dexter',
     title: 'Dexter Axle',
     description: "America's leading trailer axle manufacturer. Quality you can trust.",
-    href: '/brands/dexter',
+    href: '/brands/Dexter-Axle.html',
     size: 'tall',
     badge: 'Featured Brand',
     gradient: 'linear-gradient(180deg, #ff6b35 0%, #1a1a1a 100%)',
@@ -71,7 +71,7 @@ const categories = [
     id: 'wiring',
     title: 'Wiring & Electrical',
     description: 'Connectors, wiring harnesses, and electrical components for reliable trailer connections.',
-    href: '/wiring',
+    href: '/trailer-wiring-and-mounting/',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />

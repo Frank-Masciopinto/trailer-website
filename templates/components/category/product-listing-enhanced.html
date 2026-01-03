@@ -1,0 +1,97 @@
+{{!--
+    Enhanced Product Listing - Wraps existing listing with fitment-first layout
+    Includes sidebar filters and product grid with injected help cards
+--}}
+
+{{inject 'noCompareMessage' (lang 'compare.no_compare')}}
+
+<div class="tpu-product-listing">
+    {{!-- Filters & Products Layout --}}
+    <div class="tpu-product-listing__layout">
+        {{!-- Sidebar Filters --}}
+        {{#if category.faceted_search_enabled}}
+            <aside class="tpu-product-listing__sidebar" id="faceted-search-container">
+                {{> components/category/sidebar}}
+            </aside>
+        {{else if category.subcategories}}
+            <aside class="tpu-product-listing__sidebar" id="faceted-search-container">
+                {{> components/category/sidebar}}
+            </aside>
+        {{else if theme_settings.shop_by_price_visibility}}
+            <aside class="tpu-product-listing__sidebar" id="faceted-search-container">
+                {{> components/category/sidebar}}
+            </aside>
+        {{/if}}
+
+        {{!-- Main Product Area --}}
+        <main class="tpu-product-listing__main" id="product-listing-container">
+            {{#if category.products}}
+                {{!-- Sort & Filter Bar --}}
+                <div class="tpu-product-listing__toolbar">
+                    {{> components/products/filter sort=pagination.category.sort}}
+                    
+                    {{!-- Active Filters Summary (mobile) --}}
+                    <div class="tpu-product-listing__active-filters" id="active-filters-summary"></div>
+                </div>
+
+                {{!-- Product Grid --}}
+                <div 
+                    class="tpu-product-listing__grid"
+                    data-list-name="Category: {{category.name}}" 
+                    role="region" 
+                    aria-label="{{lang 'category.product_label'}}"
+                >
+                    {{#if theme_settings.product_list_display_mode '===' 'grid'}}
+                        {{> components/products/grid products=category.products show_compare=category.show_compare theme_settings=theme_settings event="list" }}
+                    {{else}}
+                        {{> components/products/list products=category.products show_compare=category.show_compare theme_settings=theme_settings event="list" }}
+                    {{/if}}
+                </div>
+
+                {{!-- Pagination --}}
+                <div class="tpu-product-listing__pagination">
+                    {{> components/common/paginator pagination.category}}
+                </div>
+            {{else}}
+                {{!-- Empty State --}}
+                <div class="tpu-product-listing__empty" id="empty-state-container">
+                    {{#if category.search_error}}
+                        <p>{{lang 'search.errorMessage'}}</p>
+                    {{else}}
+                        <div class="tpu-empty-state">
+                            <svg class="tpu-empty-state__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                                <circle cx="11" cy="11" r="8" />
+                                <path d="m21 21-4.35-4.35" />
+                                <path d="M8 11h6" />
+                            </svg>
+                            <h3 class="tpu-empty-state__title">No products found</h3>
+                            <p 
+                                class="tpu-empty-state__message"
+                                data-no-products-notification
+                                role="alert"
+                                aria-live="assertive"
+                                tabindex="-1"
+                            >
+                                {{lang 'categories.no_products'}}
+                            </p>
+                            <div class="tpu-empty-state__actions">
+                                <a href="{{category.url}}" class="button button--primary">
+                                    Clear All Filters
+                                </a>
+                                <a href="/contact-us" class="button button--secondary">
+                                    Get Help
+                                </a>
+                            </div>
+                        </div>
+                    {{/if}}
+                </div>
+            {{/if}}
+        </main>
+    </div>
+
+    {{!-- Below Content Region --}}
+    <div class="tpu-product-listing__region">
+        {{{region name="category_below_content"}}}
+    </div>
+</div>
+

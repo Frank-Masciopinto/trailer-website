@@ -1,0 +1,59 @@
+{{!--
+    Footer Bottom Bar
+    Payment icons, shipping badge, social links, legal, and category-aware compliance
+--}}
+
+<section class="tpu-footer-bottom tpu-footer-bottom--noscript">
+    <div class="tpu-footer-bottom__separator" role="separator" aria-hidden="true"></div>
+    
+    <div class="container">
+        <div class="tpu-footer-bottom__inner">
+            {{!-- Left: Payment & Shipping --}}
+            <div class="tpu-footer-bottom__payments">
+                {{> components/common/payment-icons}}
+                <span class="tpu-footer-bottom__shipping-badge">
+                    <svg class="tpu-footer-bottom__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <rect x="1" y="3" width="15" height="13" rx="2"></rect>
+                        <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                        <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                        <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                    </svg>
+                    {{lang 'footer.ships_to'}}
+                </span>
+            </div>
+
+            {{!-- Center: Social Icons --}}
+            {{#if theme_settings.social_icon_placement_bottom '!==' 'bottom_none'}}
+            <div class="tpu-footer-bottom__social">
+                {{> components/common/social-links}}
+            </div>
+            {{/if}}
+
+            {{!-- Right: Legal Links --}}
+            <div class="tpu-footer-bottom__legal">
+                <nav aria-label="{{lang 'footer.legal_nav_label'}}">
+                    <ul class="tpu-footer-bottom__legal-list">
+                        <li><a href="/pages/privacy-policy.html">{{lang 'footer.legal.privacy'}}</a></li>
+                        <li><a href="/pages/terms-and-conditions.html">{{lang 'footer.legal.terms'}}</a></li>
+                        <li><a href="/contact-us/">{{lang 'footer.legal.contact'}}</a></li>
+                    </ul>
+                </nav>
+                <p class="tpu-footer-bottom__copyright">
+                    &copy; {{moment format="YYYY"}} {{settings.store_name}}. {{lang 'footer.all_rights'}}
+                </p>
+            </div>
+        </div>
+
+        {{!-- Compliance Microcopy - shown on lighting category pages --}}
+        {{!-- This will be dynamically shown by JavaScript based on category context --}}
+        <div id="tpu-footer-compliance" class="tpu-footer-bottom__compliance" style="display: none;">
+            <p>
+                <svg class="tpu-footer-bottom__compliance-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    <polyline points="9 12 11 14 15 10"></polyline>
+                </svg>
+                {{lang 'footer.compliance.lighting'}}
+            </p>
+        </div>
+    </div>
+</section>

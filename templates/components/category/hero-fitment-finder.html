@@ -1,0 +1,29 @@
+{{!--
+    Hero Fitment Finder - Category page hero with guided fitment selection
+    React component mounted to #fitment-finder-root
+--}}
+
+<section class="tpu-category-hero">
+    <div class="tpu-category-hero__content">
+        {{!-- Category Title --}}
+        <div class="tpu-category-hero__header">
+            <h1 class="tpu-category-hero__title">{{category.name}}</h1>
+            <p class="tpu-category-hero__promise">
+                Find the right kit by capacity, axle count, bolt pattern & brake type.
+            </p>
+        </div>
+
+        {{!-- Fitment Finder React Mount Point --}}
+        <div 
+            id="fitment-finder-root"
+            class="tpu-category-hero__finder"
+            data-category-name="{{category.name}}"
+            data-category-id="{{category.id}}"
+        ></div>
+    </div>
+
+    {{!-- Inject category name for JavaScript --}}
+    {{inject "categoryName" category.name}}
+    {{inject "categoryId" category.id}}
+</section>
+

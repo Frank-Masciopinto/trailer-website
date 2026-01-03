@@ -29,6 +29,7 @@
     padding: 0 $tpu-space-4;
     max-width: 1440px;
     margin: 0 auto;
+    position: relative; // For absolute centering of logo on mobile
     
     @media (min-width: $tpu-screen-md) {
         height: 80px;
@@ -40,7 +41,18 @@
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    
+    // Center logo horizontally on mobile
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    @media (min-width: $tpu-screen-lg) {
+        position: static;
+        transform: none;
+        align-items: flex-start;
+    }
 }
 
 .tpu-magic-header__phone {
@@ -86,6 +98,15 @@
     display: flex;
     align-items: center;
     gap: $tpu-space-2;
+    
+    // Hide desktop actions on mobile - shown in bottom dock instead
+    &--desktop {
+        display: none;
+        
+        @media (min-width: $tpu-screen-lg) {
+            display: flex;
+        }
+    }
 }
 
 // =============================================================================
@@ -1059,6 +1080,142 @@
 // Hide regular header when Magic Header is rendered
 #magic-header-root:not(:empty) ~ .header,
 #magic-header-root:not(:empty) ~ .tpu-header {
+    display: none !important;
+}
+
+// =============================================================================
+// MOBILE BOTTOM DOCK (MagicUI)
+// =============================================================================
+// Apple-style bottom navigation for mobile devices
+// =============================================================================
+
+.tpu-bottom-dock {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: $tpu-z-header;
+    display: flex;
+    justify-content: center;
+    padding: $tpu-space-2;
+    padding-bottom: calc($tpu-space-2 + env(safe-area-inset-bottom, 0px));
+    
+    // Hide on desktop
+    @media (min-width: $tpu-screen-lg) {
+        display: none;
+    }
+}
+
+.tpu-dock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $tpu-space-2;
+    height: 58px;
+    padding: $tpu-space-2 $tpu-space-4;
+    background: rgba(26, 26, 26, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid $tpu-border-primary;
+    border-radius: $tpu-radius-2xl;
+    box-shadow: $tpu-shadow-xl;
+}
+
+.tpu-dock-icon {
+    display: flex;
+    aspect-ratio: 1;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: $tpu-radius-full;
+    transition: background $tpu-transition-fast;
+    
+    &:hover {
+        background: rgba(255, 107, 53, 0.15);
+    }
+}
+
+.tpu-bottom-dock__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    width: 100%;
+    height: 100%;
+    background: none;
+    border: none;
+    color: $tpu-text-secondary;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+    transition: color $tpu-transition-fast;
+    
+    &:hover,
+    &:focus {
+        color: $tpu-accent-primary;
+    }
+}
+
+.tpu-bottom-dock__icon {
+    width: 22px;
+    height: 22px;
+    
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.tpu-bottom-dock__label {
+    font-family: $tpu-font-body;
+    font-size: 9px;
+    font-weight: $tpu-font-medium;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.tpu-bottom-dock__badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    font-size: 10px;
+    font-weight: $tpu-font-bold;
+    color: $tpu-text-primary;
+    background: $tpu-accent-primary;
+    border-radius: $tpu-radius-full;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// Add padding to body for mobile bottom nav
+@media (max-width: #{$tpu-screen-lg - 1px}) {
+    body {
+        padding-bottom: calc(70px + env(safe-area-inset-bottom, 0px));
+    }
+}
+
+// =============================================================================
+// HIDE OLD HEADER WHEN MAGIC HEADER IS ACTIVE
+// =============================================================================
+// When Magic Header React component is rendered in #magic-header-root,
+// hide the old Handlebars-based header to prevent duplicate headers
+// =============================================================================
+
+// Hide old header elements when magic header root has content
+#magic-header-root:not(:empty) ~ header.header.tpu-header,
+#magic-header-root:not(:empty) ~ .tpu-scroll-progress,
+#magic-header-root:not(:empty) ~ .skip-to-main-link {
+    display: none !important;
+}
+
+// Also hide the old top banner if magic header has its own
+#magic-header-root:not(:empty) ~ .tpu-top-banner,
+#magic-header-root:not(:empty) ~ .banners.tpu-top-banner {
     display: none !important;
 }
 

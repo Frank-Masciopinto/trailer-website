@@ -1,0 +1,60 @@
+{{!--
+    Footer Newsletter Capture
+    Email capture with segment selection for targeted content
+--}}
+
+<section class="tpu-footer-newsletter tpu-footer-newsletter--noscript" aria-labelledby="newsletter-heading-noscript">
+    <div class="tpu-footer-newsletter__inner">
+        <h3 id="newsletter-heading-noscript" class="tpu-footer-newsletter__title">
+            {{lang 'footer.newsletter.title'}}
+        </h3>
+        <p class="tpu-footer-newsletter__helper">
+            {{lang 'footer.newsletter.helper'}}
+        </p>
+        
+        <form class="tpu-footer-newsletter__form" action="{{urls.subscribe.action}}" method="post">
+            <input type="hidden" name="action" value="subscribe">
+            <input type="hidden" name="nl_first_name" value="bc">
+            <input type="hidden" name="check" value="1">
+            
+            <div class="tpu-footer-newsletter__fields">
+                <div class="tpu-footer-newsletter__field">
+                    <label for="footer-nl-email" class="sr-only">{{lang 'common.email_address'}}</label>
+                    <input 
+                        type="email" 
+                        id="footer-nl-email" 
+                        name="nl_email" 
+                        class="tpu-footer-newsletter__input"
+                        placeholder="{{lang 'newsletter.email_placeholder'}}"
+                        value="{{customer.email}}"
+                        required
+                        autocomplete="email"
+                        aria-required="true"
+                    >
+                </div>
+                
+                <div class="tpu-footer-newsletter__field">
+                    <label for="footer-nl-segment" class="sr-only">{{lang 'footer.newsletter.segment_label'}}</label>
+                    <select 
+                        id="footer-nl-segment" 
+                        name="nl_segment" 
+                        class="tpu-footer-newsletter__select"
+                        required
+                        aria-required="true"
+                    >
+                        <option value="" disabled selected>{{lang 'footer.newsletter.segment_placeholder'}}</option>
+                        <option value="boat">{{lang 'footer.newsletter.segment_boat'}}</option>
+                        <option value="rv">{{lang 'footer.newsletter.segment_rv'}}</option>
+                        <option value="utility">{{lang 'footer.newsletter.segment_utility'}}</option>
+                        <option value="fleet">{{lang 'footer.newsletter.segment_fleet'}}</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="tpu-footer-newsletter__btn">
+                    {{lang 'footer.newsletter.submit'}}
+                </button>
+            </div>
+        </form>
+    </div>
+</section>
+

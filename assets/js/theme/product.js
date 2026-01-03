@@ -31,8 +31,15 @@ export default class Product extends PageManager {
         // Init collapsible
         collapsibleFactory();
 
-        this.productDetails = new ProductDetails($('.productView'), this.context, window.BCData.product_attributes);
-        this.productDetails.setProductVariant();
+        // Check if we're using the new React PDP or the legacy productView
+        // Only initialize ProductDetails for legacy PDP (not for .productView inside modals/preview)
+        const $productView = $('.productView').not('.previewCart .productView, .modal .productView, .quickView .productView');
+        if ($productView.length && window.BCData?.product_attributes) {
+            // Legacy PDP - initialize ProductDetails
+            this.productDetails = new ProductDetails($productView, this.context, window.BCData.product_attributes);
+            this.productDetails.setProductVariant();
+        }
+        // Note: If using React PDP (no main .productView), skip ProductDetails initialization
 
         videoGallery();
 

@@ -9,7 +9,36 @@ product:
     similar_by_views:
         limit: {{theme_settings.productpage_similar_by_views_count}}
 ---
+
+{{!-- Inject all product data for React PDP components --}}
+{{inject 'product' product}}
 {{inject 'productId' product.id}}
+{{inject 'productTitle' product.title}}
+{{inject 'productSku' product.sku}}
+{{inject 'productBrand' product.brand}}
+{{inject 'productPrice' product.price}}
+{{inject 'productImages' product.images}}
+{{inject 'productMainImage' product.main_image}}
+{{inject 'productOptions' product.options}}
+{{inject 'productCustomFields' product.custom_fields}}
+{{inject 'productCategory' product.category}}
+{{inject 'productRating' product.rating}}
+{{inject 'productNumReviews' product.num_reviews}}
+{{inject 'productReviews' product.reviews}}
+{{inject 'productAvailability' product.availability}}
+{{inject 'productStockLevel' product.stock_level}}
+{{inject 'productOutOfStock' product.out_of_stock}}
+{{inject 'productShipping' product.shipping}}
+{{inject 'productCartUrl' product.cart_url}}
+{{inject 'productUrl' product.url}}
+{{inject 'productMinPurchaseQuantity' product.min_purchase_quantity}}
+{{inject 'productMaxPurchaseQuantity' product.max_purchase_quantity}}
+{{inject 'productPreOrder' product.pre_order}}
+{{inject 'productRelatedProducts' product.related_products}}
+{{inject 'productDescription' product.description}}
+{{inject 'productWarranty' product.warranty}}
+{{inject 'showProductReviews' settings.show_product_reviews}}
+{{inject 'showProductRating' settings.show_product_rating}}
 
 {{#partial "page"}}
 
@@ -19,22 +48,22 @@ product:
         {{> components/common/alert/alert-info message}}
     {{/each}}
 
-    <div>
-        {{> components/products/product-view}}
+    {{!-- New MCP-based PDP Layout --}}
+    {{> components/pdp/pdp-layout}}
 
-        {{{region name="product_below_content"}}}
-
-        {{#if product.videos.list.length}}
+    {{!-- Product Videos (if any) --}}
+    {{#if product.videos.list.length}}
+        <div class="tpu-pdp-videos">
             {{> components/products/videos product.videos}}
-        {{/if}}
+        </div>
+    {{/if}}
 
-        {{#all settings.show_product_reviews theme_settings.show_product_reviews (if theme_settings.show_product_details_tabs '!==' true)}}
-            {{> components/products/reviews reviews=product.reviews product=product urls=urls}}
-        {{/all}}
+    {{!-- Related Products --}}
+    {{#if product.related_products}}
+        <div class="tpu-pdp-related">
+            {{> components/products/related}}
+        </div>
+    {{/if}}
 
-        {{> components/products/tabs}}
-    </div>
-
-    {{> components/products/schema}}
 {{/partial}}
 {{> layout/base}}

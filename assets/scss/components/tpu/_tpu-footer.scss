@@ -1,0 +1,715 @@
+// =============================================================================
+// TPU FOOTER - Conversion Optimized Footer Styles (Dark Mode)
+// =============================================================================
+//
+// 1. Fitment Help Band - Pre-footer CTA section
+// 2. Footer Columns - 4-column link structure
+// 3. Footer Newsletter - Email capture with segment
+// 4. Footer Bottom Bar - Payments, shipping, legal, compliance
+// 5. Accordion - Mobile navigation
+// 6. Separator - Visual divider
+//
+// =============================================================================
+
+// Dark Mode Variables
+// -----------------------------------------------------------------------------
+$tpu-footer-bg-primary: #0d0d14;
+$tpu-footer-bg-secondary: #12121a;
+$tpu-footer-bg-elevated: #1a1a24;
+$tpu-footer-text-primary: #ffffff;
+$tpu-footer-text-secondary: rgba(255, 255, 255, 0.7);
+$tpu-footer-text-muted: rgba(255, 255, 255, 0.5);
+$tpu-footer-border-color: rgba(255, 255, 255, 0.1);
+$tpu-footer-accent: #ff6b35; // TPU Orange
+$tpu-footer-accent-hover: #ff8555;
+$tpu-footer-accent-glow: rgba(255, 107, 53, 0.3);
+
+// =============================================================================
+// 1. FITMENT HELP BAND
+// =============================================================================
+
+.tpu-footer-fitment {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #1a1a2e 100%);
+    padding: spacing("double") 0;
+    position: relative;
+    overflow: hidden;
+
+    // Subtle grid pattern overlay
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: 
+            linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        background-size: 50px 50px;
+        pointer-events: none;
+    }
+}
+
+.tpu-footer-fitment__inner {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.tpu-footer-fitment__heading {
+    font-family: "Oswald", sans-serif;
+    font-size: remCalc(28);
+    font-weight: 600;
+    color: $tpu-footer-text-primary;
+    margin: 0 0 spacing("half") 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+
+    @include breakpoint("medium") {
+        font-size: remCalc(36);
+    }
+}
+
+.tpu-footer-fitment__subtext {
+    color: $tpu-footer-text-secondary;
+    font-size: fontSize("base");
+    margin: 0 0 spacing("single") 0;
+
+    @include breakpoint("medium") {
+        font-size: fontSize("larger");
+        margin-bottom: spacing("double");
+    }
+}
+
+.tpu-footer-fitment__ctas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: spacing("single");
+
+    @include breakpoint("medium") {
+        flex-direction: row;
+        justify-content: center;
+        gap: spacing("single") + spacing("half");
+    }
+}
+
+.tpu-footer-fitment__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: spacing("half");
+    min-width: 200px;
+    justify-content: center;
+}
+
+.tpu-footer-fitment__link {
+    display: inline-flex;
+    align-items: center;
+    gap: spacing("quarter");
+    color: $tpu-footer-text-primary;
+    text-decoration: none;
+    font-weight: 500;
+    padding: spacing("half") spacing("single");
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    background: rgba(255, 255, 255, 0.05);
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.5);
+        transform: translateY(-2px);
+    }
+}
+
+.tpu-footer-fitment__icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+// =============================================================================
+// 2. FOOTER COLUMNS
+// =============================================================================
+
+.tpu-footer-columns {
+    padding: spacing("double") 0;
+}
+
+.tpu-footer-columns__desktop {
+    display: none;
+
+    @include breakpoint("medium") {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: spacing("double");
+    }
+}
+
+.tpu-footer-columns__mobile {
+    display: block;
+
+    @include breakpoint("medium") {
+        display: none;
+    }
+}
+
+.tpu-footer-columns__col {
+    margin-bottom: spacing("single");
+
+    @include breakpoint("medium") {
+        margin-bottom: 0;
+    }
+}
+
+.tpu-footer-columns__title {
+    font-family: "Oswald", sans-serif;
+    font-size: fontSize("base");
+    font-weight: 600;
+    color: $tpu-footer-text-primary;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 spacing("single") 0;
+    padding-bottom: spacing("half");
+    border-bottom: 2px solid $tpu-footer-accent;
+    display: inline-block;
+}
+
+.tpu-footer-columns__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+        margin-bottom: spacing("half");
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.tpu-footer-columns__link {
+    color: $tpu-footer-text-secondary;
+    text-decoration: none;
+    font-size: fontSize("smaller");
+    transition: color 0.2s ease, padding-left 0.2s ease;
+    display: inline-block;
+
+    &:hover {
+        color: $tpu-footer-accent;
+        padding-left: 4px;
+    }
+}
+
+// =============================================================================
+// 3. FOOTER NEWSLETTER
+// =============================================================================
+
+.tpu-footer-newsletter {
+    background: $tpu-footer-bg-elevated;
+    border: 1px solid $tpu-footer-border-color;
+    border-radius: 12px;
+    padding: spacing("double");
+    margin-top: spacing("double");
+
+    @include breakpoint("medium") {
+        margin-top: 0;
+        padding: spacing("double") + spacing("half");
+    }
+}
+
+.tpu-footer-newsletter__inner {
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+
+    @include breakpoint("medium") {
+        text-align: left;
+        margin: 0;
+        max-width: none;
+    }
+}
+
+.tpu-footer-newsletter__title {
+    font-family: "Oswald", sans-serif;
+    font-size: fontSize("larger");
+    font-weight: 600;
+    color: $tpu-footer-text-primary;
+    margin: 0 0 spacing("quarter") 0;
+}
+
+.tpu-footer-newsletter__helper {
+    color: $tpu-footer-text-muted;
+    font-size: fontSize("smaller");
+    margin: 0 0 spacing("single") 0;
+}
+
+.tpu-footer-newsletter__form {
+    width: 100%;
+}
+
+.tpu-footer-newsletter__fields {
+    display: flex;
+    flex-direction: column;
+    gap: spacing("half");
+
+    @include breakpoint("medium") {
+        flex-direction: row;
+        align-items: stretch;
+    }
+}
+
+.tpu-footer-newsletter__field {
+    flex: 1;
+}
+
+.tpu-footer-newsletter__input,
+.tpu-footer-newsletter__select {
+    width: 100%;
+    padding: spacing("half") spacing("single");
+    border: 1px solid $tpu-footer-border-color;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.3);
+    color: $tpu-footer-text-primary;
+    font-size: fontSize("base");
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &::placeholder {
+        color: $tpu-footer-text-muted;
+    }
+
+    &:focus {
+        outline: none;
+        border-color: $tpu-footer-accent;
+        box-shadow: 0 0 0 3px $tpu-footer-accent-glow;
+    }
+}
+
+.tpu-footer-newsletter__select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 36px;
+    cursor: pointer;
+
+    option {
+        background: $tpu-footer-bg-primary;
+        color: $tpu-footer-text-primary;
+    }
+}
+
+.tpu-footer-newsletter__btn {
+    background: $tpu-footer-accent;
+    color: $tpu-footer-text-primary;
+    border: none;
+    border-radius: 6px;
+    padding: spacing("half") spacing("single") + spacing("half");
+    font-size: fontSize("base");
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    white-space: nowrap;
+
+    &:hover:not(:disabled) {
+        background: $tpu-footer-accent-hover;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px $tpu-footer-accent-glow;
+    }
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+}
+
+.tpu-footer-newsletter__message {
+    margin-top: spacing("half");
+    font-size: fontSize("smaller");
+    padding: spacing("half");
+    border-radius: 4px;
+
+    &--success {
+        background: rgba(46, 204, 113, 0.2);
+        color: #2ecc71;
+    }
+
+    &--error {
+        background: rgba(231, 76, 60, 0.2);
+        color: #e74c3c;
+    }
+}
+
+// =============================================================================
+// 4. FOOTER BOTTOM BAR
+// =============================================================================
+
+.tpu-footer-bottom {
+    padding: spacing("single") 0 spacing("single") + spacing("half");
+    margin-top: spacing("single");
+}
+
+.tpu-footer-bottom__separator {
+    height: 1px;
+    background: $tpu-footer-border-color;
+    margin-bottom: spacing("single");
+}
+
+.tpu-footer-bottom__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: spacing("single");
+    text-align: center;
+    padding: 0 spacing("single");
+
+    @include breakpoint("medium") {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        text-align: left;
+        padding: 0;
+    }
+}
+
+.tpu-footer-bottom__payments {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: spacing("half");
+
+    @include breakpoint("medium") {
+        align-items: flex-start;
+    }
+
+    .footer-payment-icons {
+        margin-top: 0;
+        justify-content: center;
+
+        @include breakpoint("medium") {
+            justify-content: flex-start;
+        }
+
+        svg {
+            fill: $tpu-footer-text-secondary;
+        }
+    }
+}
+
+.tpu-footer-bottom__shipping-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: spacing("quarter");
+    background: rgba(46, 204, 113, 0.15);
+    color: #2ecc71;
+    padding: spacing("quarter") spacing("half");
+    border-radius: 4px;
+    font-size: fontSize("smaller");
+    font-weight: 500;
+}
+
+.tpu-footer-bottom__icon {
+    width: 16px;
+    height: 16px;
+}
+
+.tpu-footer-bottom__social {
+    .socialLinks {
+        display: flex;
+        gap: spacing("half");
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .socialLinks-item {
+        margin: 0;
+    }
+
+    .icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        transition: background-color 0.2s ease, transform 0.2s ease;
+
+        &:hover {
+            background: $tpu-footer-accent;
+            transform: translateY(-2px);
+        }
+
+        svg {
+            width: 18px;
+            height: 18px;
+            fill: $tpu-footer-text-primary;
+        }
+    }
+}
+
+.tpu-footer-bottom__legal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: spacing("quarter");
+
+    @include breakpoint("medium") {
+        align-items: flex-end;
+        text-align: right;
+    }
+}
+
+.tpu-footer-bottom__legal-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: spacing("quarter") spacing("single");
+
+    @include breakpoint("medium") {
+        justify-content: flex-end;
+    }
+
+    a {
+        color: $tpu-footer-text-secondary;
+        text-decoration: none;
+        font-size: fontSize("smaller");
+        transition: color 0.2s ease;
+
+        &:hover {
+            color: $tpu-footer-accent;
+        }
+    }
+}
+
+.tpu-footer-bottom__copyright {
+    color: $tpu-footer-text-muted;
+    font-size: fontSize("tiny");
+    margin: 0;
+    line-height: 1.4;
+}
+
+.tpu-footer-bottom__compliance {
+    margin-top: spacing("single");
+    text-align: center;
+
+    p {
+        display: inline-flex;
+        align-items: center;
+        gap: spacing("quarter");
+        background: rgba(52, 152, 219, 0.15);
+        color: #3498db;
+        padding: spacing("half") spacing("single");
+        border-radius: 6px;
+        font-size: fontSize("smaller");
+        margin: 0;
+    }
+}
+
+.tpu-footer-bottom__compliance-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+// =============================================================================
+// 5. ACCORDION COMPONENT
+// =============================================================================
+
+.tpu-accordion__item {
+    border-bottom: 1px solid $tpu-footer-border-color;
+
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+.tpu-accordion__header {
+    margin: 0;
+}
+
+.tpu-accordion__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: spacing("single") 0;
+    background: transparent;
+    border: none;
+    color: $tpu-footer-text-primary;
+    font-family: "Oswald", sans-serif;
+    font-size: fontSize("base");
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: color 0.2s ease;
+
+    &:hover {
+        color: $tpu-footer-accent;
+    }
+
+    &[data-state="open"] {
+        .tpu-accordion__chevron {
+            transform: rotate(180deg);
+        }
+    }
+}
+
+.tpu-accordion__chevron {
+    transition: transform 0.2s ease;
+    color: $tpu-footer-text-secondary;
+}
+
+.tpu-accordion__content {
+    overflow: hidden;
+    
+    &[data-state="open"] {
+        animation: tpu-accordion-slide-down 0.2s ease-out;
+    }
+
+    &[data-state="closed"] {
+        animation: tpu-accordion-slide-up 0.2s ease-out;
+    }
+}
+
+.tpu-accordion__content-inner {
+    padding-bottom: spacing("single");
+}
+
+@keyframes tpu-accordion-slide-down {
+    from {
+        height: 0;
+    }
+    to {
+        height: var(--radix-accordion-content-height);
+    }
+}
+
+@keyframes tpu-accordion-slide-up {
+    from {
+        height: var(--radix-accordion-content-height);
+    }
+    to {
+        height: 0;
+    }
+}
+
+// =============================================================================
+// 6. SEPARATOR COMPONENT
+// =============================================================================
+
+.tpu-separator {
+    background: $tpu-footer-border-color;
+
+    &--horizontal {
+        height: 1px;
+        width: 100%;
+    }
+
+    &--vertical {
+        width: 1px;
+        height: 100%;
+    }
+}
+
+// =============================================================================
+// FOOTER REACT CONTAINER - DARK MODE OVERRIDE
+// =============================================================================
+
+.tpu-footer-react {
+    background: $tpu-footer-bg-primary;
+}
+
+.tpu-footer-main {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: spacing("double");
+    padding: 0 spacing("single");
+
+    @include breakpoint("medium") {
+        padding: 0;
+    }
+
+    @include breakpoint("large") {
+        grid-template-columns: 3fr 1fr;
+        gap: spacing("double") * 2;
+    }
+}
+
+// =============================================================================
+// GLOBAL FOOTER DARK MODE OVERRIDE
+// =============================================================================
+
+.footer.tpu-footer,
+.footer.tpu-footer--js {
+    background: $tpu-footer-bg-primary !important;
+    border-top: 1px solid $tpu-footer-border-color;
+}
+
+// Override fallback footer styles for dark mode
+.tpu-footer-fitment--noscript,
+.tpu-footer-columns--noscript,
+.tpu-footer-newsletter--noscript,
+.tpu-footer-bottom--noscript {
+    // Same dark mode styles apply via parent container
+}
+
+// Payment icons in dark mode
+.tpu-footer-bottom .footer-payment-icons {
+    .footer-payment-icon {
+        svg {
+            fill: $tpu-footer-text-secondary;
+        }
+    }
+}
+
+// =============================================================================
+// POWERED BY SECTION
+// =============================================================================
+
+.tpu-footer .footer-copyright,
+.tpu-footer--js .footer-copyright {
+    background-color: $tpu-footer-bg-primary;
+    
+    .powered-by {
+        color: $tpu-footer-text-muted;
+        
+        a {
+            color: $tpu-footer-text-secondary;
+            
+            &:hover {
+                color: $tpu-footer-accent;
+            }
+        }
+    }
+}
+
+// Ensure container within footer has proper background
+.tpu-footer > .container,
+.tpu-footer--js > .container {
+    background-color: $tpu-footer-bg-primary;
+}
+
+// =============================================================================
+// SCREEN READER UTILITY
+// =============================================================================
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}

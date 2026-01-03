@@ -222,7 +222,7 @@ export function WhyKitsBeatParts() {
         <BlurFade delay={0.35} direction="up" offset={15} blur="6px" duration={0.5}>
           <div className="tpu-kits__cta">
             <ShimmerButton
-              href="/trailer-kits/"
+              href="/trailer-axle-kits-1/"
               shimmerColor="#ffffff"
               background="linear-gradient(135deg, #ff6b35 0%, #ff8f5a 100%)"
               borderRadius="12px"
@@ -256,7 +256,7 @@ export function WhyKitsBeatParts() {
               <p className="tpu-kits__brand-tagline">
                 Engineered for reliability. Built for the long haul.
               </p>
-              <a href="/brands/carter" className="tpu-kits__brand-link">
+              <a href="/brands/Carter.html" className="tpu-kits__brand-link">
                 Explore Carter Products
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />

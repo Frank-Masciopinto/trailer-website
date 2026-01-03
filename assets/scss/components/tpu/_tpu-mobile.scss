@@ -9,11 +9,9 @@
 
 .main-content-wrapper {
     // Remove container restrictions for full-width TPU sections
-    .tpu-dark-theme & {
-        max-width: none;
-        padding: 0;
-        margin: 0;
-    }
+    max-width: none;
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
 // Mobile Header Adjustments
@@ -192,16 +190,68 @@
         grid-row: span 1;
     }
     
+    // Ensure icons are properly sized on mobile
+    .tpu-bento__icon {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+        min-height: 36px;
+        margin-bottom: $tpu-space-2;
+        
+        svg {
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            min-height: 20px;
+        }
+    }
+    
+    .tpu-bento__content {
+        padding: $tpu-space-3;
+    }
+    
     .tpu-bento__title {
         font-size: $tpu-text-lg;
+        word-break: break-word;
+        hyphens: auto;
     }
     
     .tpu-bento__description {
         font-size: $tpu-text-sm;
+        line-height: 1.5;
     }
     
     .tpu-bento-section__title {
         font-size: $tpu-text-2xl;
+    }
+    
+    .tpu-bento-section__subtitle {
+        font-size: $tpu-text-base;
+    }
+}
+
+// Small devices - ensure proper scaling between breakpoints
+@media (min-width: $tpu-screen-sm) and (max-width: #{$tpu-screen-md - 1px}) {
+    .tpu-bento__icon {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        min-height: 40px;
+        
+        svg {
+            width: 22px;
+            height: 22px;
+            min-width: 22px;
+            min-height: 22px;
+        }
+    }
+    
+    .tpu-bento__content {
+        padding: $tpu-space-4;
+    }
+    
+    .tpu-bento__title {
+        font-size: $tpu-text-xl;
     }
 }
 

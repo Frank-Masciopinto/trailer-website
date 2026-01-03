@@ -18,6 +18,7 @@ import {
     SheetFooter,
     SheetTrigger,
 } from './ui/Sheet';
+import MobileBottomNav from './MobileBottomNav';
 
 /**
  * MagicHeader - Enhanced header with Magic UI effects
@@ -117,17 +118,22 @@ export function MagicHeader({ initialCartQuantity = 0 }) {
 
                     {/* Logo placeholder - will be replaced by actual logo */}
                     <div className="tpu-magic-header__logo">
-                        <span style={{ 
-                            fontFamily: 'Oswald, sans-serif', 
-                            fontSize: '1.25rem', 
-                            fontWeight: 700,
-                            color: '#f5f5f5',
-                            textTransform: 'uppercase',
-                            letterSpacing: '0.05em',
-                            whiteSpace: 'nowrap'
-                        }}>
+                        <a 
+                            href="/"
+                            style={{ 
+                                fontFamily: 'Oswald, sans-serif', 
+                                fontSize: '1.25rem', 
+                                fontWeight: 700,
+                                color: '#f5f5f5',
+                                textTransform: 'uppercase',
+                                letterSpacing: '0.05em',
+                                whiteSpace: 'nowrap',
+                                textDecoration: 'none',
+                                transition: 'opacity 0.2s ease'
+                            }}
+                        >
                             Trailer Parts Unlimited
-                        </span>
+                        </a>
                         <a 
                             href="tel:844-898-8687" 
                             className="tpu-magic-header__phone"
@@ -164,8 +170,8 @@ export function MagicHeader({ initialCartQuantity = 0 }) {
                     {/* Desktop Navigation with Dock Effect */}
                     <DockNav />
 
-                    {/* Action Buttons */}
-                    <div className="tpu-magic-header__actions">
+                    {/* Action Buttons - Hidden on mobile, visible on desktop */}
+                    <div className="tpu-magic-header__actions tpu-magic-header__actions--desktop">
                         <ActionButton 
                             icon="phone" 
                             label="Call Us: 844-898-8687"
@@ -181,6 +187,12 @@ export function MagicHeader({ initialCartQuantity = 0 }) {
                     </div>
                 </div>
             </motion.header>
+            
+            {/* Mobile Bottom Navigation - MagicUI Dock */}
+            <MobileBottomNav 
+                cartQuantity={cartQuantity}
+                onSearchClick={() => setIsSearchOpen(true)}
+            />
 
             {/* Search Overlay */}
             <AnimatePresence>
@@ -213,53 +225,64 @@ function DockNav() {
     const navItems = [
         { 
             label: 'Axles', 
-            href: '/axles/',
+            href: '/categories/all-products/axles.html',
             children: [
-                { label: 'Trailer Axles', href: '/axles/trailer-axles/', description: 'Complete axle assemblies for trailers' },
-                { label: 'Axle Kits', href: '/axles/axle-kits/', description: 'DIY axle kit packages' },
-                { label: 'Spindles', href: '/axles/spindles/', description: 'Replacement spindles and parts' },
-                { label: 'Hubs & Drums', href: '/axles/hubs-drums/', description: 'Hub assemblies and brake drums' },
+                { label: '3,500 lbs. Axles', href: '/categories/axles/3-500-lbs-axles.html', description: 'Light-duty trailer axles' },
+                { label: '5,200 lbs. Axles', href: '/categories/axles/5-200-lbs-axles.html', description: 'Medium-duty trailer axles' },
+                { label: '7,000 lbs. Axles', href: '/categories/axles/7-000-lbs-axles.html', description: 'Heavy-duty trailer axles' },
+                { label: '10,000+ lbs. Axles', href: '/categories/axles/10-000-lbs-axles.html', description: 'Extra heavy-duty trailer axles' },
             ]
         },
         { 
-            label: 'Brakes', 
-            href: '/brakes/',
+            label: 'Trailer Axle Kits', 
+            href: '/trailer-axle-kits-1/',
             children: [
-                { label: 'Electric Brakes', href: '/brakes/electric/', description: 'Electric brake assemblies' },
-                { label: 'Hydraulic Brakes', href: '/brakes/hydraulic/', description: 'Disc and drum hydraulic brakes' },
-                { label: 'Brake Parts', href: '/brakes/parts/', description: 'Pads, shoes, and hardware' },
-                { label: 'Brake Controllers', href: '/brakes/controllers/', description: 'In-cab brake controllers' },
+                { label: 'Single Axle Kits', href: '/single-axle-kits/', description: 'Single axle configurations' },
+                { label: 'Tandem Axle Kits', href: '/tandem-axle-kits/', description: 'Tandem axle configurations' },
+                { label: 'Triple Axle Kits', href: '/triple-axle-kits/', description: 'Heavy-duty triple axle setups' },
             ]
         },
         { 
-            label: 'Lights', 
-            href: '/lights/',
+            label: 'Trailer Suspension', 
+            href: '/categories/trailer-suspension.html',
             children: [
-                { label: 'LED Lights', href: '/lights/led/', description: 'Energy-efficient LED solutions' },
-                { label: 'Tail Lights', href: '/lights/tail/', description: 'Stop, turn, and tail lights' },
-                { label: 'Marker Lights', href: '/lights/marker/', description: 'Clearance and side markers' },
-                { label: 'Light Kits', href: '/lights/kits/', description: 'Complete lighting packages' },
+                { label: 'Leaf Springs', href: '/categories/trailer-suspension/leaf-springs.html', description: 'Single and multi-leaf springs' },
+                { label: 'Suspension Kits', href: '/categories/trailer-suspension/suspension-kits.html', description: 'Complete suspension packages' },
+                { label: 'U-Bolts & Kits', href: '/u-bolts-kits/', description: 'U-bolt hardware' },
+                { label: 'Hangers & Equalizers', href: '/categories/hangers-equalizers-hardware.html', description: 'Suspension mounting hardware' },
             ]
         },
         { 
-            label: 'Wiring', 
-            href: '/wiring/',
+            label: 'Tires & Wheels', 
+            href: '/categories/tires-wheels.html',
             children: [
-                { label: 'Connectors', href: '/wiring/connectors/', description: 'Plugs and receptacles' },
-                { label: 'Wire Harnesses', href: '/wiring/harnesses/', description: 'Pre-wired harness kits' },
-                { label: 'Adapters', href: '/wiring/adapters/', description: 'Connector adapters' },
+                { label: 'Tire & Wheel Combos', href: '/categories/tires-wheels/tires-wheels.html', description: 'Pre-mounted tire and wheel sets' },
+                { label: 'Tires Only', href: '/tire-only/', description: 'Trailer tires by size' },
+                { label: 'Wheels Only', href: '/categories/tires-wheels/wheel-only.html', description: 'Steel and aluminum wheels' },
+                { label: 'Spare Tire Carriers', href: '/spare-tire-carriers/', description: 'Spare mount solutions' },
             ]
         },
         { 
-            label: 'Couplers', 
-            href: '/couplers/',
+            label: 'Trailer Axle Parts', 
+            href: '/categories/trailer-axle-parts.html',
             children: [
-                { label: 'Ball Couplers', href: '/couplers/ball/', description: 'Standard ball hitches' },
-                { label: 'Pintle Hooks', href: '/couplers/pintle/', description: 'Heavy-duty pintle hitches' },
-                { label: 'Jacks', href: '/couplers/jacks/', description: 'Tongue and stabilizer jacks' },
+                { label: 'Trailer Brakes', href: '/categories/trailer-axle-parts/trailer-brakes.html', description: 'Electric and hydraulic brakes' },
+                { label: 'Hubs & Drums', href: '/categories/brakes-hubs-drums-parts/hubs-and-drums.html', description: 'Hub assemblies and brake drums' },
+                { label: 'Spindles & Hardware', href: '/categories/brakes-hubs-drums-parts/spindles-hardware.html', description: 'Spindles, nuts and washers' },
+                { label: 'Bearings & Seals', href: '/categories/other-products/bearings-races-seals-kits.html', description: 'Bearings, races, and seal kits' },
             ]
         },
-        { label: 'Brands', href: '/brands/' },
+        { 
+            label: 'Trailer Lights', 
+            href: '/categories/trailer-lights.html',
+            children: [
+                { label: 'Clearance Lights', href: '/clearance-lights/', description: 'Marker and clearance lights' },
+                { label: 'Stop, Turn, Tail Lights', href: '/stop-turn-tail-and-back-up-trailer-lights/', description: 'All-in-one tail lights' },
+                { label: 'Light Kits', href: '/trailer-light-kit/', description: 'Complete lighting packages' },
+                { label: 'Work Light Bars', href: '/work-light-bars/', description: 'LED work lights' },
+            ]
+        },
+        { label: 'Other Products', href: '/other-products/' },
     ];
 
     return (
@@ -418,12 +441,13 @@ function SearchOverlay({ onClose }) {
  */
 function SidebarNav() {
     const menuItems = [
-        { label: 'Axles & Hubs', href: '/axles/', icon: 'wheel' },
-        { label: 'Brakes', href: '/brakes/', icon: 'brake' },
-        { label: 'Trailer Lights', href: '/lights/', icon: 'light' },
-        { label: 'Wiring & Electrical', href: '/wiring/', icon: 'electric' },
-        { label: 'Couplers & Hitches', href: '/couplers/', icon: 'coupler' },
-        { label: 'Brands', href: '/brands/', icon: 'brand' },
+        { label: 'Axles', href: '/categories/all-products/axles.html', icon: 'wheel' },
+        { label: 'Trailer Axle Kits', href: '/trailer-axle-kits-1/', icon: 'wheel' },
+        { label: 'Trailer Suspension', href: '/categories/trailer-suspension.html', icon: 'coupler' },
+        { label: 'Tires & Wheels', href: '/categories/tires-wheels.html', icon: 'electric' },
+        { label: 'Trailer Axle Parts', href: '/categories/trailer-axle-parts.html', icon: 'brake' },
+        { label: 'Trailer Lights', href: '/categories/trailer-lights.html', icon: 'light' },
+        { label: 'Other Products', href: '/other-products/', icon: 'brand' },
     ];
 
     const icons = {

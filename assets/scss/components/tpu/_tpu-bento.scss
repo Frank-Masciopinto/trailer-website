@@ -7,11 +7,15 @@
 .tpu-bento {
     display: grid;
     grid-template-columns: 1fr;
-    gap: $tpu-space-4;
-    padding: $tpu-space-4;
+    gap: $tpu-space-3;
+    padding: $tpu-space-3;
+    width: 100%;
+    box-sizing: border-box;
     
     @media (min-width: $tpu-screen-sm) {
         grid-template-columns: repeat(2, 1fr);
+        gap: $tpu-space-4;
+        padding: $tpu-space-4;
     }
     
     @media (min-width: $tpu-screen-lg) {
@@ -31,6 +35,9 @@
     border-radius: $tpu-radius-xl;
     overflow: hidden;
     transition: all $tpu-transition-normal;
+    min-width: 0; // Prevent flex overflow issues
+    max-width: 100%; // Ensure card doesn't exceed container
+    box-sizing: border-box;
     
     &:hover {
         border-color: $tpu-accent-primary;
@@ -126,13 +133,22 @@
         transparent 100%
     );
     z-index: 1;
+    cursor: pointer;
 }
 
 // Card Content
 .tpu-bento__content {
     position: relative;
     z-index: 2;
-    padding: $tpu-space-4;
+    padding: $tpu-space-3;
+    display: flex;
+    flex-direction: column;
+    min-width: 0; // Prevent flex children from overflowing
+    overflow: hidden; // Clip any overflowing content
+    
+    @media (min-width: $tpu-screen-sm) {
+        padding: $tpu-space-4;
+    }
     
     @media (min-width: $tpu-screen-md) {
         padding: $tpu-space-6;
@@ -144,7 +160,11 @@
         bottom: 0;
         left: 0;
         right: 0;
-        padding: $tpu-space-4;
+        padding: $tpu-space-3;
+        
+        @media (min-width: $tpu-screen-sm) {
+            padding: $tpu-space-4;
+        }
         
         @media (min-width: $tpu-screen-md) {
             padding: $tpu-space-6;
@@ -154,19 +174,42 @@
 
 // Card Icon
 .tpu-bento__icon {
-    width: 40px;
-    height: 40px;
+    // Prevent shrinking in flex containers
+    flex-shrink: 0;
+    
+    // Use clamp for fluid sizing that adapts to screen
+    width: clamp(32px, 8vw, 48px);
+    height: clamp(32px, 8vw, 48px);
+    min-width: 32px; // Absolute minimum
+    min-height: 32px;
+    
     display: flex;
     align-items: center;
     justify-content: center;
     background: rgba(255, 107, 53, 0.2);
     border-radius: $tpu-radius-lg;
-    margin-bottom: $tpu-space-3;
+    margin-bottom: $tpu-space-2;
+    overflow: visible; // Ensure icon is not clipped
     
     svg {
-        width: 24px;
-        height: 24px;
+        // Fluid SVG sizing
+        width: clamp(18px, 5vw, 28px);
+        height: clamp(18px, 5vw, 28px);
+        min-width: 18px; // Absolute minimum
+        min-height: 18px;
+        flex-shrink: 0;
         color: $tpu-accent-primary;
+    }
+    
+    @media (min-width: $tpu-screen-sm) {
+        width: 40px;
+        height: 40px;
+        margin-bottom: $tpu-space-3;
+        
+        svg {
+            width: 22px;
+            height: 22px;
+        }
     }
     
     @media (min-width: $tpu-screen-md) {
@@ -183,19 +226,30 @@
 // Card Title
 .tpu-bento__title {
     font-family: $tpu-font-headline;
-    font-size: $tpu-text-xl;
+    font-size: clamp($tpu-text-base, 4vw, $tpu-text-xl);
     font-weight: $tpu-font-bold;
     color: $tpu-text-primary;
     text-transform: uppercase;
     letter-spacing: $tpu-tracking-wide;
     margin: 0 0 $tpu-space-2;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    
+    @media (min-width: $tpu-screen-sm) {
+        font-size: $tpu-text-lg;
+    }
     
     @media (min-width: $tpu-screen-md) {
         font-size: $tpu-text-2xl;
     }
     
     .tpu-bento__card--lg & {
-        font-size: $tpu-text-2xl;
+        font-size: clamp($tpu-text-lg, 5vw, $tpu-text-2xl);
+        
+        @media (min-width: $tpu-screen-sm) {
+            font-size: $tpu-text-xl;
+        }
         
         @media (min-width: $tpu-screen-md) {
             font-size: $tpu-text-3xl;
@@ -206,10 +260,16 @@
 // Card Description
 .tpu-bento__description {
     font-family: $tpu-font-body;
-    font-size: $tpu-text-sm;
+    font-size: clamp($tpu-text-xs, 3vw, $tpu-text-sm);
     color: $tpu-text-muted;
     line-height: $tpu-leading-relaxed;
     margin: 0;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    
+    @media (min-width: $tpu-screen-sm) {
+        font-size: $tpu-text-sm;
+    }
     
     @media (min-width: $tpu-screen-md) {
         font-size: $tpu-text-base;
@@ -220,18 +280,33 @@
 .tpu-bento__link {
     display: inline-flex;
     align-items: center;
-    gap: $tpu-space-2;
-    margin-top: $tpu-space-3;
-    font-size: $tpu-text-sm;
+    gap: $tpu-space-1;
+    margin-top: $tpu-space-2;
+    font-size: clamp($tpu-text-xs, 3vw, $tpu-text-sm);
     font-weight: $tpu-font-semibold;
     color: $tpu-accent-primary;
     text-decoration: none;
     transition: gap $tpu-transition-fast;
+    flex-shrink: 0;
     
     svg {
-        width: 16px;
-        height: 16px;
+        width: clamp(12px, 3vw, 16px);
+        height: clamp(12px, 3vw, 16px);
+        min-width: 12px;
+        min-height: 12px;
+        flex-shrink: 0;
         transition: transform $tpu-transition-fast;
+    }
+    
+    @media (min-width: $tpu-screen-sm) {
+        gap: $tpu-space-2;
+        margin-top: $tpu-space-3;
+        font-size: $tpu-text-sm;
+        
+        svg {
+            width: 16px;
+            height: 16px;
+        }
     }
     
     &:hover {
@@ -333,8 +408,14 @@
 
 // Featured Product Section
 .tpu-bento-section {
-    padding: $tpu-space-12 0;
+    padding: $tpu-space-8 0;
     background: $tpu-bg-primary;
+    width: 100%;
+    overflow-x: hidden;
+    
+    @media (min-width: $tpu-screen-sm) {
+        padding: $tpu-space-10 0;
+    }
     
     @media (min-width: $tpu-screen-md) {
         padding: $tpu-space-16 0;
@@ -343,13 +424,27 @@
 
 .tpu-bento-section__header {
     text-align: center;
-    margin-bottom: $tpu-space-8;
-    padding: 0 $tpu-space-4;
+    margin-bottom: $tpu-space-4;
+    padding: 0 $tpu-space-3;
+    
+    @media (min-width: $tpu-screen-sm) {
+        margin-bottom: $tpu-space-6;
+        padding: 0 $tpu-space-4;
+    }
+    
+    @media (min-width: $tpu-screen-md) {
+        margin-bottom: $tpu-space-8;
+    }
 }
 
 .tpu-bento-section__title {
-    @include tpu-headline($tpu-text-3xl);
+    @include tpu-headline(clamp($tpu-text-2xl, 6vw, $tpu-text-3xl));
     margin: 0 0 $tpu-space-2;
+    word-break: break-word;
+    
+    @media (min-width: $tpu-screen-sm) {
+        font-size: $tpu-text-3xl;
+    }
     
     @media (min-width: $tpu-screen-md) {
         font-size: $tpu-text-4xl;
@@ -358,9 +453,14 @@
 
 .tpu-bento-section__subtitle {
     font-family: $tpu-font-body;
-    font-size: $tpu-text-lg;
+    font-size: clamp($tpu-text-base, 4vw, $tpu-text-lg);
     color: $tpu-text-muted;
     margin: 0;
+    line-height: $tpu-leading-relaxed;
+    
+    @media (min-width: $tpu-screen-sm) {
+        font-size: $tpu-text-lg;
+    }
 }
 
 // Lens Zoom Effect Container

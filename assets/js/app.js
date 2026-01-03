@@ -12,8 +12,18 @@ import AnimatedBentoGrid from './components/AnimatedBentoGrid';
 import GoogleReviews from './components/GoogleReviews';
 import WhyKitsBeatParts from './components/WhyKitsBeatParts';
 import CapacityGrid from './components/CapacityGrid';
+import Footer from './components/Footer';
 import { initializeLensImagesLazy } from './components/LensInitializer';
 import { initializeLightRaysLazy } from './components/LightRaysInitializer';
+
+// PLP (Category page) components
+import { FitmentFinder } from './components/plp/FitmentFinder';
+import { QuickPathChips } from './components/plp/QuickPathChips';
+import { DecisionSupport } from './components/plp/DecisionSupport';
+import { initializeProductCardBadges, injectHelpCards } from './components/plp';
+
+// PDP (Product page) components
+import { PDPApp } from './components/pdp';
 
 const getAccount = () => import('./theme/account');
 const getLogin = () => import('./theme/auth');
@@ -85,13 +95,29 @@ window.stencilBootstrap = function stencilBootstrap(pageType, contextJSON = null
                     Global.load(context);
                 }
                 
-                // Render Magic UI React header on homepage
+                // Render Magic UI React header on ALL pages
                 const magicHeaderContainer = document.getElementById('magic-header-root');
-                if (magicHeaderContainer && pageType === 'default') {
+                if (magicHeaderContainer) {
                     const root = createRoot(magicHeaderContainer);
                     root.render(React.createElement(MagicHeader, {
                         initialCartQuantity: context.cartQuantity || 0
                     }));
+                    
+                    // Hide the old header when Magic Header is active
+                    const oldHeader = document.querySelector('header.header.tpu-header');
+                    if (oldHeader) {
+                        oldHeader.style.display = 'none';
+                    }
+                    // Also hide any duplicate scroll progress bars
+                    const oldScrollProgress = document.querySelector('.tpu-scroll-progress');
+                    if (oldScrollProgress) {
+                        oldScrollProgress.style.display = 'none';
+                    }
+                    // Hide the old skip link since Magic Header doesn't have one yet
+                    const oldSkipLink = document.querySelector('.skip-to-main-link');
+                    if (oldSkipLink) {
+                        oldSkipLink.style.display = 'none';
+                    }
                 }
                 
                 // LaserFlow background replaced with static image (trailer-horizontal.webp)
@@ -139,6 +165,179 @@ window.stencilBootstrap = function stencilBootstrap(pageType, contextJSON = null
                     setTimeout(() => {
                         initializeLightRaysLazy();
                     }, 200);
+                }
+
+                // =============================================================
+                // CATEGORY PAGE (PLP) - Enhanced Fitment-First Components
+                // =============================================================
+                if (pageType === 'category' || pageType === 'brand' || pageType === 'search') {
+                    // Set category name on window for components to access
+                    if (context.categoryName) {
+                        window.categoryName = context.categoryName;
+                    }
+
+                    // Fitment Finder - Hero section
+                    const fitmentFinderContainer = document.getElementById('fitment-finder-root');
+                    if (fitmentFinderContainer) {
+                        const categoryName = fitmentFinderContainer.dataset.categoryName || '';
+                        const fitmentRoot = createRoot(fitmentFinderContainer);
+                        fitmentRoot.render(React.createElement(FitmentFinder, {
+                            categoryName: categoryName
+                        }));
+                    }
+
+                    // Quick Path Chips - Intent-based shortcuts
+                    const quickChipsContainer = document.getElementById('quick-path-chips-root');
+                    if (quickChipsContainer) {
+                        const categoryName = quickChipsContainer.dataset.categoryName || '';
+                        const chipsRoot = createRoot(quickChipsContainer);
+                        chipsRoot.render(React.createElement(QuickPathChips, {
+                            categoryName: categoryName
+                        }));
+                    }
+
+                    // Decision Support - FAQ accordion below grid
+                    const decisionSupportContainer = document.getElementById('decision-support-root');
+                    if (decisionSupportContainer) {
+                        const supportRoot = createRoot(decisionSupportContainer);
+                        supportRoot.render(React.createElement(DecisionSupport));
+                    }
+
+                    // Initialize Product Card Badges (Fits/Includes/Ships)
+                    // Delay to ensure product cards are rendered
+                    setTimeout(() => {
+                        initializeProductCardBadges();
+                    }, 150);
+
+                    // Inject Help Cards into product grid
+                    // After 8th product, then every 24 products
+                    setTimeout(() => {
+                        injectHelpCards('#product-listing-container');
+                    }, 200);
+
+                    // Re-initialize badges and help cards after AJAX filter/pagination
+                    $(document).on('statechange', () => {
+                        setTimeout(() => {
+                            initializeProductCardBadges();
+                            injectHelpCards('#product-listing-container');
+                        }, 300);
+                    });
+
+                    // Scroll to grid if coming from quick path chip
+                    if (sessionStorage.getItem('tpuScrollToGrid') === 'true') {
+                        sessionStorage.removeItem('tpuScrollToGrid');
+                        const productListing = document.getElementById('product-listing-container');
+                        if (productListing) {
+                            setTimeout(() => {
+                                productListing.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }, 100);
+                        }
+                    }
+                }
+
+                // =============================================================
+                // PRODUCT PAGE (PDP) - MCP-based React PDP
+                // =============================================================
+                if (pageType === 'product') {
+                    const pdpContainer = document.getElementById('pdp-react-root');
+                    if (pdpContainer) {
+                        // Build product object from injected context data
+                        const product = {
+                            id: context.productId,
+                            title: context.productTitle,
+                            sku: context.productSku,
+                            brand: context.productBrand,
+                            price: context.productPrice,
+                            images: context.productImages || [],
+                            main_image: context.productMainImage,
+                            options: context.productOptions || [],
+                            custom_fields: context.productCustomFields || [],
+                            category: context.productCategory || [],
+                            rating: context.productRating,
+                            num_reviews: context.productNumReviews || 0,
+                            reviews: context.productReviews,
+                            availability: context.productAvailability,
+                            stock_level: context.productStockLevel,
+                            out_of_stock: context.productOutOfStock,
+                            shipping: context.productShipping,
+                            cart_url: context.productCartUrl,
+                            url: context.productUrl,
+                            min_purchase_quantity: context.productMinPurchaseQuantity || 1,
+                            max_purchase_quantity: context.productMaxPurchaseQuantity,
+                            pre_order: context.productPreOrder,
+                            related_products: context.productRelatedProducts,
+                        };
+
+                        // Remove skeleton/loading state
+                        const skeleton = pdpContainer.querySelector('.tpu-pdp-skeleton');
+                        if (skeleton) {
+                            skeleton.remove();
+                        }
+                        pdpContainer.removeAttribute('aria-busy');
+                        pdpContainer.removeAttribute('aria-label');
+
+                        // Render PDP React app
+                        const pdpRoot = createRoot(pdpContainer);
+                        pdpRoot.render(React.createElement(PDPApp, {
+                            product: product,
+                            context: context,
+                        }));
+                    }
+                }
+
+                // Render Footer React component on all pages
+                const footerContainer = document.getElementById('tpu-footer-root');
+                if (footerContainer) {
+                    // Get data attributes from the container
+                    const phoneNumber = footerContainer.dataset.phoneNumber || '';
+                    const whatsappNumber = footerContainer.dataset.whatsappNumber || '';
+                    const subscribeUrl = footerContainer.dataset.subscribeUrl || '';
+                    const customerEmail = footerContainer.dataset.customerEmail || '';
+                    const storeName = footerContainer.dataset.storeName || '';
+                    
+                    // Determine if compliance message should show (lighting categories)
+                    const currentUrl = window.location.pathname.toLowerCase();
+                    const showCompliance = currentUrl.includes('light') || currentUrl.includes('lamp');
+                    
+                    // Also show compliance in fallback footer if applicable
+                    const complianceEl = document.getElementById('tpu-footer-compliance');
+                    if (complianceEl && showCompliance) {
+                        complianceEl.style.display = 'block';
+                    }
+
+                    // Get social media and payment icons HTML from fallback elements
+                    const socialEl = document.querySelector('.tpu-footer-bottom__social .socialLinks');
+                    const socialMediaHtml = socialEl ? socialEl.outerHTML : '';
+                    
+                    const paymentEl = document.querySelector('.footer-payment-icons');
+                    const paymentIconsHtml = paymentEl ? paymentEl.outerHTML : '';
+
+                    // Show the JS-enabled footer and render React
+                    const jsFooter = document.querySelector('.tpu-footer--js');
+                    if (jsFooter) {
+                        jsFooter.style.display = 'block';
+                    }
+
+                    // Remove aria-hidden and render
+                    footerContainer.removeAttribute('aria-hidden');
+                    
+                    const footerRoot = createRoot(footerContainer);
+                    footerRoot.render(React.createElement(Footer, {
+                        phoneNumber,
+                        whatsappNumber,
+                        subscribeUrl,
+                        customerEmail,
+                        storeName,
+                        showCompliance,
+                        socialMediaHtml,
+                        paymentIconsHtml,
+                    }));
+
+                    // Hide fallback content
+                    const fallbacks = document.querySelectorAll('[id$="-fallback"]');
+                    fallbacks.forEach(el => {
+                        el.style.display = 'none';
+                    });
                 }
 
                 const importPromises = [];

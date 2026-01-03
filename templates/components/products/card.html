@@ -138,6 +138,17 @@
                 {{> components/common/login-for-pricing}}
             {{/or}}
         </div>
+
+        {{!-- Fitment Badges - React mount point for Fits/Includes/Ships info --}}
+        <div 
+            class="card-badges-mount"
+            data-product-badges-mount
+            data-product-name="{{name}}"
+            data-product-sku="{{sku}}"
+            data-in-stock="{{#if stock_level '>' 0}}true{{else}}{{#unless stock_level}}true{{else}}false{{/unless}}{{/if}}"
+            data-stock-level="{{stock_level}}"
+        ></div>
+
         {{{region name="product_item_below_price"}}}
         {{> components/products/bulk-discount-rates}}
     </div>

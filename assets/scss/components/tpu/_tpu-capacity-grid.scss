@@ -49,6 +49,117 @@
     }
 }
 
+// =============================================================================
+// AXLE TOGGLE GROUP
+// =============================================================================
+
+.tpu-axle-toggle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: $tpu-space-8;
+    
+    @media (min-width: $tpu-screen-md) {
+        margin-bottom: $tpu-space-10;
+    }
+}
+
+.tpu-axle-toggle__group {
+    display: inline-flex;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: $tpu-radius-full;
+    padding: 4px;
+    gap: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tpu-axle-toggle__button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px; // Accessibility touch target
+    padding: $tpu-space-2 $tpu-space-4;
+    border: none;
+    border-radius: $tpu-radius-full;
+    background: transparent;
+    color: $tpu-text-secondary;
+    font-family: $tpu-font-body;
+    font-size: $tpu-text-sm;
+    font-weight: $tpu-font-medium;
+    cursor: pointer;
+    transition: color $tpu-transition-fast, background $tpu-transition-fast;
+    
+    @media (min-width: $tpu-screen-sm) {
+        padding: $tpu-space-2 $tpu-space-6;
+        font-size: $tpu-text-base;
+    }
+    
+    &:hover:not(:disabled) {
+        color: $tpu-text-primary;
+    }
+    
+    &:focus-visible {
+        outline: 2px solid $tpu-accent-primary;
+        outline-offset: 2px;
+    }
+    
+    &--selected {
+        color: #ffffff;
+        
+        &:hover {
+            color: #ffffff;
+        }
+    }
+    
+    &--disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+}
+
+.tpu-axle-toggle__indicator {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, $tpu-accent-primary 0%, darken($tpu-accent-primary, 10%) 100%);
+    border-radius: $tpu-radius-full;
+    z-index: 0;
+    box-shadow: 0 2px 8px rgba($tpu-accent-primary, 0.4);
+}
+
+.tpu-axle-toggle__label {
+    position: relative;
+    z-index: 1;
+    white-space: nowrap;
+}
+
+.tpu-axle-toggle__label-full {
+    display: none;
+    
+    @media (min-width: $tpu-screen-sm) {
+        display: inline;
+    }
+}
+
+.tpu-axle-toggle__label-short {
+    display: inline;
+    
+    @media (min-width: $tpu-screen-sm) {
+        display: none;
+    }
+}
+
+.tpu-axle-toggle__helper {
+    margin-top: $tpu-space-3;
+    font-family: $tpu-font-body;
+    font-size: $tpu-text-xs;
+    color: $tpu-text-muted;
+    
+    @media (min-width: $tpu-screen-md) {
+        font-size: $tpu-text-sm;
+    }
+}
+
 // Grid
 // -----------------------------------------------------------------------------
 

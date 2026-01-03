@@ -10,7 +10,66 @@
         "info": "Info",
         "categories": "Categories",
         "call_us": "Call us at {phone_number}",
-        "powered_by": "Powered by"
+        "powered_by": "Powered by",
+        "nav_label": "Footer navigation",
+        "legal_nav_label": "Legal links",
+        "ships_to": "Ships to US & Canada",
+        "all_rights": "All rights reserved.",
+        "fitment": {
+            "heading": "Not 100% sure it fits?",
+            "subtext": "Our experts help thousands of customers find the right kit every week.",
+            "wizard_btn": "Use Fitment Wizard",
+            "text_btn": "Text a Photo",
+            "call_btn": "Talk to an Expert",
+            "whatsapp_message": "Hi, I need help finding the right trailer parts"
+        },
+        "columns": {
+            "shop_kits": "Shop Kits",
+            "fitment_guides": "Fitment & Guides",
+            "support": "Support",
+            "b2b_fleet": "B2B & Fleet"
+        },
+        "links": {
+            "axle_kits": "Trailer Axle Kits",
+            "suspension_kits": "Suspension Kits",
+            "brake_kits": "Brake Kits",
+            "electrical_kits": "Electrical Kits",
+            "bearing_kits": "Bearing Kits",
+            "size_calculator": "Size Calculator",
+            "how_to_videos": "How-To Videos",
+            "install_diagrams": "Installation Diagrams",
+            "axle_id": "Axle Identification",
+            "load_guide": "Load Capacity Guide",
+            "shipping": "Shipping Info",
+            "returns": "Returns & Exchanges",
+            "track_order": "Track Your Order",
+            "contact": "Contact Us",
+            "faqs": "FAQs",
+            "request_quote": "Request a Quote",
+            "dealer_program": "Dealer Program",
+            "fleet_pm": "Fleet PM Kits",
+            "volume_discounts": "Volume Discounts",
+            "net_terms": "Net Terms"
+        },
+        "newsletter": {
+            "title": "Get the right kit the first time",
+            "helper": "Seasonal reminders + fitment tips. No spam.",
+            "submit": "Send me checklists",
+            "segment_label": "Trailer type",
+            "segment_placeholder": "Select trailer type",
+            "segment_boat": "Boat Trailer",
+            "segment_rv": "RV / Camper",
+            "segment_utility": "Utility / Cargo",
+            "segment_fleet": "Fleet / Commercial"
+        },
+        "legal": {
+            "privacy": "Privacy Policy",
+            "terms": "Terms & Conditions",
+            "accessibility": "Accessibility"
+        },
+        "compliance": {
+            "lighting": "Meets FMVSS/CMVSS 108 when installed per diagram."
+        }
     },
     "home": {
         "heading": "Home"
